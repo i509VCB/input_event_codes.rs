@@ -1,0 +1,54 @@
+name: Update event codes
+
+on:
+#  schedule:
+#    - $cron-daily
+  workflow_dispatch:
+
+jobs:
+  update-event-codes:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v2
+
+      - run: LAST_TAG=$(cat ./linux_last_tag)
+
+      - name: Clone Linux kernel
+        # Perform a shallowish clone
+        run: git clone --depth 750 https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/
+
+      - name: Check if a new tag was released
+        id: new_tag
+        run: |
+          cd ./linux &&
+          export LATEST_TAG=$(git describe --tags --abbrev=0) &&
+          [[ $LATEST_TAG != $LAST_TAG ]] &&
+          export NEW_TAG=$? &&
+          cd .. &&
+          echo "::set-output new_tag=$NEW_TAG"
+
+      # New tag, does has the file changed
+      - name: Check if input-event-codes.h has changed
+        if: ${{ steps.new_tag.outputs.new_tag == 1 }}
+        id: has_changed
+        run: |
+           echo "::set-output has_changed=$(diff -q ./input-event-codes.h ./linux/include/uapi/linux/input-event-codes.h)"
+
+      - name: Set new linux_last_tag
+        if: ${{ steps.new_tag.outputs.new_tag == 1 && steps.has_changed.outputs.has_changed == 1 }}
+        run: |
+          rm -rf ./linux_last_tag &&
+          $LATEST_TAG > ./linux_last_tag
+
+      - name: Create copy new event codes file.
+        if: ${{ steps.new_tag.outputs.new_tag == 1 && steps.has_changed.outputs.has_changed == 1 }}
+        run: cp ./linux/include/uapi/linux/input-event-codes.h ./input-event-codes.h
+
+      # TODO: Run generator again
+
+      - name: Create Pull Request
+        if: ${{ steps.new_tag.outputs.new_tag == 1 && steps.has_changed.outputs.has_changed == 1 }}
+        uses: peter-evans/create-pull-request@v3
+        with:
+          title: Update input-event-codes.h
