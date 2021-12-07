@@ -3,11 +3,13 @@ name = "input_event_codes"
 version = "0.1.0"
 edition = "2021"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
-
 [dependencies]
+input_event_codes_proc_macro = {path = "./input_event_codes_proc_macro"}
+
+[dev-dependencies]
+bindgen = "0.59"
 
 [workspace]
 members = [
-    "./generator"
+    "./input_event_codes_proc_macro"
 ]
