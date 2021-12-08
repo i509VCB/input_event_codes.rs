@@ -5,7 +5,8 @@ use std::{
     fs::OpenOptions,
     io::Write,
     num::ParseIntError,
-    process::{Command, Stdio}, time::Duration,
+    process::{Command, Stdio},
+    time::Duration,
 };
 
 use proc_macro2::{Ident, LexError, Literal, Span, TokenStream};
@@ -144,13 +145,7 @@ fn generate_enum(mut category: Category) -> TokenStream {
         .entries
         .into_iter()
         .map(|item| {
-            let mut name = item
-                .ident
-                .to_string()
-                .split('_')
-                .skip(1) // Skip the category name
-                // Combine all segments
-                .collect::<String>();
+            let mut name = item.ident.to_string().split_once('_').unwrap().1.to_owned();
 
             // Prefix any entries that start with a number
             if name.starts_with(char::is_numeric) {
