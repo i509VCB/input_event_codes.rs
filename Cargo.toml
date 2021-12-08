@@ -3,13 +3,7 @@ name = "input_event_codes"
 version = "0.1.0"
 edition = "2021"
 
-[dependencies]
-input_event_codes_proc_macro = {path = "./input_event_codes_proc_macro"}
-
-[dev-dependencies]
-bindgen = "0.59"
-
 [workspace]
 members = [
-    "./input_event_codes_proc_macro"
+    "./generator"
 ]
