@@ -1,12 +1,12 @@
 use std::{
+    cmp::Ordering,
     collections::HashSet,
     error::Error,
     fmt::{self, Display, Formatter},
     fs::OpenOptions,
     io::Write,
     num::ParseIntError,
-    process::{Command, Stdio},
-    time::Duration,
+    process::Command,
 };
 
 use proc_macro2::{Ident, LexError, Literal, Span, TokenStream};
@@ -20,6 +20,14 @@ const HEADER: &str = r#"
 "#;
 
 fn main() -> Result<(), Box<dyn Error>> {
+    let mut path = std::env::current_dir()?;
+    path.extend(["src", "generated.rs"]);
+
+    if path.exists() {
+        // For some reason running the generator again breaks the generated file?
+        std::fs::remove_file(&path)?;
+    }
+
     let generated = match bindgen::Builder::default()
         .header("./input-event-codes.h")
         // The header will only contain defines.
@@ -40,9 +48,6 @@ fn main() -> Result<(), Box<dyn Error>> {
     let tokens = generate_input_codes(&generated)?;
     let output = tokens.to_string();
 
-    let mut path = std::env::current_dir()?;
-    path.extend(["src", "generated.rs"]);
-
     let mut file = OpenOptions::new()
         .create(true)
         .write(true)
@@ -56,14 +61,8 @@ fn main() -> Result<(), Box<dyn Error>> {
     // Dismiss the file for formatting.
     drop(file);
 
-    std::thread::sleep(Duration::from_secs(2));
-
     // Now run cargo fmt on the file.
-    let output = Command::new("rustfmt")
-        .arg(&path)
-        .stderr(Stdio::null())
-        .stdout(Stdio::null())
-        .output()?;
+    let output = Command::new("rustfmt").arg("./src/generated.rs").output()?;
 
     if !output.status.success() {
         panic!("Error while running \"rustfmt\": {}", output.status);
@@ -93,7 +92,7 @@ fn generate_input_codes(generated: &str) -> Result<TokenStream, GenerateError> {
     )?;
 
     // Create categories of the definitions in the input event codes header.
-    let categories = consts
+    let mut categories = consts
         .iter()
         // The category name is simply everything before the first `_`,
         .map(|item| item.ident.to_string().split_once('_').unwrap().0.to_owned())
@@ -117,6 +116,9 @@ fn generate_input_codes(generated: &str) -> Result<TokenStream, GenerateError> {
             Category { name, entries }
         })
         .collect::<Vec<_>>();
+
+    // Sort the categories so the ordering does not change between each run.
+    categories.sort();
 
     if !consts.is_empty() {
         panic!("Entries not fully exhausted. This is a bug!");
@@ -234,6 +236,31 @@ fn generate_enum(mut category: Category) -> TokenStream {
 struct Category {
     name: String,
     entries: Vec<syn::ItemConst>,
+}
+
+// Implement Ord so the generated file does not get reordered every commit.
+
+impl PartialOrd for Category {
+    fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
+        self.name.partial_cmp(&other.name)
+    }
+}
+
+// Yes this is probably wrong, but we are not public api.
+impl Eq for Category {}
+
+impl Ord for Category {
+    fn cmp(&self, other: &Self) -> Ordering {
+        self.name.cmp(&other.name)
+    }
+}
+
+// Required by PartialOrd
+
+impl PartialEq for Category {
+    fn eq(&self, other: &Self) -> bool {
+        self.name == other.name
+    }
 }
 
 struct Entry {

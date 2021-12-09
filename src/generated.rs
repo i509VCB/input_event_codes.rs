@@ -4,106 +4,6 @@
 
 #[repr(transparent)]
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
-pub struct Msc(u32);
-impl Msc {
-    pub const fn new(value: u32) -> Msc {
-        Msc(value)
-    }
-    pub const fn into_inner(self) -> u32 {
-        self.0
-    }
-}
-impl From<u32> for Msc {
-    fn from(value: u32) -> Msc {
-        Msc(value)
-    }
-}
-impl From<Msc> for u32 {
-    fn from(value: Msc) -> u32 {
-        value.0
-    }
-}
-impl PartialEq<u32> for Msc {
-    fn eq(&self, other: &u32) -> bool {
-        &self.0 == other
-    }
-}
-impl Msc {
-    #[doc(alias = "MSC_SERIAL")]
-    pub const SERIAL: Msc = Msc(0);
-    #[doc(alias = "MSC_PULSELED")]
-    pub const PULSELED: Msc = Msc(1);
-    #[doc(alias = "MSC_GESTURE")]
-    pub const GESTURE: Msc = Msc(2);
-    #[doc(alias = "MSC_RAW")]
-    pub const RAW: Msc = Msc(3);
-    #[doc(alias = "MSC_SCAN")]
-    pub const SCAN: Msc = Msc(4);
-    #[doc(alias = "MSC_TIMESTAMP")]
-    pub const TIMESTAMP: Msc = Msc(5);
-    #[doc(alias = "MSC_MAX")]
-    pub const MAX: Msc = Msc(7);
-    #[doc(alias = "MSC_CNT")]
-    pub const CNT: Msc = Msc(8);
-}
-#[repr(transparent)]
-#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
-pub struct Ev(u32);
-impl Ev {
-    pub const fn new(value: u32) -> Ev {
-        Ev(value)
-    }
-    pub const fn into_inner(self) -> u32 {
-        self.0
-    }
-}
-impl From<u32> for Ev {
-    fn from(value: u32) -> Ev {
-        Ev(value)
-    }
-}
-impl From<Ev> for u32 {
-    fn from(value: Ev) -> u32 {
-        value.0
-    }
-}
-impl PartialEq<u32> for Ev {
-    fn eq(&self, other: &u32) -> bool {
-        &self.0 == other
-    }
-}
-impl Ev {
-    #[doc(alias = "EV_SYN")]
-    pub const SYN: Ev = Ev(0);
-    #[doc(alias = "EV_KEY")]
-    pub const KEY: Ev = Ev(1);
-    #[doc(alias = "EV_REL")]
-    pub const REL: Ev = Ev(2);
-    #[doc(alias = "EV_ABS")]
-    pub const ABS: Ev = Ev(3);
-    #[doc(alias = "EV_MSC")]
-    pub const MSC: Ev = Ev(4);
-    #[doc(alias = "EV_SW")]
-    pub const SW: Ev = Ev(5);
-    #[doc(alias = "EV_LED")]
-    pub const LED: Ev = Ev(17);
-    #[doc(alias = "EV_SND")]
-    pub const SND: Ev = Ev(18);
-    #[doc(alias = "EV_REP")]
-    pub const REP: Ev = Ev(20);
-    #[doc(alias = "EV_FF")]
-    pub const FF: Ev = Ev(21);
-    #[doc(alias = "EV_PWR")]
-    pub const PWR: Ev = Ev(22);
-    #[doc(alias = "EV_FF_STATUS")]
-    pub const FF_STATUS: Ev = Ev(23);
-    #[doc(alias = "EV_MAX")]
-    pub const MAX: Ev = Ev(31);
-    #[doc(alias = "EV_CNT")]
-    pub const CNT: Ev = Ev(32);
-}
-#[repr(transparent)]
-#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub struct Abs(u32);
 impl Abs {
     pub const fn new(value: u32) -> Abs {
@@ -483,6 +383,108 @@ impl Btn {
     pub const TRIGGER_HAPPY39: Btn = Btn(742);
     #[doc(alias = "BTN_TRIGGER_HAPPY40")]
     pub const TRIGGER_HAPPY40: Btn = Btn(743);
+}
+#[repr(transparent)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+pub struct Ev(u32);
+impl Ev {
+    pub const fn new(value: u32) -> Ev {
+        Ev(value)
+    }
+    pub const fn into_inner(self) -> u32 {
+        self.0
+    }
+}
+impl From<u32> for Ev {
+    fn from(value: u32) -> Ev {
+        Ev(value)
+    }
+}
+impl From<Ev> for u32 {
+    fn from(value: Ev) -> u32 {
+        value.0
+    }
+}
+impl PartialEq<u32> for Ev {
+    fn eq(&self, other: &u32) -> bool {
+        &self.0 == other
+    }
+}
+impl Ev {
+    #[doc(alias = "EV_SYN")]
+    pub const SYN: Ev = Ev(0);
+    #[doc(alias = "EV_KEY")]
+    pub const KEY: Ev = Ev(1);
+    #[doc(alias = "EV_REL")]
+    pub const REL: Ev = Ev(2);
+    #[doc(alias = "EV_ABS")]
+    pub const ABS: Ev = Ev(3);
+    #[doc(alias = "EV_MSC")]
+    pub const MSC: Ev = Ev(4);
+    #[doc(alias = "EV_SW")]
+    pub const SW: Ev = Ev(5);
+    #[doc(alias = "EV_LED")]
+    pub const LED: Ev = Ev(17);
+    #[doc(alias = "EV_SND")]
+    pub const SND: Ev = Ev(18);
+    #[doc(alias = "EV_REP")]
+    pub const REP: Ev = Ev(20);
+    #[doc(alias = "EV_FF")]
+    pub const FF: Ev = Ev(21);
+    #[doc(alias = "EV_PWR")]
+    pub const PWR: Ev = Ev(22);
+    #[doc(alias = "EV_FF_STATUS")]
+    pub const FF_STATUS: Ev = Ev(23);
+    #[doc(alias = "EV_MAX")]
+    pub const MAX: Ev = Ev(31);
+    #[doc(alias = "EV_CNT")]
+    pub const CNT: Ev = Ev(32);
+}
+#[repr(transparent)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+pub struct Input(u32);
+impl Input {
+    pub const fn new(value: u32) -> Input {
+        Input(value)
+    }
+    pub const fn into_inner(self) -> u32 {
+        self.0
+    }
+}
+impl From<u32> for Input {
+    fn from(value: u32) -> Input {
+        Input(value)
+    }
+}
+impl From<Input> for u32 {
+    fn from(value: Input) -> u32 {
+        value.0
+    }
+}
+impl PartialEq<u32> for Input {
+    fn eq(&self, other: &u32) -> bool {
+        &self.0 == other
+    }
+}
+impl Input {
+    #[doc(alias = "INPUT_PROP_POINTER")]
+    pub const PROP_POINTER: Input = Input(0);
+    #[doc(alias = "INPUT_PROP_DIRECT")]
+    pub const PROP_DIRECT: Input = Input(1);
+    #[doc(alias = "INPUT_PROP_BUTTONPAD")]
+    pub const PROP_BUTTONPAD: Input = Input(2);
+    #[doc(alias = "INPUT_PROP_SEMI_MT")]
+    pub const PROP_SEMI_MT: Input = Input(3);
+    #[doc(alias = "INPUT_PROP_TOPBUTTONPAD")]
+    pub const PROP_TOPBUTTONPAD: Input = Input(4);
+    #[doc(alias = "INPUT_PROP_POINTING_STICK")]
+    pub const PROP_POINTING_STICK: Input = Input(5);
+    #[doc(alias = "INPUT_PROP_ACCELEROMETER")]
+    pub const PROP_ACCELEROMETER: Input = Input(6);
+    #[doc(alias = "INPUT_PROP_MAX")]
+    pub const PROP_MAX: Input = Input(31);
+    #[doc(alias = "INPUT_PROP_CNT")]
+    pub const PROP_CNT: Input = Input(32);
 }
 #[repr(transparent)]
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -1508,163 +1510,101 @@ impl Key {
 }
 #[repr(transparent)]
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
-pub struct Input(u32);
-impl Input {
-    pub const fn new(value: u32) -> Input {
-        Input(value)
+pub struct Led(u32);
+impl Led {
+    pub const fn new(value: u32) -> Led {
+        Led(value)
     }
     pub const fn into_inner(self) -> u32 {
         self.0
     }
 }
-impl From<u32> for Input {
-    fn from(value: u32) -> Input {
-        Input(value)
+impl From<u32> for Led {
+    fn from(value: u32) -> Led {
+        Led(value)
     }
 }
-impl From<Input> for u32 {
-    fn from(value: Input) -> u32 {
+impl From<Led> for u32 {
+    fn from(value: Led) -> u32 {
         value.0
     }
 }
-impl PartialEq<u32> for Input {
+impl PartialEq<u32> for Led {
     fn eq(&self, other: &u32) -> bool {
         &self.0 == other
     }
 }
-impl Input {
-    #[doc(alias = "INPUT_PROP_POINTER")]
-    pub const PROP_POINTER: Input = Input(0);
-    #[doc(alias = "INPUT_PROP_DIRECT")]
-    pub const PROP_DIRECT: Input = Input(1);
-    #[doc(alias = "INPUT_PROP_BUTTONPAD")]
-    pub const PROP_BUTTONPAD: Input = Input(2);
-    #[doc(alias = "INPUT_PROP_SEMI_MT")]
-    pub const PROP_SEMI_MT: Input = Input(3);
-    #[doc(alias = "INPUT_PROP_TOPBUTTONPAD")]
-    pub const PROP_TOPBUTTONPAD: Input = Input(4);
-    #[doc(alias = "INPUT_PROP_POINTING_STICK")]
-    pub const PROP_POINTING_STICK: Input = Input(5);
-    #[doc(alias = "INPUT_PROP_ACCELEROMETER")]
-    pub const PROP_ACCELEROMETER: Input = Input(6);
-    #[doc(alias = "INPUT_PROP_MAX")]
-    pub const PROP_MAX: Input = Input(31);
-    #[doc(alias = "INPUT_PROP_CNT")]
-    pub const PROP_CNT: Input = Input(32);
+impl Led {
+    #[doc(alias = "LED_NUML")]
+    pub const NUML: Led = Led(0);
+    #[doc(alias = "LED_CAPSL")]
+    pub const CAPSL: Led = Led(1);
+    #[doc(alias = "LED_SCROLLL")]
+    pub const SCROLLL: Led = Led(2);
+    #[doc(alias = "LED_COMPOSE")]
+    pub const COMPOSE: Led = Led(3);
+    #[doc(alias = "LED_KANA")]
+    pub const KANA: Led = Led(4);
+    #[doc(alias = "LED_SLEEP")]
+    pub const SLEEP: Led = Led(5);
+    #[doc(alias = "LED_SUSPEND")]
+    pub const SUSPEND: Led = Led(6);
+    #[doc(alias = "LED_MUTE")]
+    pub const MUTE: Led = Led(7);
+    #[doc(alias = "LED_MISC")]
+    pub const MISC: Led = Led(8);
+    #[doc(alias = "LED_MAIL")]
+    pub const MAIL: Led = Led(9);
+    #[doc(alias = "LED_CHARGING")]
+    pub const CHARGING: Led = Led(10);
+    #[doc(alias = "LED_MAX")]
+    pub const MAX: Led = Led(15);
+    #[doc(alias = "LED_CNT")]
+    pub const CNT: Led = Led(16);
 }
 #[repr(transparent)]
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
-pub struct Syn(u32);
-impl Syn {
-    pub const fn new(value: u32) -> Syn {
-        Syn(value)
+pub struct Msc(u32);
+impl Msc {
+    pub const fn new(value: u32) -> Msc {
+        Msc(value)
     }
     pub const fn into_inner(self) -> u32 {
         self.0
     }
 }
-impl From<u32> for Syn {
-    fn from(value: u32) -> Syn {
-        Syn(value)
+impl From<u32> for Msc {
+    fn from(value: u32) -> Msc {
+        Msc(value)
     }
 }
-impl From<Syn> for u32 {
-    fn from(value: Syn) -> u32 {
+impl From<Msc> for u32 {
+    fn from(value: Msc) -> u32 {
         value.0
     }
 }
-impl PartialEq<u32> for Syn {
+impl PartialEq<u32> for Msc {
     fn eq(&self, other: &u32) -> bool {
         &self.0 == other
     }
 }
-impl Syn {
-    #[doc(alias = "SYN_REPORT")]
-    pub const REPORT: Syn = Syn(0);
-    #[doc(alias = "SYN_CONFIG")]
-    pub const CONFIG: Syn = Syn(1);
-    #[doc(alias = "SYN_MT_REPORT")]
-    pub const MT_REPORT: Syn = Syn(2);
-    #[doc(alias = "SYN_DROPPED")]
-    pub const DROPPED: Syn = Syn(3);
-    #[doc(alias = "SYN_MAX")]
-    pub const MAX: Syn = Syn(15);
-    #[doc(alias = "SYN_CNT")]
-    pub const CNT: Syn = Syn(16);
-}
-#[repr(transparent)]
-#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
-pub struct Snd(u32);
-impl Snd {
-    pub const fn new(value: u32) -> Snd {
-        Snd(value)
-    }
-    pub const fn into_inner(self) -> u32 {
-        self.0
-    }
-}
-impl From<u32> for Snd {
-    fn from(value: u32) -> Snd {
-        Snd(value)
-    }
-}
-impl From<Snd> for u32 {
-    fn from(value: Snd) -> u32 {
-        value.0
-    }
-}
-impl PartialEq<u32> for Snd {
-    fn eq(&self, other: &u32) -> bool {
-        &self.0 == other
-    }
-}
-impl Snd {
-    #[doc(alias = "SND_CLICK")]
-    pub const CLICK: Snd = Snd(0);
-    #[doc(alias = "SND_BELL")]
-    pub const BELL: Snd = Snd(1);
-    #[doc(alias = "SND_TONE")]
-    pub const TONE: Snd = Snd(2);
-    #[doc(alias = "SND_MAX")]
-    pub const MAX: Snd = Snd(7);
-    #[doc(alias = "SND_CNT")]
-    pub const CNT: Snd = Snd(8);
-}
-#[repr(transparent)]
-#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
-pub struct Rep(u32);
-impl Rep {
-    pub const fn new(value: u32) -> Rep {
-        Rep(value)
-    }
-    pub const fn into_inner(self) -> u32 {
-        self.0
-    }
-}
-impl From<u32> for Rep {
-    fn from(value: u32) -> Rep {
-        Rep(value)
-    }
-}
-impl From<Rep> for u32 {
-    fn from(value: Rep) -> u32 {
-        value.0
-    }
-}
-impl PartialEq<u32> for Rep {
-    fn eq(&self, other: &u32) -> bool {
-        &self.0 == other
-    }
-}
-impl Rep {
-    #[doc(alias = "REP_DELAY")]
-    pub const DELAY: Rep = Rep(0);
-    #[doc(alias = "REP_PERIOD")]
-    pub const PERIOD: Rep = Rep(1);
-    #[doc(alias = "REP_MAX")]
-    pub const MAX: Rep = Rep(1);
-    #[doc(alias = "REP_CNT")]
-    pub const CNT: Rep = Rep(2);
+impl Msc {
+    #[doc(alias = "MSC_SERIAL")]
+    pub const SERIAL: Msc = Msc(0);
+    #[doc(alias = "MSC_PULSELED")]
+    pub const PULSELED: Msc = Msc(1);
+    #[doc(alias = "MSC_GESTURE")]
+    pub const GESTURE: Msc = Msc(2);
+    #[doc(alias = "MSC_RAW")]
+    pub const RAW: Msc = Msc(3);
+    #[doc(alias = "MSC_SCAN")]
+    pub const SCAN: Msc = Msc(4);
+    #[doc(alias = "MSC_TIMESTAMP")]
+    pub const TIMESTAMP: Msc = Msc(5);
+    #[doc(alias = "MSC_MAX")]
+    pub const MAX: Msc = Msc(7);
+    #[doc(alias = "MSC_CNT")]
+    pub const CNT: Msc = Msc(8);
 }
 #[repr(transparent)]
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -1726,57 +1666,77 @@ impl Rel {
 }
 #[repr(transparent)]
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
-pub struct Led(u32);
-impl Led {
-    pub const fn new(value: u32) -> Led {
-        Led(value)
+pub struct Rep(u32);
+impl Rep {
+    pub const fn new(value: u32) -> Rep {
+        Rep(value)
     }
     pub const fn into_inner(self) -> u32 {
         self.0
     }
 }
-impl From<u32> for Led {
-    fn from(value: u32) -> Led {
-        Led(value)
+impl From<u32> for Rep {
+    fn from(value: u32) -> Rep {
+        Rep(value)
     }
 }
-impl From<Led> for u32 {
-    fn from(value: Led) -> u32 {
+impl From<Rep> for u32 {
+    fn from(value: Rep) -> u32 {
         value.0
     }
 }
-impl PartialEq<u32> for Led {
+impl PartialEq<u32> for Rep {
     fn eq(&self, other: &u32) -> bool {
         &self.0 == other
     }
 }
-impl Led {
-    #[doc(alias = "LED_NUML")]
-    pub const NUML: Led = Led(0);
-    #[doc(alias = "LED_CAPSL")]
-    pub const CAPSL: Led = Led(1);
-    #[doc(alias = "LED_SCROLLL")]
-    pub const SCROLLL: Led = Led(2);
-    #[doc(alias = "LED_COMPOSE")]
-    pub const COMPOSE: Led = Led(3);
-    #[doc(alias = "LED_KANA")]
-    pub const KANA: Led = Led(4);
-    #[doc(alias = "LED_SLEEP")]
-    pub const SLEEP: Led = Led(5);
-    #[doc(alias = "LED_SUSPEND")]
-    pub const SUSPEND: Led = Led(6);
-    #[doc(alias = "LED_MUTE")]
-    pub const MUTE: Led = Led(7);
-    #[doc(alias = "LED_MISC")]
-    pub const MISC: Led = Led(8);
-    #[doc(alias = "LED_MAIL")]
-    pub const MAIL: Led = Led(9);
-    #[doc(alias = "LED_CHARGING")]
-    pub const CHARGING: Led = Led(10);
-    #[doc(alias = "LED_MAX")]
-    pub const MAX: Led = Led(15);
-    #[doc(alias = "LED_CNT")]
-    pub const CNT: Led = Led(16);
+impl Rep {
+    #[doc(alias = "REP_DELAY")]
+    pub const DELAY: Rep = Rep(0);
+    #[doc(alias = "REP_PERIOD")]
+    pub const PERIOD: Rep = Rep(1);
+    #[doc(alias = "REP_MAX")]
+    pub const MAX: Rep = Rep(1);
+    #[doc(alias = "REP_CNT")]
+    pub const CNT: Rep = Rep(2);
+}
+#[repr(transparent)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+pub struct Snd(u32);
+impl Snd {
+    pub const fn new(value: u32) -> Snd {
+        Snd(value)
+    }
+    pub const fn into_inner(self) -> u32 {
+        self.0
+    }
+}
+impl From<u32> for Snd {
+    fn from(value: u32) -> Snd {
+        Snd(value)
+    }
+}
+impl From<Snd> for u32 {
+    fn from(value: Snd) -> u32 {
+        value.0
+    }
+}
+impl PartialEq<u32> for Snd {
+    fn eq(&self, other: &u32) -> bool {
+        &self.0 == other
+    }
+}
+impl Snd {
+    #[doc(alias = "SND_CLICK")]
+    pub const CLICK: Snd = Snd(0);
+    #[doc(alias = "SND_BELL")]
+    pub const BELL: Snd = Snd(1);
+    #[doc(alias = "SND_TONE")]
+    pub const TONE: Snd = Snd(2);
+    #[doc(alias = "SND_MAX")]
+    pub const MAX: Snd = Snd(7);
+    #[doc(alias = "SND_CNT")]
+    pub const CNT: Snd = Snd(8);
 }
 #[repr(transparent)]
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -1845,4 +1805,44 @@ impl Sw {
     pub const MAX: Sw = Sw(16);
     #[doc(alias = "SW_CNT")]
     pub const CNT: Sw = Sw(17);
+}
+#[repr(transparent)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+pub struct Syn(u32);
+impl Syn {
+    pub const fn new(value: u32) -> Syn {
+        Syn(value)
+    }
+    pub const fn into_inner(self) -> u32 {
+        self.0
+    }
+}
+impl From<u32> for Syn {
+    fn from(value: u32) -> Syn {
+        Syn(value)
+    }
+}
+impl From<Syn> for u32 {
+    fn from(value: Syn) -> u32 {
+        value.0
+    }
+}
+impl PartialEq<u32> for Syn {
+    fn eq(&self, other: &u32) -> bool {
+        &self.0 == other
+    }
+}
+impl Syn {
+    #[doc(alias = "SYN_REPORT")]
+    pub const REPORT: Syn = Syn(0);
+    #[doc(alias = "SYN_CONFIG")]
+    pub const CONFIG: Syn = Syn(1);
+    #[doc(alias = "SYN_MT_REPORT")]
+    pub const MT_REPORT: Syn = Syn(2);
+    #[doc(alias = "SYN_DROPPED")]
+    pub const DROPPED: Syn = Syn(3);
+    #[doc(alias = "SYN_MAX")]
+    pub const MAX: Syn = Syn(15);
+    #[doc(alias = "SYN_CNT")]
+    pub const CNT: Syn = Syn(16);
 }
