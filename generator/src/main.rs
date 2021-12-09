@@ -1,10 +1,13 @@
+mod category;
+mod parse;
+
 use std::{
     cmp::Ordering,
     collections::HashSet,
     error::Error,
     fmt::{self, Display, Formatter},
     fs::OpenOptions,
-    io::Write,
+    io::{Read, Write},
     num::ParseIntError,
     process::Command,
 };
@@ -20,6 +23,17 @@ const HEADER: &str = r#"
 "#;
 
 fn main() -> Result<(), Box<dyn Error>> {
+    {
+        let mut open = OpenOptions::new()
+            .read(true)
+            .open(&std::env::current_dir()?.join("input-event-codes.h"))?;
+        let mut content = String::new();
+
+        open.read_to_string(&mut content)?;
+
+        parse::parse_header(content.lines()).unwrap();
+    }
+
     let mut path = std::env::current_dir()?;
     path.extend(["src", "generated.rs"]);
 
@@ -31,7 +45,6 @@ fn main() -> Result<(), Box<dyn Error>> {
     let generated = match bindgen::Builder::default()
         .header("./input-event-codes.h")
         // The header will only contain defines.
-        // The header does say there may be typedefs but none are declared.
         .ignore_functions()
         .ignore_methods()
         .rustfmt_bindings(true)
@@ -128,13 +141,13 @@ fn generate_input_codes(generated: &str) -> Result<TokenStream, GenerateError> {
     let mut enums = Vec::with_capacity(categories.len());
 
     for category in categories {
-        enums.push(generate_enum(category));
+        enums.push(generate_category(category));
     }
 
     Ok(quote! { #(#enums)* })
 }
 
-fn generate_enum(mut category: Category) -> TokenStream {
+fn generate_category(mut category: Category) -> TokenStream {
     // TODO: Category name replacement, `Ev` is a badly named enum for example.
 
     // Normalize the name to Rust standards.
@@ -233,7 +246,7 @@ fn generate_enum(mut category: Category) -> TokenStream {
     }
 }
 
-struct Category {
+pub struct Category {
     name: String,
     entries: Vec<syn::ItemConst>,
 }
