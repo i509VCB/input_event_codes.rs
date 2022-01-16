@@ -9,3 +9,4 @@ quote = "1.0"
 bindgen = "0.59"
 proc-macro2 = "1.0"
 syn = { version = "1.0", features = [ "full", "parsing" ] }
+nom = "7.1"

@@ -3,18 +3,15 @@ mod parse;
 
 use std::{
     cmp::Ordering,
-    collections::HashSet,
     error::Error,
     fmt::{self, Display, Formatter},
     fs::OpenOptions,
-    io::{Read, Write},
+    io::Read,
     num::ParseIntError,
-    process::Command,
 };
 
 use proc_macro2::{Ident, LexError, Literal, Span, TokenStream};
 use quote::quote;
-use syn::parse::{ParseBuffer, Parser};
 
 const HEADER: &str = r#"
 // This file is generated.
@@ -23,128 +20,19 @@ const HEADER: &str = r#"
 "#;
 
 fn main() -> Result<(), Box<dyn Error>> {
-    {
-        let mut open = OpenOptions::new()
-            .read(true)
-            .open(&std::env::current_dir()?.join("input-event-codes.h"))?;
-        let mut content = String::new();
+    let mut open = OpenOptions::new()
+        .read(true)
+        .open(&std::env::current_dir()?.join("input-event-codes.h"))?;
+    let mut content = String::new();
 
-        open.read_to_string(&mut content)?;
+    open.read_to_string(&mut content)?;
+    drop(open);
 
-        parse::parse_header(content.lines()).unwrap();
-    }
+    let (_, mut defines) = parse::parse_file(&content).expect("parse error");
 
-    let mut path = std::env::current_dir()?;
-    path.extend(["src", "generated.rs"]);
-
-    if path.exists() {
-        // For some reason running the generator again breaks the generated file?
-        std::fs::remove_file(&path)?;
-    }
-
-    let generated = match bindgen::Builder::default()
-        .header("./input-event-codes.h")
-        // The header will only contain defines.
-        .ignore_functions()
-        .ignore_methods()
-        .rustfmt_bindings(true)
-        .generate()
-    {
-        Ok(generated) => Ok(generated.to_string()),
-
-        // Bindgen should provide a nicer error in the future: https://github.com/rust-lang/rust-bindgen/pull/2125
-        Err(_) => Err(GenerateError::Bindgen),
-    }?;
-
-    // Now perform the incredibly cursed parsing the source from bindgen to create a more idomatic api.
-    // TODO: Could bindgen give us the token stream directly in the future?
-    let tokens = generate_input_codes(&generated)?;
-    let output = tokens.to_string();
-
-    let mut file = OpenOptions::new()
-        .create(true)
-        .write(true)
-        .append(false)
-        .open(&path)?;
-
-    writeln!(file, "{}", HEADER)?;
-    write!(file, "{}", output)?;
-    file.flush()?;
-
-    // Dismiss the file for formatting.
-    drop(file);
-
-    // Now run cargo fmt on the file.
-    let output = Command::new("rustfmt").arg("./src/generated.rs").output()?;
-
-    if !output.status.success() {
-        panic!("Error while running \"rustfmt\": {}", output.status);
-    }
+    // TODO: Resolve all the deferred defines.
 
     Ok(())
-}
-
-/// Generate enums representing all the input event codes.
-///
-/// This macro will create an enum for every entry inside `input-event-codes.h`.
-fn generate_input_codes(generated: &str) -> Result<TokenStream, GenerateError> {
-    let tokens: TokenStream = generated.parse()?;
-
-    // Parse every single const item in the file, there should only be const items.
-    let mut consts = Parser::parse2(
-        |buffer: &ParseBuffer<'_>| -> syn::Result<Vec<syn::ItemConst>> {
-            let mut items = vec![];
-
-            while !buffer.is_empty() {
-                items.push(buffer.parse()?);
-            }
-
-            Ok(items)
-        },
-        tokens,
-    )?;
-
-    // Create categories of the definitions in the input event codes header.
-    let mut categories = consts
-        .iter()
-        // The category name is simply everything before the first `_`,
-        .map(|item| item.ident.to_string().split_once('_').unwrap().0.to_owned())
-        // Collect into a hash set so we do not have 100 category names called `KEY` and only 1.
-        .collect::<HashSet<_>>()
-        .into_iter()
-        // Now take the entries from consts and put them in their categories
-        .map(|name| {
-            let mut entries = vec![];
-
-            consts.retain(|item| {
-                if item.ident.to_string().starts_with(&name) {
-                    entries.push(item.clone());
-                    // Remove element
-                    false
-                } else {
-                    true
-                }
-            });
-
-            Category { name, entries }
-        })
-        .collect::<Vec<_>>();
-
-    // Sort the categories so the ordering does not change between each run.
-    categories.sort();
-
-    if !consts.is_empty() {
-        panic!("Entries not fully exhausted. This is a bug!");
-    }
-
-    // Generate enums
-    let mut enums = Vec::with_capacity(categories.len());
-
-    for category in categories {
-        enums.push(generate_category(category));
-    }
-
-    Ok(quote! { #(#enums)* })
 }
 
 fn generate_category(mut category: Category) -> TokenStream {
