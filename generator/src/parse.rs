@@ -1,3 +1,5 @@
+//! A parser to read the `input-event-codes.h` header file using nom.
+
 use std::ops::{RangeFrom, RangeTo};
 
 use nom::{
@@ -15,14 +17,14 @@ use nom::{
     AsChar, IResult, InputIter, Slice,
 };
 
-#[derive(Debug, PartialEq, Eq)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct Define<'a> {
     pub name: &'a str,
     pub expression: Expression<'a>,
     pub comment: Option<&'a str>,
 }
 
-#[derive(Debug, PartialEq, Eq)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum Expression<'a> {
     Constant(u32),
 
@@ -191,7 +193,12 @@ pub fn parse_file(input: &str) -> IResult<&str, Vec<Define>> {
             consume_define_no_value,
         )),
         parse_defines,
-        preceded(opt(consume_ws_and_comments), consume_endif),
+        // End the file by taking the #endif and consuming the rest of the file.
+        delimited(
+            opt(consume_ws_and_comments),
+            consume_endif,
+            opt(consume_ws_and_comments),
+        ),
     )(input)
 }
 

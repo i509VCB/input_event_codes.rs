@@ -1,17 +1,16 @@
 mod category;
+mod generate;
 mod parse;
+mod renames;
 
 use std::{
-    cmp::Ordering,
+    collections::BTreeMap,
     error::Error,
-    fmt::{self, Display, Formatter},
-    fs::OpenOptions,
-    io::Read,
-    num::ParseIntError,
+    fs::{self, OpenOptions},
+    io::{Read, Write},
 };
 
-use proc_macro2::{Ident, LexError, Literal, Span, TokenStream};
-use quote::quote;
+use parse::{Define, Expression};
 
 const HEADER: &str = r#"
 // This file is generated.
@@ -20,198 +19,122 @@ const HEADER: &str = r#"
 "#;
 
 fn main() -> Result<(), Box<dyn Error>> {
-    let mut open = OpenOptions::new()
-        .read(true)
-        .open(&std::env::current_dir()?.join("input-event-codes.h"))?;
     let mut content = String::new();
 
-    open.read_to_string(&mut content)?;
-    drop(open);
+    {
+        let mut open = OpenOptions::new()
+            .read(true)
+            .open(&std::env::current_dir()?.join("input-event-codes.h"))?;
 
-    let (_, mut defines) = parse::parse_file(&content).expect("parse error");
+        open.read_to_string(&mut content)?;
+    }
 
-    // TODO: Resolve all the deferred defines.
+    let (remaining, mut defines) = parse::parse_file(&content).expect("parse error");
+
+    if !remaining.is_empty() {
+        panic!("Part of file is remaining: {}", remaining);
+    }
+
+    let mut previous_unresolved = None;
+
+    // Resolve all the deferred defines.
+    loop {
+        // In order to not loop infinitely, first figure out how many unresolved defines we have.
+        let unresolved = defines
+            .iter()
+            .filter(|define| matches!(define.expression, Expression::Expression { .. }))
+            .count();
+
+        // Are we done?
+        if unresolved == 0 {
+            break;
+        }
+
+        // Check if the unresolved count has changed
+        if let Some(previous) = previous_unresolved {
+            if previous == unresolved {
+                // We have an infinite loop, break.
+                // TODO: Better error message
+                panic!(
+                    "Some deferred defines have no expanded value: {:?}",
+                    defines
+                        .iter()
+                        .filter(|define| matches!(define.expression, Expression::Expression { .. }))
+                        .collect::<Vec<_>>()
+                );
+            }
+        }
+
+        // Store the current count to test for the next iteration.
+        previous_unresolved = Some(unresolved);
+
+        // Try to resolve some deferred defines.
+        for index in 0..defines.len() {
+            let define = *defines.get(index).unwrap();
+
+            // Look up the deferred value
+            if let Expression::Expression { other, add } = define.expression {
+                if let Some(Define {
+                    expression: Expression::Constant(value),
+                    ..
+                }) = defines.iter().find(|define| define.name == other)
+                {
+                    let value = *value;
+
+                    // Since our deferred value is some, fill in the constant value.
+                    let define = defines.get_mut(index).unwrap();
+                    define.expression = Expression::Constant(value + add.unwrap_or(0));
+                }
+            }
+        }
+    }
+
+    let categories = category::create_categories(defines)?;
+
+    let mut category_tokens = BTreeMap::new();
+
+    for (category_name, category) in categories {
+        // Before we go any further, normalize the category name to rust-like naming.
+        let mut category_enum_name = category_name.to_owned();
+        category_enum_name
+            .get_mut(0..1)
+            .unwrap()
+            .make_ascii_uppercase();
+        category_enum_name
+            .get_mut(1..)
+            .unwrap()
+            .make_ascii_lowercase();
+
+        // TODO: Category renames
+        assert!(category_tokens
+            .insert(
+                category_enum_name.clone(),
+                generate::category_to_tokens(&category_enum_name, &category)?
+            )
+            .is_none());
+    }
+
+    let out_path = &std::env::current_dir()?.join("src").join("generated.rs");
+
+    // Remove old generated file if it exists
+    let _ = fs::remove_file(out_path);
+
+    {
+        println!("{}", out_path.display());
+        let mut file = OpenOptions::new()
+            .create(true)
+            .write(true)
+            .append(false)
+            .open(out_path)?;
+
+        writeln!(file, "{}", HEADER)?;
+
+        for tokens in category_tokens.values() {
+            writeln!(file, "{}", tokens.to_string())?;
+        }
+
+        file.flush()?;
+    }
 
     Ok(())
 }
-
-fn generate_category(mut category: Category) -> TokenStream {
-    // TODO: Category name replacement, `Ev` is a badly named enum for example.
-
-    // Normalize the name to Rust standards.
-    category.name.get_mut(0..1).unwrap().make_ascii_uppercase();
-    category.name.get_mut(1..).unwrap().make_ascii_lowercase();
-
-    let name = Ident::new(&category.name, Span::call_site());
-
-    let entries = category
-        .entries
-        .into_iter()
-        .map(|item| {
-            let mut name = item.ident.to_string().split_once('_').unwrap().1.to_owned();
-
-            // Prefix any entries that start with a number
-            if name.starts_with(char::is_numeric) {
-                name.insert(0, '_');
-            }
-
-            let ident = Ident::new(&name, Span::call_site());
-            let original_name = Literal::string(&item.ident.to_string());
-
-            match *item.expr {
-                syn::Expr::Lit(syn::ExprLit {
-                    lit: syn::Lit::Int(value),
-                    ..
-                }) => {
-                    let value = Literal::u32_unsuffixed(value.base10_parse::<u32>().unwrap());
-
-                    Entry {
-                        ident,
-                        original_name,
-                        value,
-                    }
-                }
-
-                _ => {
-                    panic!("Expression value of {} is not a literal", name)
-                }
-            }
-        })
-        .collect::<Vec<_>>();
-
-    let entries = entries
-        .iter()
-        .map(|entry| {
-            let ident = &entry.ident;
-            let value = &entry.value;
-            let alias = &entry.original_name;
-
-            // With the definition, we also include the original name before any processing for easy searching.
-            quote! {
-                #[doc(alias = #alias)]
-                pub const #ident: #name = #name(#value);
-            }
-        })
-        .collect::<Vec<_>>();
-
-    // TODO: Note how the ordering may not mean anything
-    quote! {
-        #[repr(transparent)]
-        #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
-        pub struct #name (u32);
-
-        impl #name {
-            pub const fn new(value: u32) -> #name {
-                #name(value)
-            }
-
-            pub const fn into_inner(self) -> u32 {
-                self.0
-            }
-        }
-
-        impl From<u32> for #name {
-            fn from(value: u32) -> #name {
-                #name(value)
-            }
-        }
-
-        impl From<#name> for u32 {
-            fn from(value: #name) -> u32 {
-                value.0
-            }
-        }
-
-        impl PartialEq<u32> for #name {
-            fn eq(&self, other: &u32) -> bool {
-                &self.0 == other
-            }
-        }
-
-        impl #name {
-            #(#entries)*
-        }
-    }
-}
-
-pub struct Category {
-    name: String,
-    entries: Vec<syn::ItemConst>,
-}
-
-// Implement Ord so the generated file does not get reordered every commit.
-
-impl PartialOrd for Category {
-    fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
-        self.name.partial_cmp(&other.name)
-    }
-}
-
-// Yes this is probably wrong, but we are not public api.
-impl Eq for Category {}
-
-impl Ord for Category {
-    fn cmp(&self, other: &Self) -> Ordering {
-        self.name.cmp(&other.name)
-    }
-}
-
-// Required by PartialOrd
-
-impl PartialEq for Category {
-    fn eq(&self, other: &Self) -> bool {
-        self.name == other.name
-    }
-}
-
-struct Entry {
-    ident: Ident,
-    original_name: Literal,
-    value: Literal,
-}
-
-#[derive(Debug)]
-enum GenerateError {
-    /// Bindgen failed to generate bindings to input-event-codes.h
-    Bindgen,
-
-    /// The code generated by bindgen was invalid
-    Lex(LexError),
-
-    /// Syn encountered an error while parsing.
-    Parse(syn::Error),
-
-    /// An int literal could not be parsed.
-    ParseInt(ParseIntError),
-}
-
-impl From<LexError> for GenerateError {
-    fn from(err: LexError) -> Self {
-        GenerateError::Lex(err)
-    }
-}
-
-impl From<syn::Error> for GenerateError {
-    fn from(err: syn::Error) -> Self {
-        GenerateError::Parse(err)
-    }
-}
-
-impl From<ParseIntError> for GenerateError {
-    fn from(err: ParseIntError) -> Self {
-        GenerateError::ParseInt(err)
-    }
-}
-
-impl Display for GenerateError {
-    fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
-        match self {
-            GenerateError::Bindgen => write!(f, "bindgen"),
-            GenerateError::Lex(err) => Display::fmt(err, f),
-            GenerateError::Parse(err) => Display::fmt(err, f),
-            GenerateError::ParseInt(err) => Display::fmt(err, f),
-        }
-    }
-}
-
-impl Error for GenerateError {}

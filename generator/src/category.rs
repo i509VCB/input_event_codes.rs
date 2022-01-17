@@ -1,73 +1,55 @@
-//! This module contains all data to be attached to categories.
+use std::{collections::BTreeMap, error::Error};
 
-pub const DATA: &[CategoryData] = &[
-    CategoryData {
-        name: "Input",
-        rename_to: Some("InputQuirk"),
-        documentation: None,
-    },
-    CategoryData {
-        name: "Ev",
-        rename_to: Some("EventType"),
-        documentation: None,
-    },
-    CategoryData {
-        name: "Syn",
-        rename_to: Some("SynchronizationEvent"),
-        documentation: None,
-    },
-    CategoryData {
-        name: "Key",
-        rename_to: None,
-        documentation: None,
-    },
-    CategoryData {
-        name: "Btn",
-        rename_to: Some("Button"),
-        documentation: None,
-    },
-    CategoryData {
-        name: "Rel",
-        rename_to: Some("RelativeAxis"),
-        documentation: None,
-    },
-    CategoryData {
-        name: "Abs",
-        rename_to: Some("AbsoluteAxis"),
-        documentation: None,
-    },
-    CategoryData {
-        name: "Sw",
-        rename_to: Some("SwitchEvent"),
-        documentation: None,
-    },
-    CategoryData {
-        name: "Msc",
-        rename_to: Some("MiscEvent"),
-        documentation: None,
-    },
-    CategoryData {
-        name: "Rep",
-        rename_to: Some("AutoRepeat"),
-        documentation: None,
-    },
-    CategoryData {
-        name: "Snd",
-        rename_to: Some("Sound"),
-        documentation: None,
-    },
-];
+use crate::parse::{Define, Expression};
 
-/// Describes extra data that should be attached to a category's constants.
-pub struct CategoryData {
-    /// The generated name of the category.
-    pub name: &'static str,
+#[derive(Debug)]
+pub struct Constant {
+    pub name: String,
+    pub alias_name: String,
+    pub value: u32,
+    pub comment: Option<String>,
+}
 
-    /// The changed category name.
-    pub rename_to: Option<&'static str>,
+#[derive(Debug)]
+pub struct Category {
+    pub constants: Vec<Constant>,
+}
 
-    /// The documentation to associate with the category.
-    ///
-    /// This is hard to capture and does not present all the info we would like.
-    pub documentation: Option<&'static str>,
+pub fn create_categories(defines: Vec<Define>) -> Result<BTreeMap<&str, Category>, Box<dyn Error>> {
+    let mut categories = BTreeMap::new();
+
+    for define in defines {
+        let (category_name, constant_name) =
+            define.name.split_once('_').expect("Invalid define name");
+
+        if !categories.contains_key(category_name) {
+            assert!(categories
+                .insert(category_name, Category { constants: vec![] })
+                .is_none());
+        }
+
+        let category = categories.get_mut(category_name).unwrap();
+
+        // Ensure the name of the constant is a valid rust identifier:
+        let name = if constant_name.chars().next().unwrap().is_numeric() {
+            format!("_{}", constant_name)
+        } else {
+            constant_name.to_owned()
+        };
+
+        match define.expression {
+            Expression::Constant(value) => {
+                category.constants.push(Constant {
+                    name,
+                    alias_name: define.name.to_owned(),
+                    value,
+                    comment: define.comment.map(ToOwned::to_owned),
+                });
+            }
+
+            Expression::Expression { .. } => unreachable!(),
+        }
+    }
+
+    Ok(categories)
 }

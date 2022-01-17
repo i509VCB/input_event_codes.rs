@@ -6,21 +6,31 @@
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub struct Abs(u32);
 impl Abs {
-    pub const fn new(value: u32) -> Abs {
-        Abs(value)
+    pub const fn new(value: u32) -> Self {
+        Self(value)
     }
     pub const fn into_inner(self) -> u32 {
         self.0
     }
 }
 impl From<u32> for Abs {
-    fn from(value: u32) -> Abs {
-        Abs(value)
+    fn from(value: u32) -> Self {
+        Self(value)
     }
 }
 impl From<Abs> for u32 {
     fn from(value: Abs) -> u32 {
         value.0
+    }
+}
+impl AsRef<u32> for Abs {
+    fn as_ref(&self) -> &u32 {
+        &self.0
+    }
+}
+impl ::core::borrow::Borrow<u32> for Abs {
+    fn borrow(&self) -> &u32 {
+        &self.0
     }
 }
 impl PartialEq<u32> for Abs {
@@ -30,113 +40,138 @@ impl PartialEq<u32> for Abs {
 }
 impl Abs {
     #[doc(alias = "ABS_X")]
-    pub const X: Abs = Abs(0);
+    pub const X: Abs = Abs(0u32);
     #[doc(alias = "ABS_Y")]
-    pub const Y: Abs = Abs(1);
+    pub const Y: Abs = Abs(1u32);
     #[doc(alias = "ABS_Z")]
-    pub const Z: Abs = Abs(2);
+    pub const Z: Abs = Abs(2u32);
     #[doc(alias = "ABS_RX")]
-    pub const RX: Abs = Abs(3);
+    pub const RX: Abs = Abs(3u32);
     #[doc(alias = "ABS_RY")]
-    pub const RY: Abs = Abs(4);
+    pub const RY: Abs = Abs(4u32);
     #[doc(alias = "ABS_RZ")]
-    pub const RZ: Abs = Abs(5);
+    pub const RZ: Abs = Abs(5u32);
     #[doc(alias = "ABS_THROTTLE")]
-    pub const THROTTLE: Abs = Abs(6);
+    pub const THROTTLE: Abs = Abs(6u32);
     #[doc(alias = "ABS_RUDDER")]
-    pub const RUDDER: Abs = Abs(7);
+    pub const RUDDER: Abs = Abs(7u32);
     #[doc(alias = "ABS_WHEEL")]
-    pub const WHEEL: Abs = Abs(8);
+    pub const WHEEL: Abs = Abs(8u32);
     #[doc(alias = "ABS_GAS")]
-    pub const GAS: Abs = Abs(9);
+    pub const GAS: Abs = Abs(9u32);
     #[doc(alias = "ABS_BRAKE")]
-    pub const BRAKE: Abs = Abs(10);
+    pub const BRAKE: Abs = Abs(10u32);
     #[doc(alias = "ABS_HAT0X")]
-    pub const HAT0X: Abs = Abs(16);
+    pub const HAT0X: Abs = Abs(16u32);
     #[doc(alias = "ABS_HAT0Y")]
-    pub const HAT0Y: Abs = Abs(17);
+    pub const HAT0Y: Abs = Abs(17u32);
     #[doc(alias = "ABS_HAT1X")]
-    pub const HAT1X: Abs = Abs(18);
+    pub const HAT1X: Abs = Abs(18u32);
     #[doc(alias = "ABS_HAT1Y")]
-    pub const HAT1Y: Abs = Abs(19);
+    pub const HAT1Y: Abs = Abs(19u32);
     #[doc(alias = "ABS_HAT2X")]
-    pub const HAT2X: Abs = Abs(20);
+    pub const HAT2X: Abs = Abs(20u32);
     #[doc(alias = "ABS_HAT2Y")]
-    pub const HAT2Y: Abs = Abs(21);
+    pub const HAT2Y: Abs = Abs(21u32);
     #[doc(alias = "ABS_HAT3X")]
-    pub const HAT3X: Abs = Abs(22);
+    pub const HAT3X: Abs = Abs(22u32);
     #[doc(alias = "ABS_HAT3Y")]
-    pub const HAT3Y: Abs = Abs(23);
+    pub const HAT3Y: Abs = Abs(23u32);
     #[doc(alias = "ABS_PRESSURE")]
-    pub const PRESSURE: Abs = Abs(24);
+    pub const PRESSURE: Abs = Abs(24u32);
     #[doc(alias = "ABS_DISTANCE")]
-    pub const DISTANCE: Abs = Abs(25);
+    pub const DISTANCE: Abs = Abs(25u32);
     #[doc(alias = "ABS_TILT_X")]
-    pub const TILT_X: Abs = Abs(26);
+    pub const TILT_X: Abs = Abs(26u32);
     #[doc(alias = "ABS_TILT_Y")]
-    pub const TILT_Y: Abs = Abs(27);
+    pub const TILT_Y: Abs = Abs(27u32);
     #[doc(alias = "ABS_TOOL_WIDTH")]
-    pub const TOOL_WIDTH: Abs = Abs(28);
+    pub const TOOL_WIDTH: Abs = Abs(28u32);
     #[doc(alias = "ABS_VOLUME")]
-    pub const VOLUME: Abs = Abs(32);
+    pub const VOLUME: Abs = Abs(32u32);
     #[doc(alias = "ABS_MISC")]
-    pub const MISC: Abs = Abs(40);
+    pub const MISC: Abs = Abs(40u32);
     #[doc(alias = "ABS_RESERVED")]
-    pub const RESERVED: Abs = Abs(46);
+    pub const RESERVED: Abs = Abs(46u32);
+    #[doc = " MT slot being modified "]
     #[doc(alias = "ABS_MT_SLOT")]
-    pub const MT_SLOT: Abs = Abs(47);
+    pub const MT_SLOT: Abs = Abs(47u32);
+    #[doc = " Major axis of touching ellipse "]
     #[doc(alias = "ABS_MT_TOUCH_MAJOR")]
-    pub const MT_TOUCH_MAJOR: Abs = Abs(48);
+    pub const MT_TOUCH_MAJOR: Abs = Abs(48u32);
+    #[doc = " Minor axis (omit if circular) "]
     #[doc(alias = "ABS_MT_TOUCH_MINOR")]
-    pub const MT_TOUCH_MINOR: Abs = Abs(49);
+    pub const MT_TOUCH_MINOR: Abs = Abs(49u32);
+    #[doc = " Major axis of approaching ellipse "]
     #[doc(alias = "ABS_MT_WIDTH_MAJOR")]
-    pub const MT_WIDTH_MAJOR: Abs = Abs(50);
+    pub const MT_WIDTH_MAJOR: Abs = Abs(50u32);
+    #[doc = " Minor axis (omit if circular) "]
     #[doc(alias = "ABS_MT_WIDTH_MINOR")]
-    pub const MT_WIDTH_MINOR: Abs = Abs(51);
+    pub const MT_WIDTH_MINOR: Abs = Abs(51u32);
+    #[doc = " Ellipse orientation "]
     #[doc(alias = "ABS_MT_ORIENTATION")]
-    pub const MT_ORIENTATION: Abs = Abs(52);
+    pub const MT_ORIENTATION: Abs = Abs(52u32);
+    #[doc = " Center X touch position "]
     #[doc(alias = "ABS_MT_POSITION_X")]
-    pub const MT_POSITION_X: Abs = Abs(53);
+    pub const MT_POSITION_X: Abs = Abs(53u32);
+    #[doc = " Center Y touch position "]
     #[doc(alias = "ABS_MT_POSITION_Y")]
-    pub const MT_POSITION_Y: Abs = Abs(54);
+    pub const MT_POSITION_Y: Abs = Abs(54u32);
+    #[doc = " Type of touching device "]
     #[doc(alias = "ABS_MT_TOOL_TYPE")]
-    pub const MT_TOOL_TYPE: Abs = Abs(55);
+    pub const MT_TOOL_TYPE: Abs = Abs(55u32);
+    #[doc = " Group a set of packets as a blob "]
     #[doc(alias = "ABS_MT_BLOB_ID")]
-    pub const MT_BLOB_ID: Abs = Abs(56);
+    pub const MT_BLOB_ID: Abs = Abs(56u32);
+    #[doc = " Unique ID of initiated contact "]
     #[doc(alias = "ABS_MT_TRACKING_ID")]
-    pub const MT_TRACKING_ID: Abs = Abs(57);
+    pub const MT_TRACKING_ID: Abs = Abs(57u32);
+    #[doc = " Pressure on contact area "]
     #[doc(alias = "ABS_MT_PRESSURE")]
-    pub const MT_PRESSURE: Abs = Abs(58);
+    pub const MT_PRESSURE: Abs = Abs(58u32);
+    #[doc = " Contact hover distance "]
     #[doc(alias = "ABS_MT_DISTANCE")]
-    pub const MT_DISTANCE: Abs = Abs(59);
+    pub const MT_DISTANCE: Abs = Abs(59u32);
+    #[doc = " Center X tool position "]
     #[doc(alias = "ABS_MT_TOOL_X")]
-    pub const MT_TOOL_X: Abs = Abs(60);
+    pub const MT_TOOL_X: Abs = Abs(60u32);
+    #[doc = " Center Y tool position "]
     #[doc(alias = "ABS_MT_TOOL_Y")]
-    pub const MT_TOOL_Y: Abs = Abs(61);
+    pub const MT_TOOL_Y: Abs = Abs(61u32);
     #[doc(alias = "ABS_MAX")]
-    pub const MAX: Abs = Abs(63);
+    pub const MAX: Abs = Abs(63u32);
     #[doc(alias = "ABS_CNT")]
-    pub const CNT: Abs = Abs(64);
+    pub const CNT: Abs = Abs(64u32);
 }
 #[repr(transparent)]
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub struct Btn(u32);
 impl Btn {
-    pub const fn new(value: u32) -> Btn {
-        Btn(value)
+    pub const fn new(value: u32) -> Self {
+        Self(value)
     }
     pub const fn into_inner(self) -> u32 {
         self.0
     }
 }
 impl From<u32> for Btn {
-    fn from(value: u32) -> Btn {
-        Btn(value)
+    fn from(value: u32) -> Self {
+        Self(value)
     }
 }
 impl From<Btn> for u32 {
     fn from(value: Btn) -> u32 {
         value.0
+    }
+}
+impl AsRef<u32> for Btn {
+    fn as_ref(&self) -> &u32 {
+        &self.0
+    }
+}
+impl ::core::borrow::Borrow<u32> for Btn {
+    fn borrow(&self) -> &u32 {
+        &self.0
     }
 }
 impl PartialEq<u32> for Btn {
@@ -146,263 +181,275 @@ impl PartialEq<u32> for Btn {
 }
 impl Btn {
     #[doc(alias = "BTN_MISC")]
-    pub const MISC: Btn = Btn(256);
+    pub const MISC: Btn = Btn(256u32);
     #[doc(alias = "BTN_0")]
-    pub const _0: Btn = Btn(256);
+    pub const _0: Btn = Btn(256u32);
     #[doc(alias = "BTN_1")]
-    pub const _1: Btn = Btn(257);
+    pub const _1: Btn = Btn(257u32);
     #[doc(alias = "BTN_2")]
-    pub const _2: Btn = Btn(258);
+    pub const _2: Btn = Btn(258u32);
     #[doc(alias = "BTN_3")]
-    pub const _3: Btn = Btn(259);
+    pub const _3: Btn = Btn(259u32);
     #[doc(alias = "BTN_4")]
-    pub const _4: Btn = Btn(260);
+    pub const _4: Btn = Btn(260u32);
     #[doc(alias = "BTN_5")]
-    pub const _5: Btn = Btn(261);
+    pub const _5: Btn = Btn(261u32);
     #[doc(alias = "BTN_6")]
-    pub const _6: Btn = Btn(262);
+    pub const _6: Btn = Btn(262u32);
     #[doc(alias = "BTN_7")]
-    pub const _7: Btn = Btn(263);
+    pub const _7: Btn = Btn(263u32);
     #[doc(alias = "BTN_8")]
-    pub const _8: Btn = Btn(264);
+    pub const _8: Btn = Btn(264u32);
     #[doc(alias = "BTN_9")]
-    pub const _9: Btn = Btn(265);
+    pub const _9: Btn = Btn(265u32);
     #[doc(alias = "BTN_MOUSE")]
-    pub const MOUSE: Btn = Btn(272);
+    pub const MOUSE: Btn = Btn(272u32);
     #[doc(alias = "BTN_LEFT")]
-    pub const LEFT: Btn = Btn(272);
+    pub const LEFT: Btn = Btn(272u32);
     #[doc(alias = "BTN_RIGHT")]
-    pub const RIGHT: Btn = Btn(273);
+    pub const RIGHT: Btn = Btn(273u32);
     #[doc(alias = "BTN_MIDDLE")]
-    pub const MIDDLE: Btn = Btn(274);
+    pub const MIDDLE: Btn = Btn(274u32);
     #[doc(alias = "BTN_SIDE")]
-    pub const SIDE: Btn = Btn(275);
+    pub const SIDE: Btn = Btn(275u32);
     #[doc(alias = "BTN_EXTRA")]
-    pub const EXTRA: Btn = Btn(276);
+    pub const EXTRA: Btn = Btn(276u32);
     #[doc(alias = "BTN_FORWARD")]
-    pub const FORWARD: Btn = Btn(277);
+    pub const FORWARD: Btn = Btn(277u32);
     #[doc(alias = "BTN_BACK")]
-    pub const BACK: Btn = Btn(278);
+    pub const BACK: Btn = Btn(278u32);
     #[doc(alias = "BTN_TASK")]
-    pub const TASK: Btn = Btn(279);
+    pub const TASK: Btn = Btn(279u32);
     #[doc(alias = "BTN_JOYSTICK")]
-    pub const JOYSTICK: Btn = Btn(288);
+    pub const JOYSTICK: Btn = Btn(288u32);
     #[doc(alias = "BTN_TRIGGER")]
-    pub const TRIGGER: Btn = Btn(288);
+    pub const TRIGGER: Btn = Btn(288u32);
     #[doc(alias = "BTN_THUMB")]
-    pub const THUMB: Btn = Btn(289);
+    pub const THUMB: Btn = Btn(289u32);
     #[doc(alias = "BTN_THUMB2")]
-    pub const THUMB2: Btn = Btn(290);
+    pub const THUMB2: Btn = Btn(290u32);
     #[doc(alias = "BTN_TOP")]
-    pub const TOP: Btn = Btn(291);
+    pub const TOP: Btn = Btn(291u32);
     #[doc(alias = "BTN_TOP2")]
-    pub const TOP2: Btn = Btn(292);
+    pub const TOP2: Btn = Btn(292u32);
     #[doc(alias = "BTN_PINKIE")]
-    pub const PINKIE: Btn = Btn(293);
+    pub const PINKIE: Btn = Btn(293u32);
     #[doc(alias = "BTN_BASE")]
-    pub const BASE: Btn = Btn(294);
+    pub const BASE: Btn = Btn(294u32);
     #[doc(alias = "BTN_BASE2")]
-    pub const BASE2: Btn = Btn(295);
+    pub const BASE2: Btn = Btn(295u32);
     #[doc(alias = "BTN_BASE3")]
-    pub const BASE3: Btn = Btn(296);
+    pub const BASE3: Btn = Btn(296u32);
     #[doc(alias = "BTN_BASE4")]
-    pub const BASE4: Btn = Btn(297);
+    pub const BASE4: Btn = Btn(297u32);
     #[doc(alias = "BTN_BASE5")]
-    pub const BASE5: Btn = Btn(298);
+    pub const BASE5: Btn = Btn(298u32);
     #[doc(alias = "BTN_BASE6")]
-    pub const BASE6: Btn = Btn(299);
+    pub const BASE6: Btn = Btn(299u32);
     #[doc(alias = "BTN_DEAD")]
-    pub const DEAD: Btn = Btn(303);
+    pub const DEAD: Btn = Btn(303u32);
     #[doc(alias = "BTN_GAMEPAD")]
-    pub const GAMEPAD: Btn = Btn(304);
+    pub const GAMEPAD: Btn = Btn(304u32);
     #[doc(alias = "BTN_SOUTH")]
-    pub const SOUTH: Btn = Btn(304);
+    pub const SOUTH: Btn = Btn(304u32);
     #[doc(alias = "BTN_A")]
-    pub const A: Btn = Btn(304);
+    pub const A: Btn = Btn(304u32);
     #[doc(alias = "BTN_EAST")]
-    pub const EAST: Btn = Btn(305);
+    pub const EAST: Btn = Btn(305u32);
     #[doc(alias = "BTN_B")]
-    pub const B: Btn = Btn(305);
+    pub const B: Btn = Btn(305u32);
     #[doc(alias = "BTN_C")]
-    pub const C: Btn = Btn(306);
+    pub const C: Btn = Btn(306u32);
     #[doc(alias = "BTN_NORTH")]
-    pub const NORTH: Btn = Btn(307);
+    pub const NORTH: Btn = Btn(307u32);
     #[doc(alias = "BTN_X")]
-    pub const X: Btn = Btn(307);
+    pub const X: Btn = Btn(307u32);
     #[doc(alias = "BTN_WEST")]
-    pub const WEST: Btn = Btn(308);
+    pub const WEST: Btn = Btn(308u32);
     #[doc(alias = "BTN_Y")]
-    pub const Y: Btn = Btn(308);
+    pub const Y: Btn = Btn(308u32);
     #[doc(alias = "BTN_Z")]
-    pub const Z: Btn = Btn(309);
+    pub const Z: Btn = Btn(309u32);
     #[doc(alias = "BTN_TL")]
-    pub const TL: Btn = Btn(310);
+    pub const TL: Btn = Btn(310u32);
     #[doc(alias = "BTN_TR")]
-    pub const TR: Btn = Btn(311);
+    pub const TR: Btn = Btn(311u32);
     #[doc(alias = "BTN_TL2")]
-    pub const TL2: Btn = Btn(312);
+    pub const TL2: Btn = Btn(312u32);
     #[doc(alias = "BTN_TR2")]
-    pub const TR2: Btn = Btn(313);
+    pub const TR2: Btn = Btn(313u32);
     #[doc(alias = "BTN_SELECT")]
-    pub const SELECT: Btn = Btn(314);
+    pub const SELECT: Btn = Btn(314u32);
     #[doc(alias = "BTN_START")]
-    pub const START: Btn = Btn(315);
+    pub const START: Btn = Btn(315u32);
     #[doc(alias = "BTN_MODE")]
-    pub const MODE: Btn = Btn(316);
+    pub const MODE: Btn = Btn(316u32);
     #[doc(alias = "BTN_THUMBL")]
-    pub const THUMBL: Btn = Btn(317);
+    pub const THUMBL: Btn = Btn(317u32);
     #[doc(alias = "BTN_THUMBR")]
-    pub const THUMBR: Btn = Btn(318);
+    pub const THUMBR: Btn = Btn(318u32);
     #[doc(alias = "BTN_DIGI")]
-    pub const DIGI: Btn = Btn(320);
+    pub const DIGI: Btn = Btn(320u32);
     #[doc(alias = "BTN_TOOL_PEN")]
-    pub const TOOL_PEN: Btn = Btn(320);
+    pub const TOOL_PEN: Btn = Btn(320u32);
     #[doc(alias = "BTN_TOOL_RUBBER")]
-    pub const TOOL_RUBBER: Btn = Btn(321);
+    pub const TOOL_RUBBER: Btn = Btn(321u32);
     #[doc(alias = "BTN_TOOL_BRUSH")]
-    pub const TOOL_BRUSH: Btn = Btn(322);
+    pub const TOOL_BRUSH: Btn = Btn(322u32);
     #[doc(alias = "BTN_TOOL_PENCIL")]
-    pub const TOOL_PENCIL: Btn = Btn(323);
+    pub const TOOL_PENCIL: Btn = Btn(323u32);
     #[doc(alias = "BTN_TOOL_AIRBRUSH")]
-    pub const TOOL_AIRBRUSH: Btn = Btn(324);
+    pub const TOOL_AIRBRUSH: Btn = Btn(324u32);
     #[doc(alias = "BTN_TOOL_FINGER")]
-    pub const TOOL_FINGER: Btn = Btn(325);
+    pub const TOOL_FINGER: Btn = Btn(325u32);
     #[doc(alias = "BTN_TOOL_MOUSE")]
-    pub const TOOL_MOUSE: Btn = Btn(326);
+    pub const TOOL_MOUSE: Btn = Btn(326u32);
     #[doc(alias = "BTN_TOOL_LENS")]
-    pub const TOOL_LENS: Btn = Btn(327);
+    pub const TOOL_LENS: Btn = Btn(327u32);
+    #[doc = " Five fingers on trackpad "]
     #[doc(alias = "BTN_TOOL_QUINTTAP")]
-    pub const TOOL_QUINTTAP: Btn = Btn(328);
+    pub const TOOL_QUINTTAP: Btn = Btn(328u32);
     #[doc(alias = "BTN_STYLUS3")]
-    pub const STYLUS3: Btn = Btn(329);
+    pub const STYLUS3: Btn = Btn(329u32);
     #[doc(alias = "BTN_TOUCH")]
-    pub const TOUCH: Btn = Btn(330);
+    pub const TOUCH: Btn = Btn(330u32);
     #[doc(alias = "BTN_STYLUS")]
-    pub const STYLUS: Btn = Btn(331);
+    pub const STYLUS: Btn = Btn(331u32);
     #[doc(alias = "BTN_STYLUS2")]
-    pub const STYLUS2: Btn = Btn(332);
+    pub const STYLUS2: Btn = Btn(332u32);
     #[doc(alias = "BTN_TOOL_DOUBLETAP")]
-    pub const TOOL_DOUBLETAP: Btn = Btn(333);
+    pub const TOOL_DOUBLETAP: Btn = Btn(333u32);
     #[doc(alias = "BTN_TOOL_TRIPLETAP")]
-    pub const TOOL_TRIPLETAP: Btn = Btn(334);
+    pub const TOOL_TRIPLETAP: Btn = Btn(334u32);
+    #[doc = " Four fingers on trackpad "]
     #[doc(alias = "BTN_TOOL_QUADTAP")]
-    pub const TOOL_QUADTAP: Btn = Btn(335);
+    pub const TOOL_QUADTAP: Btn = Btn(335u32);
     #[doc(alias = "BTN_WHEEL")]
-    pub const WHEEL: Btn = Btn(336);
+    pub const WHEEL: Btn = Btn(336u32);
     #[doc(alias = "BTN_GEAR_DOWN")]
-    pub const GEAR_DOWN: Btn = Btn(336);
+    pub const GEAR_DOWN: Btn = Btn(336u32);
     #[doc(alias = "BTN_GEAR_UP")]
-    pub const GEAR_UP: Btn = Btn(337);
+    pub const GEAR_UP: Btn = Btn(337u32);
     #[doc(alias = "BTN_DPAD_UP")]
-    pub const DPAD_UP: Btn = Btn(544);
+    pub const DPAD_UP: Btn = Btn(544u32);
     #[doc(alias = "BTN_DPAD_DOWN")]
-    pub const DPAD_DOWN: Btn = Btn(545);
+    pub const DPAD_DOWN: Btn = Btn(545u32);
     #[doc(alias = "BTN_DPAD_LEFT")]
-    pub const DPAD_LEFT: Btn = Btn(546);
+    pub const DPAD_LEFT: Btn = Btn(546u32);
     #[doc(alias = "BTN_DPAD_RIGHT")]
-    pub const DPAD_RIGHT: Btn = Btn(547);
+    pub const DPAD_RIGHT: Btn = Btn(547u32);
     #[doc(alias = "BTN_TRIGGER_HAPPY")]
-    pub const TRIGGER_HAPPY: Btn = Btn(704);
+    pub const TRIGGER_HAPPY: Btn = Btn(704u32);
     #[doc(alias = "BTN_TRIGGER_HAPPY1")]
-    pub const TRIGGER_HAPPY1: Btn = Btn(704);
+    pub const TRIGGER_HAPPY1: Btn = Btn(704u32);
     #[doc(alias = "BTN_TRIGGER_HAPPY2")]
-    pub const TRIGGER_HAPPY2: Btn = Btn(705);
+    pub const TRIGGER_HAPPY2: Btn = Btn(705u32);
     #[doc(alias = "BTN_TRIGGER_HAPPY3")]
-    pub const TRIGGER_HAPPY3: Btn = Btn(706);
+    pub const TRIGGER_HAPPY3: Btn = Btn(706u32);
     #[doc(alias = "BTN_TRIGGER_HAPPY4")]
-    pub const TRIGGER_HAPPY4: Btn = Btn(707);
+    pub const TRIGGER_HAPPY4: Btn = Btn(707u32);
     #[doc(alias = "BTN_TRIGGER_HAPPY5")]
-    pub const TRIGGER_HAPPY5: Btn = Btn(708);
+    pub const TRIGGER_HAPPY5: Btn = Btn(708u32);
     #[doc(alias = "BTN_TRIGGER_HAPPY6")]
-    pub const TRIGGER_HAPPY6: Btn = Btn(709);
+    pub const TRIGGER_HAPPY6: Btn = Btn(709u32);
     #[doc(alias = "BTN_TRIGGER_HAPPY7")]
-    pub const TRIGGER_HAPPY7: Btn = Btn(710);
+    pub const TRIGGER_HAPPY7: Btn = Btn(710u32);
     #[doc(alias = "BTN_TRIGGER_HAPPY8")]
-    pub const TRIGGER_HAPPY8: Btn = Btn(711);
+    pub const TRIGGER_HAPPY8: Btn = Btn(711u32);
     #[doc(alias = "BTN_TRIGGER_HAPPY9")]
-    pub const TRIGGER_HAPPY9: Btn = Btn(712);
+    pub const TRIGGER_HAPPY9: Btn = Btn(712u32);
     #[doc(alias = "BTN_TRIGGER_HAPPY10")]
-    pub const TRIGGER_HAPPY10: Btn = Btn(713);
+    pub const TRIGGER_HAPPY10: Btn = Btn(713u32);
     #[doc(alias = "BTN_TRIGGER_HAPPY11")]
-    pub const TRIGGER_HAPPY11: Btn = Btn(714);
+    pub const TRIGGER_HAPPY11: Btn = Btn(714u32);
     #[doc(alias = "BTN_TRIGGER_HAPPY12")]
-    pub const TRIGGER_HAPPY12: Btn = Btn(715);
+    pub const TRIGGER_HAPPY12: Btn = Btn(715u32);
     #[doc(alias = "BTN_TRIGGER_HAPPY13")]
-    pub const TRIGGER_HAPPY13: Btn = Btn(716);
+    pub const TRIGGER_HAPPY13: Btn = Btn(716u32);
     #[doc(alias = "BTN_TRIGGER_HAPPY14")]
-    pub const TRIGGER_HAPPY14: Btn = Btn(717);
+    pub const TRIGGER_HAPPY14: Btn = Btn(717u32);
     #[doc(alias = "BTN_TRIGGER_HAPPY15")]
-    pub const TRIGGER_HAPPY15: Btn = Btn(718);
+    pub const TRIGGER_HAPPY15: Btn = Btn(718u32);
     #[doc(alias = "BTN_TRIGGER_HAPPY16")]
-    pub const TRIGGER_HAPPY16: Btn = Btn(719);
+    pub const TRIGGER_HAPPY16: Btn = Btn(719u32);
     #[doc(alias = "BTN_TRIGGER_HAPPY17")]
-    pub const TRIGGER_HAPPY17: Btn = Btn(720);
+    pub const TRIGGER_HAPPY17: Btn = Btn(720u32);
     #[doc(alias = "BTN_TRIGGER_HAPPY18")]
-    pub const TRIGGER_HAPPY18: Btn = Btn(721);
+    pub const TRIGGER_HAPPY18: Btn = Btn(721u32);
     #[doc(alias = "BTN_TRIGGER_HAPPY19")]
-    pub const TRIGGER_HAPPY19: Btn = Btn(722);
+    pub const TRIGGER_HAPPY19: Btn = Btn(722u32);
     #[doc(alias = "BTN_TRIGGER_HAPPY20")]
-    pub const TRIGGER_HAPPY20: Btn = Btn(723);
+    pub const TRIGGER_HAPPY20: Btn = Btn(723u32);
     #[doc(alias = "BTN_TRIGGER_HAPPY21")]
-    pub const TRIGGER_HAPPY21: Btn = Btn(724);
+    pub const TRIGGER_HAPPY21: Btn = Btn(724u32);
     #[doc(alias = "BTN_TRIGGER_HAPPY22")]
-    pub const TRIGGER_HAPPY22: Btn = Btn(725);
+    pub const TRIGGER_HAPPY22: Btn = Btn(725u32);
     #[doc(alias = "BTN_TRIGGER_HAPPY23")]
-    pub const TRIGGER_HAPPY23: Btn = Btn(726);
+    pub const TRIGGER_HAPPY23: Btn = Btn(726u32);
     #[doc(alias = "BTN_TRIGGER_HAPPY24")]
-    pub const TRIGGER_HAPPY24: Btn = Btn(727);
+    pub const TRIGGER_HAPPY24: Btn = Btn(727u32);
     #[doc(alias = "BTN_TRIGGER_HAPPY25")]
-    pub const TRIGGER_HAPPY25: Btn = Btn(728);
+    pub const TRIGGER_HAPPY25: Btn = Btn(728u32);
     #[doc(alias = "BTN_TRIGGER_HAPPY26")]
-    pub const TRIGGER_HAPPY26: Btn = Btn(729);
+    pub const TRIGGER_HAPPY26: Btn = Btn(729u32);
     #[doc(alias = "BTN_TRIGGER_HAPPY27")]
-    pub const TRIGGER_HAPPY27: Btn = Btn(730);
+    pub const TRIGGER_HAPPY27: Btn = Btn(730u32);
     #[doc(alias = "BTN_TRIGGER_HAPPY28")]
-    pub const TRIGGER_HAPPY28: Btn = Btn(731);
+    pub const TRIGGER_HAPPY28: Btn = Btn(731u32);
     #[doc(alias = "BTN_TRIGGER_HAPPY29")]
-    pub const TRIGGER_HAPPY29: Btn = Btn(732);
+    pub const TRIGGER_HAPPY29: Btn = Btn(732u32);
     #[doc(alias = "BTN_TRIGGER_HAPPY30")]
-    pub const TRIGGER_HAPPY30: Btn = Btn(733);
+    pub const TRIGGER_HAPPY30: Btn = Btn(733u32);
     #[doc(alias = "BTN_TRIGGER_HAPPY31")]
-    pub const TRIGGER_HAPPY31: Btn = Btn(734);
+    pub const TRIGGER_HAPPY31: Btn = Btn(734u32);
     #[doc(alias = "BTN_TRIGGER_HAPPY32")]
-    pub const TRIGGER_HAPPY32: Btn = Btn(735);
+    pub const TRIGGER_HAPPY32: Btn = Btn(735u32);
     #[doc(alias = "BTN_TRIGGER_HAPPY33")]
-    pub const TRIGGER_HAPPY33: Btn = Btn(736);
+    pub const TRIGGER_HAPPY33: Btn = Btn(736u32);
     #[doc(alias = "BTN_TRIGGER_HAPPY34")]
-    pub const TRIGGER_HAPPY34: Btn = Btn(737);
+    pub const TRIGGER_HAPPY34: Btn = Btn(737u32);
     #[doc(alias = "BTN_TRIGGER_HAPPY35")]
-    pub const TRIGGER_HAPPY35: Btn = Btn(738);
+    pub const TRIGGER_HAPPY35: Btn = Btn(738u32);
     #[doc(alias = "BTN_TRIGGER_HAPPY36")]
-    pub const TRIGGER_HAPPY36: Btn = Btn(739);
+    pub const TRIGGER_HAPPY36: Btn = Btn(739u32);
     #[doc(alias = "BTN_TRIGGER_HAPPY37")]
-    pub const TRIGGER_HAPPY37: Btn = Btn(740);
+    pub const TRIGGER_HAPPY37: Btn = Btn(740u32);
     #[doc(alias = "BTN_TRIGGER_HAPPY38")]
-    pub const TRIGGER_HAPPY38: Btn = Btn(741);
+    pub const TRIGGER_HAPPY38: Btn = Btn(741u32);
     #[doc(alias = "BTN_TRIGGER_HAPPY39")]
-    pub const TRIGGER_HAPPY39: Btn = Btn(742);
+    pub const TRIGGER_HAPPY39: Btn = Btn(742u32);
     #[doc(alias = "BTN_TRIGGER_HAPPY40")]
-    pub const TRIGGER_HAPPY40: Btn = Btn(743);
+    pub const TRIGGER_HAPPY40: Btn = Btn(743u32);
 }
 #[repr(transparent)]
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub struct Ev(u32);
 impl Ev {
-    pub const fn new(value: u32) -> Ev {
-        Ev(value)
+    pub const fn new(value: u32) -> Self {
+        Self(value)
     }
     pub const fn into_inner(self) -> u32 {
         self.0
     }
 }
 impl From<u32> for Ev {
-    fn from(value: u32) -> Ev {
-        Ev(value)
+    fn from(value: u32) -> Self {
+        Self(value)
     }
 }
 impl From<Ev> for u32 {
     fn from(value: Ev) -> u32 {
         value.0
+    }
+}
+impl AsRef<u32> for Ev {
+    fn as_ref(&self) -> &u32 {
+        &self.0
+    }
+}
+impl ::core::borrow::Borrow<u32> for Ev {
+    fn borrow(&self) -> &u32 {
+        &self.0
     }
 }
 impl PartialEq<u32> for Ev {
@@ -412,53 +459,63 @@ impl PartialEq<u32> for Ev {
 }
 impl Ev {
     #[doc(alias = "EV_SYN")]
-    pub const SYN: Ev = Ev(0);
+    pub const SYN: Ev = Ev(0u32);
     #[doc(alias = "EV_KEY")]
-    pub const KEY: Ev = Ev(1);
+    pub const KEY: Ev = Ev(1u32);
     #[doc(alias = "EV_REL")]
-    pub const REL: Ev = Ev(2);
+    pub const REL: Ev = Ev(2u32);
     #[doc(alias = "EV_ABS")]
-    pub const ABS: Ev = Ev(3);
+    pub const ABS: Ev = Ev(3u32);
     #[doc(alias = "EV_MSC")]
-    pub const MSC: Ev = Ev(4);
+    pub const MSC: Ev = Ev(4u32);
     #[doc(alias = "EV_SW")]
-    pub const SW: Ev = Ev(5);
+    pub const SW: Ev = Ev(5u32);
     #[doc(alias = "EV_LED")]
-    pub const LED: Ev = Ev(17);
+    pub const LED: Ev = Ev(17u32);
     #[doc(alias = "EV_SND")]
-    pub const SND: Ev = Ev(18);
+    pub const SND: Ev = Ev(18u32);
     #[doc(alias = "EV_REP")]
-    pub const REP: Ev = Ev(20);
+    pub const REP: Ev = Ev(20u32);
     #[doc(alias = "EV_FF")]
-    pub const FF: Ev = Ev(21);
+    pub const FF: Ev = Ev(21u32);
     #[doc(alias = "EV_PWR")]
-    pub const PWR: Ev = Ev(22);
+    pub const PWR: Ev = Ev(22u32);
     #[doc(alias = "EV_FF_STATUS")]
-    pub const FF_STATUS: Ev = Ev(23);
+    pub const FF_STATUS: Ev = Ev(23u32);
     #[doc(alias = "EV_MAX")]
-    pub const MAX: Ev = Ev(31);
+    pub const MAX: Ev = Ev(31u32);
     #[doc(alias = "EV_CNT")]
-    pub const CNT: Ev = Ev(32);
+    pub const CNT: Ev = Ev(32u32);
 }
 #[repr(transparent)]
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub struct Input(u32);
 impl Input {
-    pub const fn new(value: u32) -> Input {
-        Input(value)
+    pub const fn new(value: u32) -> Self {
+        Self(value)
     }
     pub const fn into_inner(self) -> u32 {
         self.0
     }
 }
 impl From<u32> for Input {
-    fn from(value: u32) -> Input {
-        Input(value)
+    fn from(value: u32) -> Self {
+        Self(value)
     }
 }
 impl From<Input> for u32 {
     fn from(value: Input) -> u32 {
         value.0
+    }
+}
+impl AsRef<u32> for Input {
+    fn as_ref(&self) -> &u32 {
+        &self.0
+    }
+}
+impl ::core::borrow::Borrow<u32> for Input {
+    fn borrow(&self) -> &u32 {
+        &self.0
     }
 }
 impl PartialEq<u32> for Input {
@@ -467,44 +524,61 @@ impl PartialEq<u32> for Input {
     }
 }
 impl Input {
+    #[doc = " needs a pointer "]
     #[doc(alias = "INPUT_PROP_POINTER")]
-    pub const PROP_POINTER: Input = Input(0);
+    pub const PROP_POINTER: Input = Input(0u32);
+    #[doc = " direct input devices "]
     #[doc(alias = "INPUT_PROP_DIRECT")]
-    pub const PROP_DIRECT: Input = Input(1);
+    pub const PROP_DIRECT: Input = Input(1u32);
+    #[doc = " has button(s) under pad "]
     #[doc(alias = "INPUT_PROP_BUTTONPAD")]
-    pub const PROP_BUTTONPAD: Input = Input(2);
+    pub const PROP_BUTTONPAD: Input = Input(2u32);
+    #[doc = " touch rectangle only "]
     #[doc(alias = "INPUT_PROP_SEMI_MT")]
-    pub const PROP_SEMI_MT: Input = Input(3);
+    pub const PROP_SEMI_MT: Input = Input(3u32);
+    #[doc = " softbuttons at top of pad "]
     #[doc(alias = "INPUT_PROP_TOPBUTTONPAD")]
-    pub const PROP_TOPBUTTONPAD: Input = Input(4);
+    pub const PROP_TOPBUTTONPAD: Input = Input(4u32);
+    #[doc = " is a pointing stick "]
     #[doc(alias = "INPUT_PROP_POINTING_STICK")]
-    pub const PROP_POINTING_STICK: Input = Input(5);
+    pub const PROP_POINTING_STICK: Input = Input(5u32);
+    #[doc = " has accelerometer "]
     #[doc(alias = "INPUT_PROP_ACCELEROMETER")]
-    pub const PROP_ACCELEROMETER: Input = Input(6);
+    pub const PROP_ACCELEROMETER: Input = Input(6u32);
     #[doc(alias = "INPUT_PROP_MAX")]
-    pub const PROP_MAX: Input = Input(31);
+    pub const PROP_MAX: Input = Input(31u32);
     #[doc(alias = "INPUT_PROP_CNT")]
-    pub const PROP_CNT: Input = Input(32);
+    pub const PROP_CNT: Input = Input(32u32);
 }
 #[repr(transparent)]
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub struct Key(u32);
 impl Key {
-    pub const fn new(value: u32) -> Key {
-        Key(value)
+    pub const fn new(value: u32) -> Self {
+        Self(value)
     }
     pub const fn into_inner(self) -> u32 {
         self.0
     }
 }
 impl From<u32> for Key {
-    fn from(value: u32) -> Key {
-        Key(value)
+    fn from(value: u32) -> Self {
+        Self(value)
     }
 }
 impl From<Key> for u32 {
     fn from(value: Key) -> u32 {
         value.0
+    }
+}
+impl AsRef<u32> for Key {
+    fn as_ref(&self) -> &u32 {
+        &self.0
+    }
+}
+impl ::core::borrow::Borrow<u32> for Key {
+    fn borrow(&self) -> &u32 {
+        &self.0
     }
 }
 impl PartialEq<u32> for Key {
@@ -514,1019 +588,1147 @@ impl PartialEq<u32> for Key {
 }
 impl Key {
     #[doc(alias = "KEY_RESERVED")]
-    pub const RESERVED: Key = Key(0);
+    pub const RESERVED: Key = Key(0u32);
     #[doc(alias = "KEY_ESC")]
-    pub const ESC: Key = Key(1);
+    pub const ESC: Key = Key(1u32);
     #[doc(alias = "KEY_1")]
-    pub const _1: Key = Key(2);
+    pub const _1: Key = Key(2u32);
     #[doc(alias = "KEY_2")]
-    pub const _2: Key = Key(3);
+    pub const _2: Key = Key(3u32);
     #[doc(alias = "KEY_3")]
-    pub const _3: Key = Key(4);
+    pub const _3: Key = Key(4u32);
     #[doc(alias = "KEY_4")]
-    pub const _4: Key = Key(5);
+    pub const _4: Key = Key(5u32);
     #[doc(alias = "KEY_5")]
-    pub const _5: Key = Key(6);
+    pub const _5: Key = Key(6u32);
     #[doc(alias = "KEY_6")]
-    pub const _6: Key = Key(7);
+    pub const _6: Key = Key(7u32);
     #[doc(alias = "KEY_7")]
-    pub const _7: Key = Key(8);
+    pub const _7: Key = Key(8u32);
     #[doc(alias = "KEY_8")]
-    pub const _8: Key = Key(9);
+    pub const _8: Key = Key(9u32);
     #[doc(alias = "KEY_9")]
-    pub const _9: Key = Key(10);
+    pub const _9: Key = Key(10u32);
     #[doc(alias = "KEY_0")]
-    pub const _0: Key = Key(11);
+    pub const _0: Key = Key(11u32);
     #[doc(alias = "KEY_MINUS")]
-    pub const MINUS: Key = Key(12);
+    pub const MINUS: Key = Key(12u32);
     #[doc(alias = "KEY_EQUAL")]
-    pub const EQUAL: Key = Key(13);
+    pub const EQUAL: Key = Key(13u32);
     #[doc(alias = "KEY_BACKSPACE")]
-    pub const BACKSPACE: Key = Key(14);
+    pub const BACKSPACE: Key = Key(14u32);
     #[doc(alias = "KEY_TAB")]
-    pub const TAB: Key = Key(15);
+    pub const TAB: Key = Key(15u32);
     #[doc(alias = "KEY_Q")]
-    pub const Q: Key = Key(16);
+    pub const Q: Key = Key(16u32);
     #[doc(alias = "KEY_W")]
-    pub const W: Key = Key(17);
+    pub const W: Key = Key(17u32);
     #[doc(alias = "KEY_E")]
-    pub const E: Key = Key(18);
+    pub const E: Key = Key(18u32);
     #[doc(alias = "KEY_R")]
-    pub const R: Key = Key(19);
+    pub const R: Key = Key(19u32);
     #[doc(alias = "KEY_T")]
-    pub const T: Key = Key(20);
+    pub const T: Key = Key(20u32);
     #[doc(alias = "KEY_Y")]
-    pub const Y: Key = Key(21);
+    pub const Y: Key = Key(21u32);
     #[doc(alias = "KEY_U")]
-    pub const U: Key = Key(22);
+    pub const U: Key = Key(22u32);
     #[doc(alias = "KEY_I")]
-    pub const I: Key = Key(23);
+    pub const I: Key = Key(23u32);
     #[doc(alias = "KEY_O")]
-    pub const O: Key = Key(24);
+    pub const O: Key = Key(24u32);
     #[doc(alias = "KEY_P")]
-    pub const P: Key = Key(25);
+    pub const P: Key = Key(25u32);
     #[doc(alias = "KEY_LEFTBRACE")]
-    pub const LEFTBRACE: Key = Key(26);
+    pub const LEFTBRACE: Key = Key(26u32);
     #[doc(alias = "KEY_RIGHTBRACE")]
-    pub const RIGHTBRACE: Key = Key(27);
+    pub const RIGHTBRACE: Key = Key(27u32);
     #[doc(alias = "KEY_ENTER")]
-    pub const ENTER: Key = Key(28);
+    pub const ENTER: Key = Key(28u32);
     #[doc(alias = "KEY_LEFTCTRL")]
-    pub const LEFTCTRL: Key = Key(29);
+    pub const LEFTCTRL: Key = Key(29u32);
     #[doc(alias = "KEY_A")]
-    pub const A: Key = Key(30);
+    pub const A: Key = Key(30u32);
     #[doc(alias = "KEY_S")]
-    pub const S: Key = Key(31);
+    pub const S: Key = Key(31u32);
     #[doc(alias = "KEY_D")]
-    pub const D: Key = Key(32);
+    pub const D: Key = Key(32u32);
     #[doc(alias = "KEY_F")]
-    pub const F: Key = Key(33);
+    pub const F: Key = Key(33u32);
     #[doc(alias = "KEY_G")]
-    pub const G: Key = Key(34);
+    pub const G: Key = Key(34u32);
     #[doc(alias = "KEY_H")]
-    pub const H: Key = Key(35);
+    pub const H: Key = Key(35u32);
     #[doc(alias = "KEY_J")]
-    pub const J: Key = Key(36);
+    pub const J: Key = Key(36u32);
     #[doc(alias = "KEY_K")]
-    pub const K: Key = Key(37);
+    pub const K: Key = Key(37u32);
     #[doc(alias = "KEY_L")]
-    pub const L: Key = Key(38);
+    pub const L: Key = Key(38u32);
     #[doc(alias = "KEY_SEMICOLON")]
-    pub const SEMICOLON: Key = Key(39);
+    pub const SEMICOLON: Key = Key(39u32);
     #[doc(alias = "KEY_APOSTROPHE")]
-    pub const APOSTROPHE: Key = Key(40);
+    pub const APOSTROPHE: Key = Key(40u32);
     #[doc(alias = "KEY_GRAVE")]
-    pub const GRAVE: Key = Key(41);
+    pub const GRAVE: Key = Key(41u32);
     #[doc(alias = "KEY_LEFTSHIFT")]
-    pub const LEFTSHIFT: Key = Key(42);
+    pub const LEFTSHIFT: Key = Key(42u32);
     #[doc(alias = "KEY_BACKSLASH")]
-    pub const BACKSLASH: Key = Key(43);
+    pub const BACKSLASH: Key = Key(43u32);
     #[doc(alias = "KEY_Z")]
-    pub const Z: Key = Key(44);
+    pub const Z: Key = Key(44u32);
     #[doc(alias = "KEY_X")]
-    pub const X: Key = Key(45);
+    pub const X: Key = Key(45u32);
     #[doc(alias = "KEY_C")]
-    pub const C: Key = Key(46);
+    pub const C: Key = Key(46u32);
     #[doc(alias = "KEY_V")]
-    pub const V: Key = Key(47);
+    pub const V: Key = Key(47u32);
     #[doc(alias = "KEY_B")]
-    pub const B: Key = Key(48);
+    pub const B: Key = Key(48u32);
     #[doc(alias = "KEY_N")]
-    pub const N: Key = Key(49);
+    pub const N: Key = Key(49u32);
     #[doc(alias = "KEY_M")]
-    pub const M: Key = Key(50);
+    pub const M: Key = Key(50u32);
     #[doc(alias = "KEY_COMMA")]
-    pub const COMMA: Key = Key(51);
+    pub const COMMA: Key = Key(51u32);
     #[doc(alias = "KEY_DOT")]
-    pub const DOT: Key = Key(52);
+    pub const DOT: Key = Key(52u32);
     #[doc(alias = "KEY_SLASH")]
-    pub const SLASH: Key = Key(53);
+    pub const SLASH: Key = Key(53u32);
     #[doc(alias = "KEY_RIGHTSHIFT")]
-    pub const RIGHTSHIFT: Key = Key(54);
+    pub const RIGHTSHIFT: Key = Key(54u32);
     #[doc(alias = "KEY_KPASTERISK")]
-    pub const KPASTERISK: Key = Key(55);
+    pub const KPASTERISK: Key = Key(55u32);
     #[doc(alias = "KEY_LEFTALT")]
-    pub const LEFTALT: Key = Key(56);
+    pub const LEFTALT: Key = Key(56u32);
     #[doc(alias = "KEY_SPACE")]
-    pub const SPACE: Key = Key(57);
+    pub const SPACE: Key = Key(57u32);
     #[doc(alias = "KEY_CAPSLOCK")]
-    pub const CAPSLOCK: Key = Key(58);
+    pub const CAPSLOCK: Key = Key(58u32);
     #[doc(alias = "KEY_F1")]
-    pub const F1: Key = Key(59);
+    pub const F1: Key = Key(59u32);
     #[doc(alias = "KEY_F2")]
-    pub const F2: Key = Key(60);
+    pub const F2: Key = Key(60u32);
     #[doc(alias = "KEY_F3")]
-    pub const F3: Key = Key(61);
+    pub const F3: Key = Key(61u32);
     #[doc(alias = "KEY_F4")]
-    pub const F4: Key = Key(62);
+    pub const F4: Key = Key(62u32);
     #[doc(alias = "KEY_F5")]
-    pub const F5: Key = Key(63);
+    pub const F5: Key = Key(63u32);
     #[doc(alias = "KEY_F6")]
-    pub const F6: Key = Key(64);
+    pub const F6: Key = Key(64u32);
     #[doc(alias = "KEY_F7")]
-    pub const F7: Key = Key(65);
+    pub const F7: Key = Key(65u32);
     #[doc(alias = "KEY_F8")]
-    pub const F8: Key = Key(66);
+    pub const F8: Key = Key(66u32);
     #[doc(alias = "KEY_F9")]
-    pub const F9: Key = Key(67);
+    pub const F9: Key = Key(67u32);
     #[doc(alias = "KEY_F10")]
-    pub const F10: Key = Key(68);
+    pub const F10: Key = Key(68u32);
     #[doc(alias = "KEY_NUMLOCK")]
-    pub const NUMLOCK: Key = Key(69);
+    pub const NUMLOCK: Key = Key(69u32);
     #[doc(alias = "KEY_SCROLLLOCK")]
-    pub const SCROLLLOCK: Key = Key(70);
+    pub const SCROLLLOCK: Key = Key(70u32);
     #[doc(alias = "KEY_KP7")]
-    pub const KP7: Key = Key(71);
+    pub const KP7: Key = Key(71u32);
     #[doc(alias = "KEY_KP8")]
-    pub const KP8: Key = Key(72);
+    pub const KP8: Key = Key(72u32);
     #[doc(alias = "KEY_KP9")]
-    pub const KP9: Key = Key(73);
+    pub const KP9: Key = Key(73u32);
     #[doc(alias = "KEY_KPMINUS")]
-    pub const KPMINUS: Key = Key(74);
+    pub const KPMINUS: Key = Key(74u32);
     #[doc(alias = "KEY_KP4")]
-    pub const KP4: Key = Key(75);
+    pub const KP4: Key = Key(75u32);
     #[doc(alias = "KEY_KP5")]
-    pub const KP5: Key = Key(76);
+    pub const KP5: Key = Key(76u32);
     #[doc(alias = "KEY_KP6")]
-    pub const KP6: Key = Key(77);
+    pub const KP6: Key = Key(77u32);
     #[doc(alias = "KEY_KPPLUS")]
-    pub const KPPLUS: Key = Key(78);
+    pub const KPPLUS: Key = Key(78u32);
     #[doc(alias = "KEY_KP1")]
-    pub const KP1: Key = Key(79);
+    pub const KP1: Key = Key(79u32);
     #[doc(alias = "KEY_KP2")]
-    pub const KP2: Key = Key(80);
+    pub const KP2: Key = Key(80u32);
     #[doc(alias = "KEY_KP3")]
-    pub const KP3: Key = Key(81);
+    pub const KP3: Key = Key(81u32);
     #[doc(alias = "KEY_KP0")]
-    pub const KP0: Key = Key(82);
+    pub const KP0: Key = Key(82u32);
     #[doc(alias = "KEY_KPDOT")]
-    pub const KPDOT: Key = Key(83);
+    pub const KPDOT: Key = Key(83u32);
     #[doc(alias = "KEY_ZENKAKUHANKAKU")]
-    pub const ZENKAKUHANKAKU: Key = Key(85);
+    pub const ZENKAKUHANKAKU: Key = Key(85u32);
     #[doc(alias = "KEY_102ND")]
-    pub const _102ND: Key = Key(86);
+    pub const _102ND: Key = Key(86u32);
     #[doc(alias = "KEY_F11")]
-    pub const F11: Key = Key(87);
+    pub const F11: Key = Key(87u32);
     #[doc(alias = "KEY_F12")]
-    pub const F12: Key = Key(88);
+    pub const F12: Key = Key(88u32);
     #[doc(alias = "KEY_RO")]
-    pub const RO: Key = Key(89);
+    pub const RO: Key = Key(89u32);
     #[doc(alias = "KEY_KATAKANA")]
-    pub const KATAKANA: Key = Key(90);
+    pub const KATAKANA: Key = Key(90u32);
     #[doc(alias = "KEY_HIRAGANA")]
-    pub const HIRAGANA: Key = Key(91);
+    pub const HIRAGANA: Key = Key(91u32);
     #[doc(alias = "KEY_HENKAN")]
-    pub const HENKAN: Key = Key(92);
+    pub const HENKAN: Key = Key(92u32);
     #[doc(alias = "KEY_KATAKANAHIRAGANA")]
-    pub const KATAKANAHIRAGANA: Key = Key(93);
+    pub const KATAKANAHIRAGANA: Key = Key(93u32);
     #[doc(alias = "KEY_MUHENKAN")]
-    pub const MUHENKAN: Key = Key(94);
+    pub const MUHENKAN: Key = Key(94u32);
     #[doc(alias = "KEY_KPJPCOMMA")]
-    pub const KPJPCOMMA: Key = Key(95);
+    pub const KPJPCOMMA: Key = Key(95u32);
     #[doc(alias = "KEY_KPENTER")]
-    pub const KPENTER: Key = Key(96);
+    pub const KPENTER: Key = Key(96u32);
     #[doc(alias = "KEY_RIGHTCTRL")]
-    pub const RIGHTCTRL: Key = Key(97);
+    pub const RIGHTCTRL: Key = Key(97u32);
     #[doc(alias = "KEY_KPSLASH")]
-    pub const KPSLASH: Key = Key(98);
+    pub const KPSLASH: Key = Key(98u32);
     #[doc(alias = "KEY_SYSRQ")]
-    pub const SYSRQ: Key = Key(99);
+    pub const SYSRQ: Key = Key(99u32);
     #[doc(alias = "KEY_RIGHTALT")]
-    pub const RIGHTALT: Key = Key(100);
+    pub const RIGHTALT: Key = Key(100u32);
     #[doc(alias = "KEY_LINEFEED")]
-    pub const LINEFEED: Key = Key(101);
+    pub const LINEFEED: Key = Key(101u32);
     #[doc(alias = "KEY_HOME")]
-    pub const HOME: Key = Key(102);
+    pub const HOME: Key = Key(102u32);
     #[doc(alias = "KEY_UP")]
-    pub const UP: Key = Key(103);
+    pub const UP: Key = Key(103u32);
     #[doc(alias = "KEY_PAGEUP")]
-    pub const PAGEUP: Key = Key(104);
+    pub const PAGEUP: Key = Key(104u32);
     #[doc(alias = "KEY_LEFT")]
-    pub const LEFT: Key = Key(105);
+    pub const LEFT: Key = Key(105u32);
     #[doc(alias = "KEY_RIGHT")]
-    pub const RIGHT: Key = Key(106);
+    pub const RIGHT: Key = Key(106u32);
     #[doc(alias = "KEY_END")]
-    pub const END: Key = Key(107);
+    pub const END: Key = Key(107u32);
     #[doc(alias = "KEY_DOWN")]
-    pub const DOWN: Key = Key(108);
+    pub const DOWN: Key = Key(108u32);
     #[doc(alias = "KEY_PAGEDOWN")]
-    pub const PAGEDOWN: Key = Key(109);
+    pub const PAGEDOWN: Key = Key(109u32);
     #[doc(alias = "KEY_INSERT")]
-    pub const INSERT: Key = Key(110);
+    pub const INSERT: Key = Key(110u32);
     #[doc(alias = "KEY_DELETE")]
-    pub const DELETE: Key = Key(111);
+    pub const DELETE: Key = Key(111u32);
     #[doc(alias = "KEY_MACRO")]
-    pub const MACRO: Key = Key(112);
+    pub const MACRO: Key = Key(112u32);
     #[doc(alias = "KEY_MUTE")]
-    pub const MUTE: Key = Key(113);
+    pub const MUTE: Key = Key(113u32);
     #[doc(alias = "KEY_VOLUMEDOWN")]
-    pub const VOLUMEDOWN: Key = Key(114);
+    pub const VOLUMEDOWN: Key = Key(114u32);
     #[doc(alias = "KEY_VOLUMEUP")]
-    pub const VOLUMEUP: Key = Key(115);
+    pub const VOLUMEUP: Key = Key(115u32);
+    #[doc = " SC System Power Down "]
     #[doc(alias = "KEY_POWER")]
-    pub const POWER: Key = Key(116);
+    pub const POWER: Key = Key(116u32);
     #[doc(alias = "KEY_KPEQUAL")]
-    pub const KPEQUAL: Key = Key(117);
+    pub const KPEQUAL: Key = Key(117u32);
     #[doc(alias = "KEY_KPPLUSMINUS")]
-    pub const KPPLUSMINUS: Key = Key(118);
+    pub const KPPLUSMINUS: Key = Key(118u32);
     #[doc(alias = "KEY_PAUSE")]
-    pub const PAUSE: Key = Key(119);
+    pub const PAUSE: Key = Key(119u32);
+    #[doc = " AL Compiz Scale (Expose) "]
     #[doc(alias = "KEY_SCALE")]
-    pub const SCALE: Key = Key(120);
+    pub const SCALE: Key = Key(120u32);
     #[doc(alias = "KEY_KPCOMMA")]
-    pub const KPCOMMA: Key = Key(121);
+    pub const KPCOMMA: Key = Key(121u32);
     #[doc(alias = "KEY_HANGEUL")]
-    pub const HANGEUL: Key = Key(122);
+    pub const HANGEUL: Key = Key(122u32);
     #[doc(alias = "KEY_HANGUEL")]
-    pub const HANGUEL: Key = Key(122);
+    pub const HANGUEL: Key = Key(122u32);
     #[doc(alias = "KEY_HANJA")]
-    pub const HANJA: Key = Key(123);
+    pub const HANJA: Key = Key(123u32);
     #[doc(alias = "KEY_YEN")]
-    pub const YEN: Key = Key(124);
+    pub const YEN: Key = Key(124u32);
     #[doc(alias = "KEY_LEFTMETA")]
-    pub const LEFTMETA: Key = Key(125);
+    pub const LEFTMETA: Key = Key(125u32);
     #[doc(alias = "KEY_RIGHTMETA")]
-    pub const RIGHTMETA: Key = Key(126);
+    pub const RIGHTMETA: Key = Key(126u32);
     #[doc(alias = "KEY_COMPOSE")]
-    pub const COMPOSE: Key = Key(127);
+    pub const COMPOSE: Key = Key(127u32);
+    #[doc = " AC Stop "]
     #[doc(alias = "KEY_STOP")]
-    pub const STOP: Key = Key(128);
+    pub const STOP: Key = Key(128u32);
     #[doc(alias = "KEY_AGAIN")]
-    pub const AGAIN: Key = Key(129);
+    pub const AGAIN: Key = Key(129u32);
+    #[doc = " AC Properties "]
     #[doc(alias = "KEY_PROPS")]
-    pub const PROPS: Key = Key(130);
+    pub const PROPS: Key = Key(130u32);
+    #[doc = " AC Undo "]
     #[doc(alias = "KEY_UNDO")]
-    pub const UNDO: Key = Key(131);
+    pub const UNDO: Key = Key(131u32);
     #[doc(alias = "KEY_FRONT")]
-    pub const FRONT: Key = Key(132);
+    pub const FRONT: Key = Key(132u32);
+    #[doc = " AC Copy "]
     #[doc(alias = "KEY_COPY")]
-    pub const COPY: Key = Key(133);
+    pub const COPY: Key = Key(133u32);
+    #[doc = " AC Open "]
     #[doc(alias = "KEY_OPEN")]
-    pub const OPEN: Key = Key(134);
+    pub const OPEN: Key = Key(134u32);
+    #[doc = " AC Paste "]
     #[doc(alias = "KEY_PASTE")]
-    pub const PASTE: Key = Key(135);
+    pub const PASTE: Key = Key(135u32);
+    #[doc = " AC Search "]
     #[doc(alias = "KEY_FIND")]
-    pub const FIND: Key = Key(136);
+    pub const FIND: Key = Key(136u32);
+    #[doc = " AC Cut "]
     #[doc(alias = "KEY_CUT")]
-    pub const CUT: Key = Key(137);
+    pub const CUT: Key = Key(137u32);
+    #[doc = " AL Integrated Help Center "]
     #[doc(alias = "KEY_HELP")]
-    pub const HELP: Key = Key(138);
+    pub const HELP: Key = Key(138u32);
+    #[doc = " Menu (show menu) "]
     #[doc(alias = "KEY_MENU")]
-    pub const MENU: Key = Key(139);
+    pub const MENU: Key = Key(139u32);
+    #[doc = " AL Calculator "]
     #[doc(alias = "KEY_CALC")]
-    pub const CALC: Key = Key(140);
+    pub const CALC: Key = Key(140u32);
     #[doc(alias = "KEY_SETUP")]
-    pub const SETUP: Key = Key(141);
+    pub const SETUP: Key = Key(141u32);
+    #[doc = " SC System Sleep "]
     #[doc(alias = "KEY_SLEEP")]
-    pub const SLEEP: Key = Key(142);
+    pub const SLEEP: Key = Key(142u32);
+    #[doc = " System Wake Up "]
     #[doc(alias = "KEY_WAKEUP")]
-    pub const WAKEUP: Key = Key(143);
+    pub const WAKEUP: Key = Key(143u32);
+    #[doc = " AL Local Machine Browser "]
     #[doc(alias = "KEY_FILE")]
-    pub const FILE: Key = Key(144);
+    pub const FILE: Key = Key(144u32);
     #[doc(alias = "KEY_SENDFILE")]
-    pub const SENDFILE: Key = Key(145);
+    pub const SENDFILE: Key = Key(145u32);
     #[doc(alias = "KEY_DELETEFILE")]
-    pub const DELETEFILE: Key = Key(146);
+    pub const DELETEFILE: Key = Key(146u32);
     #[doc(alias = "KEY_XFER")]
-    pub const XFER: Key = Key(147);
+    pub const XFER: Key = Key(147u32);
     #[doc(alias = "KEY_PROG1")]
-    pub const PROG1: Key = Key(148);
+    pub const PROG1: Key = Key(148u32);
     #[doc(alias = "KEY_PROG2")]
-    pub const PROG2: Key = Key(149);
+    pub const PROG2: Key = Key(149u32);
+    #[doc = " AL Internet Browser "]
     #[doc(alias = "KEY_WWW")]
-    pub const WWW: Key = Key(150);
+    pub const WWW: Key = Key(150u32);
     #[doc(alias = "KEY_MSDOS")]
-    pub const MSDOS: Key = Key(151);
+    pub const MSDOS: Key = Key(151u32);
+    #[doc = " AL Terminal Lock/Screensaver "]
     #[doc(alias = "KEY_COFFEE")]
-    pub const COFFEE: Key = Key(152);
+    pub const COFFEE: Key = Key(152u32);
     #[doc(alias = "KEY_SCREENLOCK")]
-    pub const SCREENLOCK: Key = Key(152);
+    pub const SCREENLOCK: Key = Key(152u32);
+    #[doc = " Display orientation for e.g. tablets "]
     #[doc(alias = "KEY_ROTATE_DISPLAY")]
-    pub const ROTATE_DISPLAY: Key = Key(153);
+    pub const ROTATE_DISPLAY: Key = Key(153u32);
     #[doc(alias = "KEY_DIRECTION")]
-    pub const DIRECTION: Key = Key(153);
+    pub const DIRECTION: Key = Key(153u32);
     #[doc(alias = "KEY_CYCLEWINDOWS")]
-    pub const CYCLEWINDOWS: Key = Key(154);
+    pub const CYCLEWINDOWS: Key = Key(154u32);
     #[doc(alias = "KEY_MAIL")]
-    pub const MAIL: Key = Key(155);
+    pub const MAIL: Key = Key(155u32);
+    #[doc = " AC Bookmarks "]
     #[doc(alias = "KEY_BOOKMARKS")]
-    pub const BOOKMARKS: Key = Key(156);
+    pub const BOOKMARKS: Key = Key(156u32);
     #[doc(alias = "KEY_COMPUTER")]
-    pub const COMPUTER: Key = Key(157);
+    pub const COMPUTER: Key = Key(157u32);
+    #[doc = " AC Back "]
     #[doc(alias = "KEY_BACK")]
-    pub const BACK: Key = Key(158);
+    pub const BACK: Key = Key(158u32);
+    #[doc = " AC Forward "]
     #[doc(alias = "KEY_FORWARD")]
-    pub const FORWARD: Key = Key(159);
+    pub const FORWARD: Key = Key(159u32);
     #[doc(alias = "KEY_CLOSECD")]
-    pub const CLOSECD: Key = Key(160);
+    pub const CLOSECD: Key = Key(160u32);
     #[doc(alias = "KEY_EJECTCD")]
-    pub const EJECTCD: Key = Key(161);
+    pub const EJECTCD: Key = Key(161u32);
     #[doc(alias = "KEY_EJECTCLOSECD")]
-    pub const EJECTCLOSECD: Key = Key(162);
+    pub const EJECTCLOSECD: Key = Key(162u32);
     #[doc(alias = "KEY_NEXTSONG")]
-    pub const NEXTSONG: Key = Key(163);
+    pub const NEXTSONG: Key = Key(163u32);
     #[doc(alias = "KEY_PLAYPAUSE")]
-    pub const PLAYPAUSE: Key = Key(164);
+    pub const PLAYPAUSE: Key = Key(164u32);
     #[doc(alias = "KEY_PREVIOUSSONG")]
-    pub const PREVIOUSSONG: Key = Key(165);
+    pub const PREVIOUSSONG: Key = Key(165u32);
     #[doc(alias = "KEY_STOPCD")]
-    pub const STOPCD: Key = Key(166);
+    pub const STOPCD: Key = Key(166u32);
     #[doc(alias = "KEY_RECORD")]
-    pub const RECORD: Key = Key(167);
+    pub const RECORD: Key = Key(167u32);
     #[doc(alias = "KEY_REWIND")]
-    pub const REWIND: Key = Key(168);
+    pub const REWIND: Key = Key(168u32);
+    #[doc = " Media Select Telephone "]
     #[doc(alias = "KEY_PHONE")]
-    pub const PHONE: Key = Key(169);
+    pub const PHONE: Key = Key(169u32);
     #[doc(alias = "KEY_ISO")]
-    pub const ISO: Key = Key(170);
+    pub const ISO: Key = Key(170u32);
+    #[doc = " AL Consumer Control Configuration "]
     #[doc(alias = "KEY_CONFIG")]
-    pub const CONFIG: Key = Key(171);
+    pub const CONFIG: Key = Key(171u32);
+    #[doc = " AC Home "]
     #[doc(alias = "KEY_HOMEPAGE")]
-    pub const HOMEPAGE: Key = Key(172);
+    pub const HOMEPAGE: Key = Key(172u32);
+    #[doc = " AC Refresh "]
     #[doc(alias = "KEY_REFRESH")]
-    pub const REFRESH: Key = Key(173);
+    pub const REFRESH: Key = Key(173u32);
+    #[doc = " AC Exit "]
     #[doc(alias = "KEY_EXIT")]
-    pub const EXIT: Key = Key(174);
+    pub const EXIT: Key = Key(174u32);
     #[doc(alias = "KEY_MOVE")]
-    pub const MOVE: Key = Key(175);
+    pub const MOVE: Key = Key(175u32);
     #[doc(alias = "KEY_EDIT")]
-    pub const EDIT: Key = Key(176);
+    pub const EDIT: Key = Key(176u32);
     #[doc(alias = "KEY_SCROLLUP")]
-    pub const SCROLLUP: Key = Key(177);
+    pub const SCROLLUP: Key = Key(177u32);
     #[doc(alias = "KEY_SCROLLDOWN")]
-    pub const SCROLLDOWN: Key = Key(178);
+    pub const SCROLLDOWN: Key = Key(178u32);
     #[doc(alias = "KEY_KPLEFTPAREN")]
-    pub const KPLEFTPAREN: Key = Key(179);
+    pub const KPLEFTPAREN: Key = Key(179u32);
     #[doc(alias = "KEY_KPRIGHTPAREN")]
-    pub const KPRIGHTPAREN: Key = Key(180);
+    pub const KPRIGHTPAREN: Key = Key(180u32);
+    #[doc = " AC New "]
     #[doc(alias = "KEY_NEW")]
-    pub const NEW: Key = Key(181);
+    pub const NEW: Key = Key(181u32);
+    #[doc = " AC Redo/Repeat "]
     #[doc(alias = "KEY_REDO")]
-    pub const REDO: Key = Key(182);
+    pub const REDO: Key = Key(182u32);
     #[doc(alias = "KEY_F13")]
-    pub const F13: Key = Key(183);
+    pub const F13: Key = Key(183u32);
     #[doc(alias = "KEY_F14")]
-    pub const F14: Key = Key(184);
+    pub const F14: Key = Key(184u32);
     #[doc(alias = "KEY_F15")]
-    pub const F15: Key = Key(185);
+    pub const F15: Key = Key(185u32);
     #[doc(alias = "KEY_F16")]
-    pub const F16: Key = Key(186);
+    pub const F16: Key = Key(186u32);
     #[doc(alias = "KEY_F17")]
-    pub const F17: Key = Key(187);
+    pub const F17: Key = Key(187u32);
     #[doc(alias = "KEY_F18")]
-    pub const F18: Key = Key(188);
+    pub const F18: Key = Key(188u32);
     #[doc(alias = "KEY_F19")]
-    pub const F19: Key = Key(189);
+    pub const F19: Key = Key(189u32);
     #[doc(alias = "KEY_F20")]
-    pub const F20: Key = Key(190);
+    pub const F20: Key = Key(190u32);
     #[doc(alias = "KEY_F21")]
-    pub const F21: Key = Key(191);
+    pub const F21: Key = Key(191u32);
     #[doc(alias = "KEY_F22")]
-    pub const F22: Key = Key(192);
+    pub const F22: Key = Key(192u32);
     #[doc(alias = "KEY_F23")]
-    pub const F23: Key = Key(193);
+    pub const F23: Key = Key(193u32);
     #[doc(alias = "KEY_F24")]
-    pub const F24: Key = Key(194);
+    pub const F24: Key = Key(194u32);
     #[doc(alias = "KEY_PLAYCD")]
-    pub const PLAYCD: Key = Key(200);
+    pub const PLAYCD: Key = Key(200u32);
     #[doc(alias = "KEY_PAUSECD")]
-    pub const PAUSECD: Key = Key(201);
+    pub const PAUSECD: Key = Key(201u32);
     #[doc(alias = "KEY_PROG3")]
-    pub const PROG3: Key = Key(202);
+    pub const PROG3: Key = Key(202u32);
     #[doc(alias = "KEY_PROG4")]
-    pub const PROG4: Key = Key(203);
+    pub const PROG4: Key = Key(203u32);
+    #[doc = " AL Dashboard "]
     #[doc(alias = "KEY_DASHBOARD")]
-    pub const DASHBOARD: Key = Key(204);
+    pub const DASHBOARD: Key = Key(204u32);
     #[doc(alias = "KEY_SUSPEND")]
-    pub const SUSPEND: Key = Key(205);
+    pub const SUSPEND: Key = Key(205u32);
+    #[doc = " AC Close "]
     #[doc(alias = "KEY_CLOSE")]
-    pub const CLOSE: Key = Key(206);
+    pub const CLOSE: Key = Key(206u32);
     #[doc(alias = "KEY_PLAY")]
-    pub const PLAY: Key = Key(207);
+    pub const PLAY: Key = Key(207u32);
     #[doc(alias = "KEY_FASTFORWARD")]
-    pub const FASTFORWARD: Key = Key(208);
+    pub const FASTFORWARD: Key = Key(208u32);
     #[doc(alias = "KEY_BASSBOOST")]
-    pub const BASSBOOST: Key = Key(209);
+    pub const BASSBOOST: Key = Key(209u32);
+    #[doc = " AC Print "]
     #[doc(alias = "KEY_PRINT")]
-    pub const PRINT: Key = Key(210);
+    pub const PRINT: Key = Key(210u32);
     #[doc(alias = "KEY_HP")]
-    pub const HP: Key = Key(211);
+    pub const HP: Key = Key(211u32);
     #[doc(alias = "KEY_CAMERA")]
-    pub const CAMERA: Key = Key(212);
+    pub const CAMERA: Key = Key(212u32);
     #[doc(alias = "KEY_SOUND")]
-    pub const SOUND: Key = Key(213);
+    pub const SOUND: Key = Key(213u32);
     #[doc(alias = "KEY_QUESTION")]
-    pub const QUESTION: Key = Key(214);
+    pub const QUESTION: Key = Key(214u32);
     #[doc(alias = "KEY_EMAIL")]
-    pub const EMAIL: Key = Key(215);
+    pub const EMAIL: Key = Key(215u32);
     #[doc(alias = "KEY_CHAT")]
-    pub const CHAT: Key = Key(216);
+    pub const CHAT: Key = Key(216u32);
     #[doc(alias = "KEY_SEARCH")]
-    pub const SEARCH: Key = Key(217);
+    pub const SEARCH: Key = Key(217u32);
     #[doc(alias = "KEY_CONNECT")]
-    pub const CONNECT: Key = Key(218);
+    pub const CONNECT: Key = Key(218u32);
+    #[doc = " AL Checkbook/Finance "]
     #[doc(alias = "KEY_FINANCE")]
-    pub const FINANCE: Key = Key(219);
+    pub const FINANCE: Key = Key(219u32);
     #[doc(alias = "KEY_SPORT")]
-    pub const SPORT: Key = Key(220);
+    pub const SPORT: Key = Key(220u32);
     #[doc(alias = "KEY_SHOP")]
-    pub const SHOP: Key = Key(221);
+    pub const SHOP: Key = Key(221u32);
     #[doc(alias = "KEY_ALTERASE")]
-    pub const ALTERASE: Key = Key(222);
+    pub const ALTERASE: Key = Key(222u32);
+    #[doc = " AC Cancel "]
     #[doc(alias = "KEY_CANCEL")]
-    pub const CANCEL: Key = Key(223);
+    pub const CANCEL: Key = Key(223u32);
     #[doc(alias = "KEY_BRIGHTNESSDOWN")]
-    pub const BRIGHTNESSDOWN: Key = Key(224);
+    pub const BRIGHTNESSDOWN: Key = Key(224u32);
     #[doc(alias = "KEY_BRIGHTNESSUP")]
-    pub const BRIGHTNESSUP: Key = Key(225);
+    pub const BRIGHTNESSUP: Key = Key(225u32);
     #[doc(alias = "KEY_MEDIA")]
-    pub const MEDIA: Key = Key(226);
+    pub const MEDIA: Key = Key(226u32);
+    #[doc = " Cycle between available video\n\t\t\t\t\t   outputs (Monitor/LCD/TV-out/etc) "]
     #[doc(alias = "KEY_SWITCHVIDEOMODE")]
-    pub const SWITCHVIDEOMODE: Key = Key(227);
+    pub const SWITCHVIDEOMODE: Key = Key(227u32);
     #[doc(alias = "KEY_KBDILLUMTOGGLE")]
-    pub const KBDILLUMTOGGLE: Key = Key(228);
+    pub const KBDILLUMTOGGLE: Key = Key(228u32);
     #[doc(alias = "KEY_KBDILLUMDOWN")]
-    pub const KBDILLUMDOWN: Key = Key(229);
+    pub const KBDILLUMDOWN: Key = Key(229u32);
     #[doc(alias = "KEY_KBDILLUMUP")]
-    pub const KBDILLUMUP: Key = Key(230);
+    pub const KBDILLUMUP: Key = Key(230u32);
+    #[doc = " AC Send "]
     #[doc(alias = "KEY_SEND")]
-    pub const SEND: Key = Key(231);
+    pub const SEND: Key = Key(231u32);
+    #[doc = " AC Reply "]
     #[doc(alias = "KEY_REPLY")]
-    pub const REPLY: Key = Key(232);
+    pub const REPLY: Key = Key(232u32);
+    #[doc = " AC Forward Msg "]
     #[doc(alias = "KEY_FORWARDMAIL")]
-    pub const FORWARDMAIL: Key = Key(233);
+    pub const FORWARDMAIL: Key = Key(233u32);
+    #[doc = " AC Save "]
     #[doc(alias = "KEY_SAVE")]
-    pub const SAVE: Key = Key(234);
+    pub const SAVE: Key = Key(234u32);
     #[doc(alias = "KEY_DOCUMENTS")]
-    pub const DOCUMENTS: Key = Key(235);
+    pub const DOCUMENTS: Key = Key(235u32);
     #[doc(alias = "KEY_BATTERY")]
-    pub const BATTERY: Key = Key(236);
+    pub const BATTERY: Key = Key(236u32);
     #[doc(alias = "KEY_BLUETOOTH")]
-    pub const BLUETOOTH: Key = Key(237);
+    pub const BLUETOOTH: Key = Key(237u32);
     #[doc(alias = "KEY_WLAN")]
-    pub const WLAN: Key = Key(238);
+    pub const WLAN: Key = Key(238u32);
     #[doc(alias = "KEY_UWB")]
-    pub const UWB: Key = Key(239);
+    pub const UWB: Key = Key(239u32);
     #[doc(alias = "KEY_UNKNOWN")]
-    pub const UNKNOWN: Key = Key(240);
+    pub const UNKNOWN: Key = Key(240u32);
+    #[doc = " drive next video source "]
     #[doc(alias = "KEY_VIDEO_NEXT")]
-    pub const VIDEO_NEXT: Key = Key(241);
+    pub const VIDEO_NEXT: Key = Key(241u32);
+    #[doc = " drive previous video source "]
     #[doc(alias = "KEY_VIDEO_PREV")]
-    pub const VIDEO_PREV: Key = Key(242);
+    pub const VIDEO_PREV: Key = Key(242u32);
+    #[doc = " brightness up, after max is min "]
     #[doc(alias = "KEY_BRIGHTNESS_CYCLE")]
-    pub const BRIGHTNESS_CYCLE: Key = Key(243);
+    pub const BRIGHTNESS_CYCLE: Key = Key(243u32);
+    #[doc = " Set Auto Brightness: manual\n\t\t\t\t\t  brightness control is off,\n\t\t\t\t\t  rely on ambient "]
     #[doc(alias = "KEY_BRIGHTNESS_AUTO")]
-    pub const BRIGHTNESS_AUTO: Key = Key(244);
+    pub const BRIGHTNESS_AUTO: Key = Key(244u32);
     #[doc(alias = "KEY_BRIGHTNESS_ZERO")]
-    pub const BRIGHTNESS_ZERO: Key = Key(244);
+    pub const BRIGHTNESS_ZERO: Key = Key(244u32);
+    #[doc = " display device to off state "]
     #[doc(alias = "KEY_DISPLAY_OFF")]
-    pub const DISPLAY_OFF: Key = Key(245);
+    pub const DISPLAY_OFF: Key = Key(245u32);
+    #[doc = " Wireless WAN (LTE, UMTS, GSM, etc.) "]
     #[doc(alias = "KEY_WWAN")]
-    pub const WWAN: Key = Key(246);
+    pub const WWAN: Key = Key(246u32);
     #[doc(alias = "KEY_WIMAX")]
-    pub const WIMAX: Key = Key(246);
+    pub const WIMAX: Key = Key(246u32);
+    #[doc = " Key that controls all radios "]
     #[doc(alias = "KEY_RFKILL")]
-    pub const RFKILL: Key = Key(247);
+    pub const RFKILL: Key = Key(247u32);
+    #[doc = " Mute / unmute the microphone "]
     #[doc(alias = "KEY_MICMUTE")]
-    pub const MICMUTE: Key = Key(248);
+    pub const MICMUTE: Key = Key(248u32);
     #[doc(alias = "KEY_OK")]
-    pub const OK: Key = Key(352);
+    pub const OK: Key = Key(352u32);
     #[doc(alias = "KEY_SELECT")]
-    pub const SELECT: Key = Key(353);
+    pub const SELECT: Key = Key(353u32);
     #[doc(alias = "KEY_GOTO")]
-    pub const GOTO: Key = Key(354);
+    pub const GOTO: Key = Key(354u32);
     #[doc(alias = "KEY_CLEAR")]
-    pub const CLEAR: Key = Key(355);
+    pub const CLEAR: Key = Key(355u32);
     #[doc(alias = "KEY_POWER2")]
-    pub const POWER2: Key = Key(356);
+    pub const POWER2: Key = Key(356u32);
     #[doc(alias = "KEY_OPTION")]
-    pub const OPTION: Key = Key(357);
+    pub const OPTION: Key = Key(357u32);
+    #[doc = " AL OEM Features/Tips/Tutorial "]
     #[doc(alias = "KEY_INFO")]
-    pub const INFO: Key = Key(358);
+    pub const INFO: Key = Key(358u32);
     #[doc(alias = "KEY_TIME")]
-    pub const TIME: Key = Key(359);
+    pub const TIME: Key = Key(359u32);
     #[doc(alias = "KEY_VENDOR")]
-    pub const VENDOR: Key = Key(360);
+    pub const VENDOR: Key = Key(360u32);
     #[doc(alias = "KEY_ARCHIVE")]
-    pub const ARCHIVE: Key = Key(361);
+    pub const ARCHIVE: Key = Key(361u32);
+    #[doc = " Media Select Program Guide "]
     #[doc(alias = "KEY_PROGRAM")]
-    pub const PROGRAM: Key = Key(362);
+    pub const PROGRAM: Key = Key(362u32);
     #[doc(alias = "KEY_CHANNEL")]
-    pub const CHANNEL: Key = Key(363);
+    pub const CHANNEL: Key = Key(363u32);
     #[doc(alias = "KEY_FAVORITES")]
-    pub const FAVORITES: Key = Key(364);
+    pub const FAVORITES: Key = Key(364u32);
     #[doc(alias = "KEY_EPG")]
-    pub const EPG: Key = Key(365);
+    pub const EPG: Key = Key(365u32);
+    #[doc = " Media Select Home "]
     #[doc(alias = "KEY_PVR")]
-    pub const PVR: Key = Key(366);
+    pub const PVR: Key = Key(366u32);
     #[doc(alias = "KEY_MHP")]
-    pub const MHP: Key = Key(367);
+    pub const MHP: Key = Key(367u32);
     #[doc(alias = "KEY_LANGUAGE")]
-    pub const LANGUAGE: Key = Key(368);
+    pub const LANGUAGE: Key = Key(368u32);
     #[doc(alias = "KEY_TITLE")]
-    pub const TITLE: Key = Key(369);
+    pub const TITLE: Key = Key(369u32);
     #[doc(alias = "KEY_SUBTITLE")]
-    pub const SUBTITLE: Key = Key(370);
+    pub const SUBTITLE: Key = Key(370u32);
     #[doc(alias = "KEY_ANGLE")]
-    pub const ANGLE: Key = Key(371);
+    pub const ANGLE: Key = Key(371u32);
+    #[doc = " AC View Toggle "]
     #[doc(alias = "KEY_FULL_SCREEN")]
-    pub const FULL_SCREEN: Key = Key(372);
+    pub const FULL_SCREEN: Key = Key(372u32);
     #[doc(alias = "KEY_ZOOM")]
-    pub const ZOOM: Key = Key(372);
+    pub const ZOOM: Key = Key(372u32);
     #[doc(alias = "KEY_MODE")]
-    pub const MODE: Key = Key(373);
+    pub const MODE: Key = Key(373u32);
     #[doc(alias = "KEY_KEYBOARD")]
-    pub const KEYBOARD: Key = Key(374);
+    pub const KEYBOARD: Key = Key(374u32);
+    #[doc = " HUTRR37: Aspect "]
     #[doc(alias = "KEY_ASPECT_RATIO")]
-    pub const ASPECT_RATIO: Key = Key(375);
+    pub const ASPECT_RATIO: Key = Key(375u32);
     #[doc(alias = "KEY_SCREEN")]
-    pub const SCREEN: Key = Key(375);
+    pub const SCREEN: Key = Key(375u32);
+    #[doc = " Media Select Computer "]
     #[doc(alias = "KEY_PC")]
-    pub const PC: Key = Key(376);
+    pub const PC: Key = Key(376u32);
+    #[doc = " Media Select TV "]
     #[doc(alias = "KEY_TV")]
-    pub const TV: Key = Key(377);
+    pub const TV: Key = Key(377u32);
+    #[doc = " Media Select Cable "]
     #[doc(alias = "KEY_TV2")]
-    pub const TV2: Key = Key(378);
+    pub const TV2: Key = Key(378u32);
+    #[doc = " Media Select VCR "]
     #[doc(alias = "KEY_VCR")]
-    pub const VCR: Key = Key(379);
+    pub const VCR: Key = Key(379u32);
+    #[doc = " VCR Plus "]
     #[doc(alias = "KEY_VCR2")]
-    pub const VCR2: Key = Key(380);
+    pub const VCR2: Key = Key(380u32);
+    #[doc = " Media Select Satellite "]
     #[doc(alias = "KEY_SAT")]
-    pub const SAT: Key = Key(381);
+    pub const SAT: Key = Key(381u32);
     #[doc(alias = "KEY_SAT2")]
-    pub const SAT2: Key = Key(382);
+    pub const SAT2: Key = Key(382u32);
+    #[doc = " Media Select CD "]
     #[doc(alias = "KEY_CD")]
-    pub const CD: Key = Key(383);
+    pub const CD: Key = Key(383u32);
+    #[doc = " Media Select Tape "]
     #[doc(alias = "KEY_TAPE")]
-    pub const TAPE: Key = Key(384);
+    pub const TAPE: Key = Key(384u32);
     #[doc(alias = "KEY_RADIO")]
-    pub const RADIO: Key = Key(385);
+    pub const RADIO: Key = Key(385u32);
+    #[doc = " Media Select Tuner "]
     #[doc(alias = "KEY_TUNER")]
-    pub const TUNER: Key = Key(386);
+    pub const TUNER: Key = Key(386u32);
     #[doc(alias = "KEY_PLAYER")]
-    pub const PLAYER: Key = Key(387);
+    pub const PLAYER: Key = Key(387u32);
     #[doc(alias = "KEY_TEXT")]
-    pub const TEXT: Key = Key(388);
+    pub const TEXT: Key = Key(388u32);
+    #[doc = " Media Select DVD "]
     #[doc(alias = "KEY_DVD")]
-    pub const DVD: Key = Key(389);
+    pub const DVD: Key = Key(389u32);
     #[doc(alias = "KEY_AUX")]
-    pub const AUX: Key = Key(390);
+    pub const AUX: Key = Key(390u32);
     #[doc(alias = "KEY_MP3")]
-    pub const MP3: Key = Key(391);
+    pub const MP3: Key = Key(391u32);
+    #[doc = " AL Audio Browser "]
     #[doc(alias = "KEY_AUDIO")]
-    pub const AUDIO: Key = Key(392);
+    pub const AUDIO: Key = Key(392u32);
+    #[doc = " AL Movie Browser "]
     #[doc(alias = "KEY_VIDEO")]
-    pub const VIDEO: Key = Key(393);
+    pub const VIDEO: Key = Key(393u32);
     #[doc(alias = "KEY_DIRECTORY")]
-    pub const DIRECTORY: Key = Key(394);
+    pub const DIRECTORY: Key = Key(394u32);
     #[doc(alias = "KEY_LIST")]
-    pub const LIST: Key = Key(395);
+    pub const LIST: Key = Key(395u32);
+    #[doc = " Media Select Messages "]
     #[doc(alias = "KEY_MEMO")]
-    pub const MEMO: Key = Key(396);
+    pub const MEMO: Key = Key(396u32);
     #[doc(alias = "KEY_CALENDAR")]
-    pub const CALENDAR: Key = Key(397);
+    pub const CALENDAR: Key = Key(397u32);
     #[doc(alias = "KEY_RED")]
-    pub const RED: Key = Key(398);
+    pub const RED: Key = Key(398u32);
     #[doc(alias = "KEY_GREEN")]
-    pub const GREEN: Key = Key(399);
+    pub const GREEN: Key = Key(399u32);
     #[doc(alias = "KEY_YELLOW")]
-    pub const YELLOW: Key = Key(400);
+    pub const YELLOW: Key = Key(400u32);
     #[doc(alias = "KEY_BLUE")]
-    pub const BLUE: Key = Key(401);
+    pub const BLUE: Key = Key(401u32);
+    #[doc = " Channel Increment "]
     #[doc(alias = "KEY_CHANNELUP")]
-    pub const CHANNELUP: Key = Key(402);
+    pub const CHANNELUP: Key = Key(402u32);
+    #[doc = " Channel Decrement "]
     #[doc(alias = "KEY_CHANNELDOWN")]
-    pub const CHANNELDOWN: Key = Key(403);
+    pub const CHANNELDOWN: Key = Key(403u32);
     #[doc(alias = "KEY_FIRST")]
-    pub const FIRST: Key = Key(404);
+    pub const FIRST: Key = Key(404u32);
+    #[doc = " Recall Last "]
     #[doc(alias = "KEY_LAST")]
-    pub const LAST: Key = Key(405);
+    pub const LAST: Key = Key(405u32);
     #[doc(alias = "KEY_AB")]
-    pub const AB: Key = Key(406);
+    pub const AB: Key = Key(406u32);
     #[doc(alias = "KEY_NEXT")]
-    pub const NEXT: Key = Key(407);
+    pub const NEXT: Key = Key(407u32);
     #[doc(alias = "KEY_RESTART")]
-    pub const RESTART: Key = Key(408);
+    pub const RESTART: Key = Key(408u32);
     #[doc(alias = "KEY_SLOW")]
-    pub const SLOW: Key = Key(409);
+    pub const SLOW: Key = Key(409u32);
     #[doc(alias = "KEY_SHUFFLE")]
-    pub const SHUFFLE: Key = Key(410);
+    pub const SHUFFLE: Key = Key(410u32);
     #[doc(alias = "KEY_BREAK")]
-    pub const BREAK: Key = Key(411);
+    pub const BREAK: Key = Key(411u32);
     #[doc(alias = "KEY_PREVIOUS")]
-    pub const PREVIOUS: Key = Key(412);
+    pub const PREVIOUS: Key = Key(412u32);
     #[doc(alias = "KEY_DIGITS")]
-    pub const DIGITS: Key = Key(413);
+    pub const DIGITS: Key = Key(413u32);
     #[doc(alias = "KEY_TEEN")]
-    pub const TEEN: Key = Key(414);
+    pub const TEEN: Key = Key(414u32);
     #[doc(alias = "KEY_TWEN")]
-    pub const TWEN: Key = Key(415);
+    pub const TWEN: Key = Key(415u32);
+    #[doc = " Media Select Video Phone "]
     #[doc(alias = "KEY_VIDEOPHONE")]
-    pub const VIDEOPHONE: Key = Key(416);
+    pub const VIDEOPHONE: Key = Key(416u32);
+    #[doc = " Media Select Games "]
     #[doc(alias = "KEY_GAMES")]
-    pub const GAMES: Key = Key(417);
+    pub const GAMES: Key = Key(417u32);
+    #[doc = " AC Zoom In "]
     #[doc(alias = "KEY_ZOOMIN")]
-    pub const ZOOMIN: Key = Key(418);
+    pub const ZOOMIN: Key = Key(418u32);
+    #[doc = " AC Zoom Out "]
     #[doc(alias = "KEY_ZOOMOUT")]
-    pub const ZOOMOUT: Key = Key(419);
+    pub const ZOOMOUT: Key = Key(419u32);
+    #[doc = " AC Zoom "]
     #[doc(alias = "KEY_ZOOMRESET")]
-    pub const ZOOMRESET: Key = Key(420);
+    pub const ZOOMRESET: Key = Key(420u32);
+    #[doc = " AL Word Processor "]
     #[doc(alias = "KEY_WORDPROCESSOR")]
-    pub const WORDPROCESSOR: Key = Key(421);
+    pub const WORDPROCESSOR: Key = Key(421u32);
+    #[doc = " AL Text Editor "]
     #[doc(alias = "KEY_EDITOR")]
-    pub const EDITOR: Key = Key(422);
+    pub const EDITOR: Key = Key(422u32);
+    #[doc = " AL Spreadsheet "]
     #[doc(alias = "KEY_SPREADSHEET")]
-    pub const SPREADSHEET: Key = Key(423);
+    pub const SPREADSHEET: Key = Key(423u32);
+    #[doc = " AL Graphics Editor "]
     #[doc(alias = "KEY_GRAPHICSEDITOR")]
-    pub const GRAPHICSEDITOR: Key = Key(424);
+    pub const GRAPHICSEDITOR: Key = Key(424u32);
+    #[doc = " AL Presentation App "]
     #[doc(alias = "KEY_PRESENTATION")]
-    pub const PRESENTATION: Key = Key(425);
+    pub const PRESENTATION: Key = Key(425u32);
+    #[doc = " AL Database App "]
     #[doc(alias = "KEY_DATABASE")]
-    pub const DATABASE: Key = Key(426);
+    pub const DATABASE: Key = Key(426u32);
+    #[doc = " AL Newsreader "]
     #[doc(alias = "KEY_NEWS")]
-    pub const NEWS: Key = Key(427);
+    pub const NEWS: Key = Key(427u32);
+    #[doc = " AL Voicemail "]
     #[doc(alias = "KEY_VOICEMAIL")]
-    pub const VOICEMAIL: Key = Key(428);
+    pub const VOICEMAIL: Key = Key(428u32);
+    #[doc = " AL Contacts/Address Book "]
     #[doc(alias = "KEY_ADDRESSBOOK")]
-    pub const ADDRESSBOOK: Key = Key(429);
+    pub const ADDRESSBOOK: Key = Key(429u32);
+    #[doc = " AL Instant Messaging "]
     #[doc(alias = "KEY_MESSENGER")]
-    pub const MESSENGER: Key = Key(430);
+    pub const MESSENGER: Key = Key(430u32);
+    #[doc = " Turn display (LCD) on and off "]
     #[doc(alias = "KEY_DISPLAYTOGGLE")]
-    pub const DISPLAYTOGGLE: Key = Key(431);
+    pub const DISPLAYTOGGLE: Key = Key(431u32);
     #[doc(alias = "KEY_BRIGHTNESS_TOGGLE")]
-    pub const BRIGHTNESS_TOGGLE: Key = Key(431);
+    pub const BRIGHTNESS_TOGGLE: Key = Key(431u32);
+    #[doc = " AL Spell Check "]
     #[doc(alias = "KEY_SPELLCHECK")]
-    pub const SPELLCHECK: Key = Key(432);
+    pub const SPELLCHECK: Key = Key(432u32);
+    #[doc = " AL Logoff "]
     #[doc(alias = "KEY_LOGOFF")]
-    pub const LOGOFF: Key = Key(433);
+    pub const LOGOFF: Key = Key(433u32);
     #[doc(alias = "KEY_DOLLAR")]
-    pub const DOLLAR: Key = Key(434);
+    pub const DOLLAR: Key = Key(434u32);
     #[doc(alias = "KEY_EURO")]
-    pub const EURO: Key = Key(435);
+    pub const EURO: Key = Key(435u32);
+    #[doc = " Consumer - transport controls "]
     #[doc(alias = "KEY_FRAMEBACK")]
-    pub const FRAMEBACK: Key = Key(436);
+    pub const FRAMEBACK: Key = Key(436u32);
     #[doc(alias = "KEY_FRAMEFORWARD")]
-    pub const FRAMEFORWARD: Key = Key(437);
+    pub const FRAMEFORWARD: Key = Key(437u32);
+    #[doc = " GenDesc - system context menu "]
     #[doc(alias = "KEY_CONTEXT_MENU")]
-    pub const CONTEXT_MENU: Key = Key(438);
+    pub const CONTEXT_MENU: Key = Key(438u32);
+    #[doc = " Consumer - transport control "]
     #[doc(alias = "KEY_MEDIA_REPEAT")]
-    pub const MEDIA_REPEAT: Key = Key(439);
+    pub const MEDIA_REPEAT: Key = Key(439u32);
+    #[doc = " 10 channels up (10+) "]
     #[doc(alias = "KEY_10CHANNELSUP")]
-    pub const _10CHANNELSUP: Key = Key(440);
+    pub const _10CHANNELSUP: Key = Key(440u32);
+    #[doc = " 10 channels down (10-) "]
     #[doc(alias = "KEY_10CHANNELSDOWN")]
-    pub const _10CHANNELSDOWN: Key = Key(441);
+    pub const _10CHANNELSDOWN: Key = Key(441u32);
+    #[doc = " AL Image Browser "]
     #[doc(alias = "KEY_IMAGES")]
-    pub const IMAGES: Key = Key(442);
+    pub const IMAGES: Key = Key(442u32);
+    #[doc = " Show/hide the notification center "]
     #[doc(alias = "KEY_NOTIFICATION_CENTER")]
-    pub const NOTIFICATION_CENTER: Key = Key(444);
+    pub const NOTIFICATION_CENTER: Key = Key(444u32);
+    #[doc = " Answer incoming call "]
     #[doc(alias = "KEY_PICKUP_PHONE")]
-    pub const PICKUP_PHONE: Key = Key(445);
+    pub const PICKUP_PHONE: Key = Key(445u32);
+    #[doc = " Decline incoming call "]
     #[doc(alias = "KEY_HANGUP_PHONE")]
-    pub const HANGUP_PHONE: Key = Key(446);
+    pub const HANGUP_PHONE: Key = Key(446u32);
     #[doc(alias = "KEY_DEL_EOL")]
-    pub const DEL_EOL: Key = Key(448);
+    pub const DEL_EOL: Key = Key(448u32);
     #[doc(alias = "KEY_DEL_EOS")]
-    pub const DEL_EOS: Key = Key(449);
+    pub const DEL_EOS: Key = Key(449u32);
     #[doc(alias = "KEY_INS_LINE")]
-    pub const INS_LINE: Key = Key(450);
+    pub const INS_LINE: Key = Key(450u32);
     #[doc(alias = "KEY_DEL_LINE")]
-    pub const DEL_LINE: Key = Key(451);
+    pub const DEL_LINE: Key = Key(451u32);
     #[doc(alias = "KEY_FN")]
-    pub const FN: Key = Key(464);
+    pub const FN: Key = Key(464u32);
     #[doc(alias = "KEY_FN_ESC")]
-    pub const FN_ESC: Key = Key(465);
+    pub const FN_ESC: Key = Key(465u32);
     #[doc(alias = "KEY_FN_F1")]
-    pub const FN_F1: Key = Key(466);
+    pub const FN_F1: Key = Key(466u32);
     #[doc(alias = "KEY_FN_F2")]
-    pub const FN_F2: Key = Key(467);
+    pub const FN_F2: Key = Key(467u32);
     #[doc(alias = "KEY_FN_F3")]
-    pub const FN_F3: Key = Key(468);
+    pub const FN_F3: Key = Key(468u32);
     #[doc(alias = "KEY_FN_F4")]
-    pub const FN_F4: Key = Key(469);
+    pub const FN_F4: Key = Key(469u32);
     #[doc(alias = "KEY_FN_F5")]
-    pub const FN_F5: Key = Key(470);
+    pub const FN_F5: Key = Key(470u32);
     #[doc(alias = "KEY_FN_F6")]
-    pub const FN_F6: Key = Key(471);
+    pub const FN_F6: Key = Key(471u32);
     #[doc(alias = "KEY_FN_F7")]
-    pub const FN_F7: Key = Key(472);
+    pub const FN_F7: Key = Key(472u32);
     #[doc(alias = "KEY_FN_F8")]
-    pub const FN_F8: Key = Key(473);
+    pub const FN_F8: Key = Key(473u32);
     #[doc(alias = "KEY_FN_F9")]
-    pub const FN_F9: Key = Key(474);
+    pub const FN_F9: Key = Key(474u32);
     #[doc(alias = "KEY_FN_F10")]
-    pub const FN_F10: Key = Key(475);
+    pub const FN_F10: Key = Key(475u32);
     #[doc(alias = "KEY_FN_F11")]
-    pub const FN_F11: Key = Key(476);
+    pub const FN_F11: Key = Key(476u32);
     #[doc(alias = "KEY_FN_F12")]
-    pub const FN_F12: Key = Key(477);
+    pub const FN_F12: Key = Key(477u32);
     #[doc(alias = "KEY_FN_1")]
-    pub const FN_1: Key = Key(478);
+    pub const FN_1: Key = Key(478u32);
     #[doc(alias = "KEY_FN_2")]
-    pub const FN_2: Key = Key(479);
+    pub const FN_2: Key = Key(479u32);
     #[doc(alias = "KEY_FN_D")]
-    pub const FN_D: Key = Key(480);
+    pub const FN_D: Key = Key(480u32);
     #[doc(alias = "KEY_FN_E")]
-    pub const FN_E: Key = Key(481);
+    pub const FN_E: Key = Key(481u32);
     #[doc(alias = "KEY_FN_F")]
-    pub const FN_F: Key = Key(482);
+    pub const FN_F: Key = Key(482u32);
     #[doc(alias = "KEY_FN_S")]
-    pub const FN_S: Key = Key(483);
+    pub const FN_S: Key = Key(483u32);
     #[doc(alias = "KEY_FN_B")]
-    pub const FN_B: Key = Key(484);
+    pub const FN_B: Key = Key(484u32);
     #[doc(alias = "KEY_FN_RIGHT_SHIFT")]
-    pub const FN_RIGHT_SHIFT: Key = Key(485);
+    pub const FN_RIGHT_SHIFT: Key = Key(485u32);
     #[doc(alias = "KEY_BRL_DOT1")]
-    pub const BRL_DOT1: Key = Key(497);
+    pub const BRL_DOT1: Key = Key(497u32);
     #[doc(alias = "KEY_BRL_DOT2")]
-    pub const BRL_DOT2: Key = Key(498);
+    pub const BRL_DOT2: Key = Key(498u32);
     #[doc(alias = "KEY_BRL_DOT3")]
-    pub const BRL_DOT3: Key = Key(499);
+    pub const BRL_DOT3: Key = Key(499u32);
     #[doc(alias = "KEY_BRL_DOT4")]
-    pub const BRL_DOT4: Key = Key(500);
+    pub const BRL_DOT4: Key = Key(500u32);
     #[doc(alias = "KEY_BRL_DOT5")]
-    pub const BRL_DOT5: Key = Key(501);
+    pub const BRL_DOT5: Key = Key(501u32);
     #[doc(alias = "KEY_BRL_DOT6")]
-    pub const BRL_DOT6: Key = Key(502);
+    pub const BRL_DOT6: Key = Key(502u32);
     #[doc(alias = "KEY_BRL_DOT7")]
-    pub const BRL_DOT7: Key = Key(503);
+    pub const BRL_DOT7: Key = Key(503u32);
     #[doc(alias = "KEY_BRL_DOT8")]
-    pub const BRL_DOT8: Key = Key(504);
+    pub const BRL_DOT8: Key = Key(504u32);
     #[doc(alias = "KEY_BRL_DOT9")]
-    pub const BRL_DOT9: Key = Key(505);
+    pub const BRL_DOT9: Key = Key(505u32);
     #[doc(alias = "KEY_BRL_DOT10")]
-    pub const BRL_DOT10: Key = Key(506);
+    pub const BRL_DOT10: Key = Key(506u32);
+    #[doc = " used by phones, remote controls, "]
     #[doc(alias = "KEY_NUMERIC_0")]
-    pub const NUMERIC_0: Key = Key(512);
+    pub const NUMERIC_0: Key = Key(512u32);
+    #[doc = " and other keypads "]
     #[doc(alias = "KEY_NUMERIC_1")]
-    pub const NUMERIC_1: Key = Key(513);
+    pub const NUMERIC_1: Key = Key(513u32);
     #[doc(alias = "KEY_NUMERIC_2")]
-    pub const NUMERIC_2: Key = Key(514);
+    pub const NUMERIC_2: Key = Key(514u32);
     #[doc(alias = "KEY_NUMERIC_3")]
-    pub const NUMERIC_3: Key = Key(515);
+    pub const NUMERIC_3: Key = Key(515u32);
     #[doc(alias = "KEY_NUMERIC_4")]
-    pub const NUMERIC_4: Key = Key(516);
+    pub const NUMERIC_4: Key = Key(516u32);
     #[doc(alias = "KEY_NUMERIC_5")]
-    pub const NUMERIC_5: Key = Key(517);
+    pub const NUMERIC_5: Key = Key(517u32);
     #[doc(alias = "KEY_NUMERIC_6")]
-    pub const NUMERIC_6: Key = Key(518);
+    pub const NUMERIC_6: Key = Key(518u32);
     #[doc(alias = "KEY_NUMERIC_7")]
-    pub const NUMERIC_7: Key = Key(519);
+    pub const NUMERIC_7: Key = Key(519u32);
     #[doc(alias = "KEY_NUMERIC_8")]
-    pub const NUMERIC_8: Key = Key(520);
+    pub const NUMERIC_8: Key = Key(520u32);
     #[doc(alias = "KEY_NUMERIC_9")]
-    pub const NUMERIC_9: Key = Key(521);
+    pub const NUMERIC_9: Key = Key(521u32);
     #[doc(alias = "KEY_NUMERIC_STAR")]
-    pub const NUMERIC_STAR: Key = Key(522);
+    pub const NUMERIC_STAR: Key = Key(522u32);
     #[doc(alias = "KEY_NUMERIC_POUND")]
-    pub const NUMERIC_POUND: Key = Key(523);
+    pub const NUMERIC_POUND: Key = Key(523u32);
+    #[doc = " Phone key A - HUT Telephony 0xb9 "]
     #[doc(alias = "KEY_NUMERIC_A")]
-    pub const NUMERIC_A: Key = Key(524);
+    pub const NUMERIC_A: Key = Key(524u32);
     #[doc(alias = "KEY_NUMERIC_B")]
-    pub const NUMERIC_B: Key = Key(525);
+    pub const NUMERIC_B: Key = Key(525u32);
     #[doc(alias = "KEY_NUMERIC_C")]
-    pub const NUMERIC_C: Key = Key(526);
+    pub const NUMERIC_C: Key = Key(526u32);
     #[doc(alias = "KEY_NUMERIC_D")]
-    pub const NUMERIC_D: Key = Key(527);
+    pub const NUMERIC_D: Key = Key(527u32);
     #[doc(alias = "KEY_CAMERA_FOCUS")]
-    pub const CAMERA_FOCUS: Key = Key(528);
+    pub const CAMERA_FOCUS: Key = Key(528u32);
+    #[doc = " WiFi Protected Setup key "]
     #[doc(alias = "KEY_WPS_BUTTON")]
-    pub const WPS_BUTTON: Key = Key(529);
+    pub const WPS_BUTTON: Key = Key(529u32);
+    #[doc = " Request switch touchpad on or off "]
     #[doc(alias = "KEY_TOUCHPAD_TOGGLE")]
-    pub const TOUCHPAD_TOGGLE: Key = Key(530);
+    pub const TOUCHPAD_TOGGLE: Key = Key(530u32);
     #[doc(alias = "KEY_TOUCHPAD_ON")]
-    pub const TOUCHPAD_ON: Key = Key(531);
+    pub const TOUCHPAD_ON: Key = Key(531u32);
     #[doc(alias = "KEY_TOUCHPAD_OFF")]
-    pub const TOUCHPAD_OFF: Key = Key(532);
+    pub const TOUCHPAD_OFF: Key = Key(532u32);
     #[doc(alias = "KEY_CAMERA_ZOOMIN")]
-    pub const CAMERA_ZOOMIN: Key = Key(533);
+    pub const CAMERA_ZOOMIN: Key = Key(533u32);
     #[doc(alias = "KEY_CAMERA_ZOOMOUT")]
-    pub const CAMERA_ZOOMOUT: Key = Key(534);
+    pub const CAMERA_ZOOMOUT: Key = Key(534u32);
     #[doc(alias = "KEY_CAMERA_UP")]
-    pub const CAMERA_UP: Key = Key(535);
+    pub const CAMERA_UP: Key = Key(535u32);
     #[doc(alias = "KEY_CAMERA_DOWN")]
-    pub const CAMERA_DOWN: Key = Key(536);
+    pub const CAMERA_DOWN: Key = Key(536u32);
     #[doc(alias = "KEY_CAMERA_LEFT")]
-    pub const CAMERA_LEFT: Key = Key(537);
+    pub const CAMERA_LEFT: Key = Key(537u32);
     #[doc(alias = "KEY_CAMERA_RIGHT")]
-    pub const CAMERA_RIGHT: Key = Key(538);
+    pub const CAMERA_RIGHT: Key = Key(538u32);
     #[doc(alias = "KEY_ATTENDANT_ON")]
-    pub const ATTENDANT_ON: Key = Key(539);
+    pub const ATTENDANT_ON: Key = Key(539u32);
     #[doc(alias = "KEY_ATTENDANT_OFF")]
-    pub const ATTENDANT_OFF: Key = Key(540);
+    pub const ATTENDANT_OFF: Key = Key(540u32);
+    #[doc = " Attendant call on or off "]
     #[doc(alias = "KEY_ATTENDANT_TOGGLE")]
-    pub const ATTENDANT_TOGGLE: Key = Key(541);
+    pub const ATTENDANT_TOGGLE: Key = Key(541u32);
+    #[doc = " Reading light on or off "]
     #[doc(alias = "KEY_LIGHTS_TOGGLE")]
-    pub const LIGHTS_TOGGLE: Key = Key(542);
+    pub const LIGHTS_TOGGLE: Key = Key(542u32);
+    #[doc = " Ambient light sensor "]
     #[doc(alias = "KEY_ALS_TOGGLE")]
-    pub const ALS_TOGGLE: Key = Key(560);
+    pub const ALS_TOGGLE: Key = Key(560u32);
+    #[doc = " Display rotation lock "]
     #[doc(alias = "KEY_ROTATE_LOCK_TOGGLE")]
-    pub const ROTATE_LOCK_TOGGLE: Key = Key(561);
+    pub const ROTATE_LOCK_TOGGLE: Key = Key(561u32);
+    #[doc = " AL Button Configuration "]
     #[doc(alias = "KEY_BUTTONCONFIG")]
-    pub const BUTTONCONFIG: Key = Key(576);
+    pub const BUTTONCONFIG: Key = Key(576u32);
+    #[doc = " AL Task/Project Manager "]
     #[doc(alias = "KEY_TASKMANAGER")]
-    pub const TASKMANAGER: Key = Key(577);
+    pub const TASKMANAGER: Key = Key(577u32);
+    #[doc = " AL Log/Journal/Timecard "]
     #[doc(alias = "KEY_JOURNAL")]
-    pub const JOURNAL: Key = Key(578);
+    pub const JOURNAL: Key = Key(578u32);
+    #[doc = " AL Control Panel "]
     #[doc(alias = "KEY_CONTROLPANEL")]
-    pub const CONTROLPANEL: Key = Key(579);
+    pub const CONTROLPANEL: Key = Key(579u32);
+    #[doc = " AL Select Task/Application "]
     #[doc(alias = "KEY_APPSELECT")]
-    pub const APPSELECT: Key = Key(580);
+    pub const APPSELECT: Key = Key(580u32);
+    #[doc = " AL Screen Saver "]
     #[doc(alias = "KEY_SCREENSAVER")]
-    pub const SCREENSAVER: Key = Key(581);
+    pub const SCREENSAVER: Key = Key(581u32);
+    #[doc = " Listening Voice Command "]
     #[doc(alias = "KEY_VOICECOMMAND")]
-    pub const VOICECOMMAND: Key = Key(582);
+    pub const VOICECOMMAND: Key = Key(582u32);
+    #[doc = " AL Context-aware desktop assistant "]
     #[doc(alias = "KEY_ASSISTANT")]
-    pub const ASSISTANT: Key = Key(583);
+    pub const ASSISTANT: Key = Key(583u32);
+    #[doc = " AC Next Keyboard Layout Select "]
     #[doc(alias = "KEY_KBD_LAYOUT_NEXT")]
-    pub const KBD_LAYOUT_NEXT: Key = Key(584);
+    pub const KBD_LAYOUT_NEXT: Key = Key(584u32);
+    #[doc = " Show/hide emoji picker (HUTRR101) "]
     #[doc(alias = "KEY_EMOJI_PICKER")]
-    pub const EMOJI_PICKER: Key = Key(585);
+    pub const EMOJI_PICKER: Key = Key(585u32);
+    #[doc = " Set Brightness to Minimum "]
     #[doc(alias = "KEY_BRIGHTNESS_MIN")]
-    pub const BRIGHTNESS_MIN: Key = Key(592);
+    pub const BRIGHTNESS_MIN: Key = Key(592u32);
+    #[doc = " Set Brightness to Maximum "]
     #[doc(alias = "KEY_BRIGHTNESS_MAX")]
-    pub const BRIGHTNESS_MAX: Key = Key(593);
+    pub const BRIGHTNESS_MAX: Key = Key(593u32);
     #[doc(alias = "KEY_KBDINPUTASSIST_PREV")]
-    pub const KBDINPUTASSIST_PREV: Key = Key(608);
+    pub const KBDINPUTASSIST_PREV: Key = Key(608u32);
     #[doc(alias = "KEY_KBDINPUTASSIST_NEXT")]
-    pub const KBDINPUTASSIST_NEXT: Key = Key(609);
+    pub const KBDINPUTASSIST_NEXT: Key = Key(609u32);
     #[doc(alias = "KEY_KBDINPUTASSIST_PREVGROUP")]
-    pub const KBDINPUTASSIST_PREVGROUP: Key = Key(610);
+    pub const KBDINPUTASSIST_PREVGROUP: Key = Key(610u32);
     #[doc(alias = "KEY_KBDINPUTASSIST_NEXTGROUP")]
-    pub const KBDINPUTASSIST_NEXTGROUP: Key = Key(611);
+    pub const KBDINPUTASSIST_NEXTGROUP: Key = Key(611u32);
     #[doc(alias = "KEY_KBDINPUTASSIST_ACCEPT")]
-    pub const KBDINPUTASSIST_ACCEPT: Key = Key(612);
+    pub const KBDINPUTASSIST_ACCEPT: Key = Key(612u32);
     #[doc(alias = "KEY_KBDINPUTASSIST_CANCEL")]
-    pub const KBDINPUTASSIST_CANCEL: Key = Key(613);
+    pub const KBDINPUTASSIST_CANCEL: Key = Key(613u32);
     #[doc(alias = "KEY_RIGHT_UP")]
-    pub const RIGHT_UP: Key = Key(614);
+    pub const RIGHT_UP: Key = Key(614u32);
     #[doc(alias = "KEY_RIGHT_DOWN")]
-    pub const RIGHT_DOWN: Key = Key(615);
+    pub const RIGHT_DOWN: Key = Key(615u32);
     #[doc(alias = "KEY_LEFT_UP")]
-    pub const LEFT_UP: Key = Key(616);
+    pub const LEFT_UP: Key = Key(616u32);
     #[doc(alias = "KEY_LEFT_DOWN")]
-    pub const LEFT_DOWN: Key = Key(617);
+    pub const LEFT_DOWN: Key = Key(617u32);
+    #[doc = " Show Device's Root Menu "]
     #[doc(alias = "KEY_ROOT_MENU")]
-    pub const ROOT_MENU: Key = Key(618);
+    pub const ROOT_MENU: Key = Key(618u32);
     #[doc(alias = "KEY_MEDIA_TOP_MENU")]
-    pub const MEDIA_TOP_MENU: Key = Key(619);
+    pub const MEDIA_TOP_MENU: Key = Key(619u32);
     #[doc(alias = "KEY_NUMERIC_11")]
-    pub const NUMERIC_11: Key = Key(620);
+    pub const NUMERIC_11: Key = Key(620u32);
     #[doc(alias = "KEY_NUMERIC_12")]
-    pub const NUMERIC_12: Key = Key(621);
+    pub const NUMERIC_12: Key = Key(621u32);
     #[doc(alias = "KEY_AUDIO_DESC")]
-    pub const AUDIO_DESC: Key = Key(622);
+    pub const AUDIO_DESC: Key = Key(622u32);
     #[doc(alias = "KEY_3D_MODE")]
-    pub const _3D_MODE: Key = Key(623);
+    pub const _3D_MODE: Key = Key(623u32);
     #[doc(alias = "KEY_NEXT_FAVORITE")]
-    pub const NEXT_FAVORITE: Key = Key(624);
+    pub const NEXT_FAVORITE: Key = Key(624u32);
     #[doc(alias = "KEY_STOP_RECORD")]
-    pub const STOP_RECORD: Key = Key(625);
+    pub const STOP_RECORD: Key = Key(625u32);
     #[doc(alias = "KEY_PAUSE_RECORD")]
-    pub const PAUSE_RECORD: Key = Key(626);
+    pub const PAUSE_RECORD: Key = Key(626u32);
+    #[doc = " Video on Demand "]
     #[doc(alias = "KEY_VOD")]
-    pub const VOD: Key = Key(627);
+    pub const VOD: Key = Key(627u32);
     #[doc(alias = "KEY_UNMUTE")]
-    pub const UNMUTE: Key = Key(628);
+    pub const UNMUTE: Key = Key(628u32);
     #[doc(alias = "KEY_FASTREVERSE")]
-    pub const FASTREVERSE: Key = Key(629);
+    pub const FASTREVERSE: Key = Key(629u32);
     #[doc(alias = "KEY_SLOWREVERSE")]
-    pub const SLOWREVERSE: Key = Key(630);
+    pub const SLOWREVERSE: Key = Key(630u32);
     #[doc(alias = "KEY_DATA")]
-    pub const DATA: Key = Key(631);
+    pub const DATA: Key = Key(631u32);
     #[doc(alias = "KEY_ONSCREEN_KEYBOARD")]
-    pub const ONSCREEN_KEYBOARD: Key = Key(632);
+    pub const ONSCREEN_KEYBOARD: Key = Key(632u32);
     #[doc(alias = "KEY_PRIVACY_SCREEN_TOGGLE")]
-    pub const PRIVACY_SCREEN_TOGGLE: Key = Key(633);
+    pub const PRIVACY_SCREEN_TOGGLE: Key = Key(633u32);
     #[doc(alias = "KEY_SELECTIVE_SCREENSHOT")]
-    pub const SELECTIVE_SCREENSHOT: Key = Key(634);
+    pub const SELECTIVE_SCREENSHOT: Key = Key(634u32);
     #[doc(alias = "KEY_MACRO1")]
-    pub const MACRO1: Key = Key(656);
+    pub const MACRO1: Key = Key(656u32);
     #[doc(alias = "KEY_MACRO2")]
-    pub const MACRO2: Key = Key(657);
+    pub const MACRO2: Key = Key(657u32);
     #[doc(alias = "KEY_MACRO3")]
-    pub const MACRO3: Key = Key(658);
+    pub const MACRO3: Key = Key(658u32);
     #[doc(alias = "KEY_MACRO4")]
-    pub const MACRO4: Key = Key(659);
+    pub const MACRO4: Key = Key(659u32);
     #[doc(alias = "KEY_MACRO5")]
-    pub const MACRO5: Key = Key(660);
+    pub const MACRO5: Key = Key(660u32);
     #[doc(alias = "KEY_MACRO6")]
-    pub const MACRO6: Key = Key(661);
+    pub const MACRO6: Key = Key(661u32);
     #[doc(alias = "KEY_MACRO7")]
-    pub const MACRO7: Key = Key(662);
+    pub const MACRO7: Key = Key(662u32);
     #[doc(alias = "KEY_MACRO8")]
-    pub const MACRO8: Key = Key(663);
+    pub const MACRO8: Key = Key(663u32);
     #[doc(alias = "KEY_MACRO9")]
-    pub const MACRO9: Key = Key(664);
+    pub const MACRO9: Key = Key(664u32);
     #[doc(alias = "KEY_MACRO10")]
-    pub const MACRO10: Key = Key(665);
+    pub const MACRO10: Key = Key(665u32);
     #[doc(alias = "KEY_MACRO11")]
-    pub const MACRO11: Key = Key(666);
+    pub const MACRO11: Key = Key(666u32);
     #[doc(alias = "KEY_MACRO12")]
-    pub const MACRO12: Key = Key(667);
+    pub const MACRO12: Key = Key(667u32);
     #[doc(alias = "KEY_MACRO13")]
-    pub const MACRO13: Key = Key(668);
+    pub const MACRO13: Key = Key(668u32);
     #[doc(alias = "KEY_MACRO14")]
-    pub const MACRO14: Key = Key(669);
+    pub const MACRO14: Key = Key(669u32);
     #[doc(alias = "KEY_MACRO15")]
-    pub const MACRO15: Key = Key(670);
+    pub const MACRO15: Key = Key(670u32);
     #[doc(alias = "KEY_MACRO16")]
-    pub const MACRO16: Key = Key(671);
+    pub const MACRO16: Key = Key(671u32);
     #[doc(alias = "KEY_MACRO17")]
-    pub const MACRO17: Key = Key(672);
+    pub const MACRO17: Key = Key(672u32);
     #[doc(alias = "KEY_MACRO18")]
-    pub const MACRO18: Key = Key(673);
+    pub const MACRO18: Key = Key(673u32);
     #[doc(alias = "KEY_MACRO19")]
-    pub const MACRO19: Key = Key(674);
+    pub const MACRO19: Key = Key(674u32);
     #[doc(alias = "KEY_MACRO20")]
-    pub const MACRO20: Key = Key(675);
+    pub const MACRO20: Key = Key(675u32);
     #[doc(alias = "KEY_MACRO21")]
-    pub const MACRO21: Key = Key(676);
+    pub const MACRO21: Key = Key(676u32);
     #[doc(alias = "KEY_MACRO22")]
-    pub const MACRO22: Key = Key(677);
+    pub const MACRO22: Key = Key(677u32);
     #[doc(alias = "KEY_MACRO23")]
-    pub const MACRO23: Key = Key(678);
+    pub const MACRO23: Key = Key(678u32);
     #[doc(alias = "KEY_MACRO24")]
-    pub const MACRO24: Key = Key(679);
+    pub const MACRO24: Key = Key(679u32);
     #[doc(alias = "KEY_MACRO25")]
-    pub const MACRO25: Key = Key(680);
+    pub const MACRO25: Key = Key(680u32);
     #[doc(alias = "KEY_MACRO26")]
-    pub const MACRO26: Key = Key(681);
+    pub const MACRO26: Key = Key(681u32);
     #[doc(alias = "KEY_MACRO27")]
-    pub const MACRO27: Key = Key(682);
+    pub const MACRO27: Key = Key(682u32);
     #[doc(alias = "KEY_MACRO28")]
-    pub const MACRO28: Key = Key(683);
+    pub const MACRO28: Key = Key(683u32);
     #[doc(alias = "KEY_MACRO29")]
-    pub const MACRO29: Key = Key(684);
+    pub const MACRO29: Key = Key(684u32);
     #[doc(alias = "KEY_MACRO30")]
-    pub const MACRO30: Key = Key(685);
+    pub const MACRO30: Key = Key(685u32);
     #[doc(alias = "KEY_MACRO_RECORD_START")]
-    pub const MACRO_RECORD_START: Key = Key(688);
+    pub const MACRO_RECORD_START: Key = Key(688u32);
     #[doc(alias = "KEY_MACRO_RECORD_STOP")]
-    pub const MACRO_RECORD_STOP: Key = Key(689);
+    pub const MACRO_RECORD_STOP: Key = Key(689u32);
     #[doc(alias = "KEY_MACRO_PRESET_CYCLE")]
-    pub const MACRO_PRESET_CYCLE: Key = Key(690);
+    pub const MACRO_PRESET_CYCLE: Key = Key(690u32);
     #[doc(alias = "KEY_MACRO_PRESET1")]
-    pub const MACRO_PRESET1: Key = Key(691);
+    pub const MACRO_PRESET1: Key = Key(691u32);
     #[doc(alias = "KEY_MACRO_PRESET2")]
-    pub const MACRO_PRESET2: Key = Key(692);
+    pub const MACRO_PRESET2: Key = Key(692u32);
     #[doc(alias = "KEY_MACRO_PRESET3")]
-    pub const MACRO_PRESET3: Key = Key(693);
+    pub const MACRO_PRESET3: Key = Key(693u32);
     #[doc(alias = "KEY_KBD_LCD_MENU1")]
-    pub const KBD_LCD_MENU1: Key = Key(696);
+    pub const KBD_LCD_MENU1: Key = Key(696u32);
     #[doc(alias = "KEY_KBD_LCD_MENU2")]
-    pub const KBD_LCD_MENU2: Key = Key(697);
+    pub const KBD_LCD_MENU2: Key = Key(697u32);
     #[doc(alias = "KEY_KBD_LCD_MENU3")]
-    pub const KBD_LCD_MENU3: Key = Key(698);
+    pub const KBD_LCD_MENU3: Key = Key(698u32);
     #[doc(alias = "KEY_KBD_LCD_MENU4")]
-    pub const KBD_LCD_MENU4: Key = Key(699);
+    pub const KBD_LCD_MENU4: Key = Key(699u32);
     #[doc(alias = "KEY_KBD_LCD_MENU5")]
-    pub const KBD_LCD_MENU5: Key = Key(700);
+    pub const KBD_LCD_MENU5: Key = Key(700u32);
     #[doc(alias = "KEY_MIN_INTERESTING")]
-    pub const MIN_INTERESTING: Key = Key(113);
+    pub const MIN_INTERESTING: Key = Key(113u32);
     #[doc(alias = "KEY_MAX")]
-    pub const MAX: Key = Key(767);
+    pub const MAX: Key = Key(767u32);
     #[doc(alias = "KEY_CNT")]
-    pub const CNT: Key = Key(768);
+    pub const CNT: Key = Key(768u32);
 }
 #[repr(transparent)]
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub struct Led(u32);
 impl Led {
-    pub const fn new(value: u32) -> Led {
-        Led(value)
+    pub const fn new(value: u32) -> Self {
+        Self(value)
     }
     pub const fn into_inner(self) -> u32 {
         self.0
     }
 }
 impl From<u32> for Led {
-    fn from(value: u32) -> Led {
-        Led(value)
+    fn from(value: u32) -> Self {
+        Self(value)
     }
 }
 impl From<Led> for u32 {
     fn from(value: Led) -> u32 {
         value.0
+    }
+}
+impl AsRef<u32> for Led {
+    fn as_ref(&self) -> &u32 {
+        &self.0
+    }
+}
+impl ::core::borrow::Borrow<u32> for Led {
+    fn borrow(&self) -> &u32 {
+        &self.0
     }
 }
 impl PartialEq<u32> for Led {
@@ -1536,51 +1738,61 @@ impl PartialEq<u32> for Led {
 }
 impl Led {
     #[doc(alias = "LED_NUML")]
-    pub const NUML: Led = Led(0);
+    pub const NUML: Led = Led(0u32);
     #[doc(alias = "LED_CAPSL")]
-    pub const CAPSL: Led = Led(1);
+    pub const CAPSL: Led = Led(1u32);
     #[doc(alias = "LED_SCROLLL")]
-    pub const SCROLLL: Led = Led(2);
+    pub const SCROLLL: Led = Led(2u32);
     #[doc(alias = "LED_COMPOSE")]
-    pub const COMPOSE: Led = Led(3);
+    pub const COMPOSE: Led = Led(3u32);
     #[doc(alias = "LED_KANA")]
-    pub const KANA: Led = Led(4);
+    pub const KANA: Led = Led(4u32);
     #[doc(alias = "LED_SLEEP")]
-    pub const SLEEP: Led = Led(5);
+    pub const SLEEP: Led = Led(5u32);
     #[doc(alias = "LED_SUSPEND")]
-    pub const SUSPEND: Led = Led(6);
+    pub const SUSPEND: Led = Led(6u32);
     #[doc(alias = "LED_MUTE")]
-    pub const MUTE: Led = Led(7);
+    pub const MUTE: Led = Led(7u32);
     #[doc(alias = "LED_MISC")]
-    pub const MISC: Led = Led(8);
+    pub const MISC: Led = Led(8u32);
     #[doc(alias = "LED_MAIL")]
-    pub const MAIL: Led = Led(9);
+    pub const MAIL: Led = Led(9u32);
     #[doc(alias = "LED_CHARGING")]
-    pub const CHARGING: Led = Led(10);
+    pub const CHARGING: Led = Led(10u32);
     #[doc(alias = "LED_MAX")]
-    pub const MAX: Led = Led(15);
+    pub const MAX: Led = Led(15u32);
     #[doc(alias = "LED_CNT")]
-    pub const CNT: Led = Led(16);
+    pub const CNT: Led = Led(16u32);
 }
 #[repr(transparent)]
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub struct Msc(u32);
 impl Msc {
-    pub const fn new(value: u32) -> Msc {
-        Msc(value)
+    pub const fn new(value: u32) -> Self {
+        Self(value)
     }
     pub const fn into_inner(self) -> u32 {
         self.0
     }
 }
 impl From<u32> for Msc {
-    fn from(value: u32) -> Msc {
-        Msc(value)
+    fn from(value: u32) -> Self {
+        Self(value)
     }
 }
 impl From<Msc> for u32 {
     fn from(value: Msc) -> u32 {
         value.0
+    }
+}
+impl AsRef<u32> for Msc {
+    fn as_ref(&self) -> &u32 {
+        &self.0
+    }
+}
+impl ::core::borrow::Borrow<u32> for Msc {
+    fn borrow(&self) -> &u32 {
+        &self.0
     }
 }
 impl PartialEq<u32> for Msc {
@@ -1590,41 +1802,51 @@ impl PartialEq<u32> for Msc {
 }
 impl Msc {
     #[doc(alias = "MSC_SERIAL")]
-    pub const SERIAL: Msc = Msc(0);
+    pub const SERIAL: Msc = Msc(0u32);
     #[doc(alias = "MSC_PULSELED")]
-    pub const PULSELED: Msc = Msc(1);
+    pub const PULSELED: Msc = Msc(1u32);
     #[doc(alias = "MSC_GESTURE")]
-    pub const GESTURE: Msc = Msc(2);
+    pub const GESTURE: Msc = Msc(2u32);
     #[doc(alias = "MSC_RAW")]
-    pub const RAW: Msc = Msc(3);
+    pub const RAW: Msc = Msc(3u32);
     #[doc(alias = "MSC_SCAN")]
-    pub const SCAN: Msc = Msc(4);
+    pub const SCAN: Msc = Msc(4u32);
     #[doc(alias = "MSC_TIMESTAMP")]
-    pub const TIMESTAMP: Msc = Msc(5);
+    pub const TIMESTAMP: Msc = Msc(5u32);
     #[doc(alias = "MSC_MAX")]
-    pub const MAX: Msc = Msc(7);
+    pub const MAX: Msc = Msc(7u32);
     #[doc(alias = "MSC_CNT")]
-    pub const CNT: Msc = Msc(8);
+    pub const CNT: Msc = Msc(8u32);
 }
 #[repr(transparent)]
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub struct Rel(u32);
 impl Rel {
-    pub const fn new(value: u32) -> Rel {
-        Rel(value)
+    pub const fn new(value: u32) -> Self {
+        Self(value)
     }
     pub const fn into_inner(self) -> u32 {
         self.0
     }
 }
 impl From<u32> for Rel {
-    fn from(value: u32) -> Rel {
-        Rel(value)
+    fn from(value: u32) -> Self {
+        Self(value)
     }
 }
 impl From<Rel> for u32 {
     fn from(value: Rel) -> u32 {
         value.0
+    }
+}
+impl AsRef<u32> for Rel {
+    fn as_ref(&self) -> &u32 {
+        &self.0
+    }
+}
+impl ::core::borrow::Borrow<u32> for Rel {
+    fn borrow(&self) -> &u32 {
+        &self.0
     }
 }
 impl PartialEq<u32> for Rel {
@@ -1634,55 +1856,65 @@ impl PartialEq<u32> for Rel {
 }
 impl Rel {
     #[doc(alias = "REL_X")]
-    pub const X: Rel = Rel(0);
+    pub const X: Rel = Rel(0u32);
     #[doc(alias = "REL_Y")]
-    pub const Y: Rel = Rel(1);
+    pub const Y: Rel = Rel(1u32);
     #[doc(alias = "REL_Z")]
-    pub const Z: Rel = Rel(2);
+    pub const Z: Rel = Rel(2u32);
     #[doc(alias = "REL_RX")]
-    pub const RX: Rel = Rel(3);
+    pub const RX: Rel = Rel(3u32);
     #[doc(alias = "REL_RY")]
-    pub const RY: Rel = Rel(4);
+    pub const RY: Rel = Rel(4u32);
     #[doc(alias = "REL_RZ")]
-    pub const RZ: Rel = Rel(5);
+    pub const RZ: Rel = Rel(5u32);
     #[doc(alias = "REL_HWHEEL")]
-    pub const HWHEEL: Rel = Rel(6);
+    pub const HWHEEL: Rel = Rel(6u32);
     #[doc(alias = "REL_DIAL")]
-    pub const DIAL: Rel = Rel(7);
+    pub const DIAL: Rel = Rel(7u32);
     #[doc(alias = "REL_WHEEL")]
-    pub const WHEEL: Rel = Rel(8);
+    pub const WHEEL: Rel = Rel(8u32);
     #[doc(alias = "REL_MISC")]
-    pub const MISC: Rel = Rel(9);
+    pub const MISC: Rel = Rel(9u32);
     #[doc(alias = "REL_RESERVED")]
-    pub const RESERVED: Rel = Rel(10);
+    pub const RESERVED: Rel = Rel(10u32);
     #[doc(alias = "REL_WHEEL_HI_RES")]
-    pub const WHEEL_HI_RES: Rel = Rel(11);
+    pub const WHEEL_HI_RES: Rel = Rel(11u32);
     #[doc(alias = "REL_HWHEEL_HI_RES")]
-    pub const HWHEEL_HI_RES: Rel = Rel(12);
+    pub const HWHEEL_HI_RES: Rel = Rel(12u32);
     #[doc(alias = "REL_MAX")]
-    pub const MAX: Rel = Rel(15);
+    pub const MAX: Rel = Rel(15u32);
     #[doc(alias = "REL_CNT")]
-    pub const CNT: Rel = Rel(16);
+    pub const CNT: Rel = Rel(16u32);
 }
 #[repr(transparent)]
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub struct Rep(u32);
 impl Rep {
-    pub const fn new(value: u32) -> Rep {
-        Rep(value)
+    pub const fn new(value: u32) -> Self {
+        Self(value)
     }
     pub const fn into_inner(self) -> u32 {
         self.0
     }
 }
 impl From<u32> for Rep {
-    fn from(value: u32) -> Rep {
-        Rep(value)
+    fn from(value: u32) -> Self {
+        Self(value)
     }
 }
 impl From<Rep> for u32 {
     fn from(value: Rep) -> u32 {
         value.0
+    }
+}
+impl AsRef<u32> for Rep {
+    fn as_ref(&self) -> &u32 {
+        &self.0
+    }
+}
+impl ::core::borrow::Borrow<u32> for Rep {
+    fn borrow(&self) -> &u32 {
+        &self.0
     }
 }
 impl PartialEq<u32> for Rep {
@@ -1692,33 +1924,43 @@ impl PartialEq<u32> for Rep {
 }
 impl Rep {
     #[doc(alias = "REP_DELAY")]
-    pub const DELAY: Rep = Rep(0);
+    pub const DELAY: Rep = Rep(0u32);
     #[doc(alias = "REP_PERIOD")]
-    pub const PERIOD: Rep = Rep(1);
+    pub const PERIOD: Rep = Rep(1u32);
     #[doc(alias = "REP_MAX")]
-    pub const MAX: Rep = Rep(1);
+    pub const MAX: Rep = Rep(1u32);
     #[doc(alias = "REP_CNT")]
-    pub const CNT: Rep = Rep(2);
+    pub const CNT: Rep = Rep(2u32);
 }
 #[repr(transparent)]
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub struct Snd(u32);
 impl Snd {
-    pub const fn new(value: u32) -> Snd {
-        Snd(value)
+    pub const fn new(value: u32) -> Self {
+        Self(value)
     }
     pub const fn into_inner(self) -> u32 {
         self.0
     }
 }
 impl From<u32> for Snd {
-    fn from(value: u32) -> Snd {
-        Snd(value)
+    fn from(value: u32) -> Self {
+        Self(value)
     }
 }
 impl From<Snd> for u32 {
     fn from(value: Snd) -> u32 {
         value.0
+    }
+}
+impl AsRef<u32> for Snd {
+    fn as_ref(&self) -> &u32 {
+        &self.0
+    }
+}
+impl ::core::borrow::Borrow<u32> for Snd {
+    fn borrow(&self) -> &u32 {
+        &self.0
     }
 }
 impl PartialEq<u32> for Snd {
@@ -1728,35 +1970,45 @@ impl PartialEq<u32> for Snd {
 }
 impl Snd {
     #[doc(alias = "SND_CLICK")]
-    pub const CLICK: Snd = Snd(0);
+    pub const CLICK: Snd = Snd(0u32);
     #[doc(alias = "SND_BELL")]
-    pub const BELL: Snd = Snd(1);
+    pub const BELL: Snd = Snd(1u32);
     #[doc(alias = "SND_TONE")]
-    pub const TONE: Snd = Snd(2);
+    pub const TONE: Snd = Snd(2u32);
     #[doc(alias = "SND_MAX")]
-    pub const MAX: Snd = Snd(7);
+    pub const MAX: Snd = Snd(7u32);
     #[doc(alias = "SND_CNT")]
-    pub const CNT: Snd = Snd(8);
+    pub const CNT: Snd = Snd(8u32);
 }
 #[repr(transparent)]
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub struct Sw(u32);
 impl Sw {
-    pub const fn new(value: u32) -> Sw {
-        Sw(value)
+    pub const fn new(value: u32) -> Self {
+        Self(value)
     }
     pub const fn into_inner(self) -> u32 {
         self.0
     }
 }
 impl From<u32> for Sw {
-    fn from(value: u32) -> Sw {
-        Sw(value)
+    fn from(value: u32) -> Self {
+        Self(value)
     }
 }
 impl From<Sw> for u32 {
     fn from(value: Sw) -> u32 {
         value.0
+    }
+}
+impl AsRef<u32> for Sw {
+    fn as_ref(&self) -> &u32 {
+        &self.0
+    }
+}
+impl ::core::borrow::Borrow<u32> for Sw {
+    fn borrow(&self) -> &u32 {
+        &self.0
     }
 }
 impl PartialEq<u32> for Sw {
@@ -1765,66 +2017,94 @@ impl PartialEq<u32> for Sw {
     }
 }
 impl Sw {
+    #[doc = " set = lid shut "]
     #[doc(alias = "SW_LID")]
-    pub const LID: Sw = Sw(0);
+    pub const LID: Sw = Sw(0u32);
+    #[doc = " set = tablet mode "]
     #[doc(alias = "SW_TABLET_MODE")]
-    pub const TABLET_MODE: Sw = Sw(1);
+    pub const TABLET_MODE: Sw = Sw(1u32);
+    #[doc = " set = inserted "]
     #[doc(alias = "SW_HEADPHONE_INSERT")]
-    pub const HEADPHONE_INSERT: Sw = Sw(2);
+    pub const HEADPHONE_INSERT: Sw = Sw(2u32);
+    #[doc = " rfkill master switch, type \"any\"\n\t\t\t\t\t set = radio enabled "]
     #[doc(alias = "SW_RFKILL_ALL")]
-    pub const RFKILL_ALL: Sw = Sw(3);
+    pub const RFKILL_ALL: Sw = Sw(3u32);
+    #[doc = " deprecated "]
     #[doc(alias = "SW_RADIO")]
-    pub const RADIO: Sw = Sw(3);
+    pub const RADIO: Sw = Sw(3u32);
+    #[doc = " set = inserted "]
     #[doc(alias = "SW_MICROPHONE_INSERT")]
-    pub const MICROPHONE_INSERT: Sw = Sw(4);
+    pub const MICROPHONE_INSERT: Sw = Sw(4u32);
+    #[doc = " set = plugged into dock "]
     #[doc(alias = "SW_DOCK")]
-    pub const DOCK: Sw = Sw(5);
+    pub const DOCK: Sw = Sw(5u32);
+    #[doc = " set = inserted "]
     #[doc(alias = "SW_LINEOUT_INSERT")]
-    pub const LINEOUT_INSERT: Sw = Sw(6);
+    pub const LINEOUT_INSERT: Sw = Sw(6u32);
+    #[doc = " set = mechanical switch set "]
     #[doc(alias = "SW_JACK_PHYSICAL_INSERT")]
-    pub const JACK_PHYSICAL_INSERT: Sw = Sw(7);
+    pub const JACK_PHYSICAL_INSERT: Sw = Sw(7u32);
+    #[doc = " set = inserted "]
     #[doc(alias = "SW_VIDEOOUT_INSERT")]
-    pub const VIDEOOUT_INSERT: Sw = Sw(8);
+    pub const VIDEOOUT_INSERT: Sw = Sw(8u32);
+    #[doc = " set = lens covered "]
     #[doc(alias = "SW_CAMERA_LENS_COVER")]
-    pub const CAMERA_LENS_COVER: Sw = Sw(9);
+    pub const CAMERA_LENS_COVER: Sw = Sw(9u32);
+    #[doc = " set = keypad slide out "]
     #[doc(alias = "SW_KEYPAD_SLIDE")]
-    pub const KEYPAD_SLIDE: Sw = Sw(10);
+    pub const KEYPAD_SLIDE: Sw = Sw(10u32);
+    #[doc = " set = front proximity sensor active "]
     #[doc(alias = "SW_FRONT_PROXIMITY")]
-    pub const FRONT_PROXIMITY: Sw = Sw(11);
+    pub const FRONT_PROXIMITY: Sw = Sw(11u32);
+    #[doc = " set = rotate locked/disabled "]
     #[doc(alias = "SW_ROTATE_LOCK")]
-    pub const ROTATE_LOCK: Sw = Sw(12);
+    pub const ROTATE_LOCK: Sw = Sw(12u32);
+    #[doc = " set = inserted "]
     #[doc(alias = "SW_LINEIN_INSERT")]
-    pub const LINEIN_INSERT: Sw = Sw(13);
+    pub const LINEIN_INSERT: Sw = Sw(13u32);
+    #[doc = " set = device disabled "]
     #[doc(alias = "SW_MUTE_DEVICE")]
-    pub const MUTE_DEVICE: Sw = Sw(14);
+    pub const MUTE_DEVICE: Sw = Sw(14u32);
+    #[doc = " set = pen inserted "]
     #[doc(alias = "SW_PEN_INSERTED")]
-    pub const PEN_INSERTED: Sw = Sw(15);
+    pub const PEN_INSERTED: Sw = Sw(15u32);
+    #[doc = " set = cover closed "]
     #[doc(alias = "SW_MACHINE_COVER")]
-    pub const MACHINE_COVER: Sw = Sw(16);
+    pub const MACHINE_COVER: Sw = Sw(16u32);
     #[doc(alias = "SW_MAX")]
-    pub const MAX: Sw = Sw(16);
+    pub const MAX: Sw = Sw(16u32);
     #[doc(alias = "SW_CNT")]
-    pub const CNT: Sw = Sw(17);
+    pub const CNT: Sw = Sw(17u32);
 }
 #[repr(transparent)]
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub struct Syn(u32);
 impl Syn {
-    pub const fn new(value: u32) -> Syn {
-        Syn(value)
+    pub const fn new(value: u32) -> Self {
+        Self(value)
     }
     pub const fn into_inner(self) -> u32 {
         self.0
     }
 }
 impl From<u32> for Syn {
-    fn from(value: u32) -> Syn {
-        Syn(value)
+    fn from(value: u32) -> Self {
+        Self(value)
     }
 }
 impl From<Syn> for u32 {
     fn from(value: Syn) -> u32 {
         value.0
+    }
+}
+impl AsRef<u32> for Syn {
+    fn as_ref(&self) -> &u32 {
+        &self.0
+    }
+}
+impl ::core::borrow::Borrow<u32> for Syn {
+    fn borrow(&self) -> &u32 {
+        &self.0
     }
 }
 impl PartialEq<u32> for Syn {
@@ -1834,15 +2114,15 @@ impl PartialEq<u32> for Syn {
 }
 impl Syn {
     #[doc(alias = "SYN_REPORT")]
-    pub const REPORT: Syn = Syn(0);
+    pub const REPORT: Syn = Syn(0u32);
     #[doc(alias = "SYN_CONFIG")]
-    pub const CONFIG: Syn = Syn(1);
+    pub const CONFIG: Syn = Syn(1u32);
     #[doc(alias = "SYN_MT_REPORT")]
-    pub const MT_REPORT: Syn = Syn(2);
+    pub const MT_REPORT: Syn = Syn(2u32);
     #[doc(alias = "SYN_DROPPED")]
-    pub const DROPPED: Syn = Syn(3);
+    pub const DROPPED: Syn = Syn(3u32);
     #[doc(alias = "SYN_MAX")]
-    pub const MAX: Syn = Syn(15);
+    pub const MAX: Syn = Syn(15u32);
     #[doc(alias = "SYN_CNT")]
-    pub const CNT: Syn = Syn(16);
+    pub const CNT: Syn = Syn(16u32);
 }
