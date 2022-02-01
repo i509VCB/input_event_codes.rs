@@ -64,3 +64,20 @@ jobs:
         with:
           command: build
           args: --release
+
+  doc:
+    env:
+      RUSTDOCFLAGS: "-Dwarnings"
+
+    runs-on: ubuntu-latest
+      - name: Checkout sources
+        uses: actions/checkout@v2
+      - name: Rust toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+      - name: Test docs
+        uses: actions-rs/cargo@v1
+        with:
+          command: doc
+          args: --release
