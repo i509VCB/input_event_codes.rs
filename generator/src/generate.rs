@@ -3,13 +3,20 @@ use std::error::Error;
 use proc_macro2::{Ident, Span, TokenStream};
 use quote::quote;
 
-use crate::category::Category;
+use crate::{category::Category, renames};
 
 pub fn category_to_tokens(
-    category_name: &str,
+    category_enum_name: &str,
     category: &Category,
 ) -> Result<TokenStream, Box<dyn Error>> {
-    let enum_name = Ident::new(category_name, Span::call_site());
+    // Apply renames
+    let enum_name = renames::RENAMES
+        .iter()
+        .find(|rename| rename.name == category_enum_name)
+        .and_then(|rename| rename.rename_to)
+        .unwrap_or(category_enum_name);
+
+    let enum_name = Ident::new(enum_name, Span::call_site());
 
     let constant_tokens = category
         .constants

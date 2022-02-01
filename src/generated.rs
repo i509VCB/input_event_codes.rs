@@ -4,8 +4,8 @@
 
 #[repr(transparent)]
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
-pub struct Abs(u32);
-impl Abs {
+pub struct AbsoluteAxis(u32);
+impl AbsoluteAxis {
     pub const fn new(value: u32) -> Self {
         Self(value)
     }
@@ -13,140 +13,140 @@ impl Abs {
         self.0
     }
 }
-impl From<u32> for Abs {
+impl From<u32> for AbsoluteAxis {
     fn from(value: u32) -> Self {
         Self(value)
     }
 }
-impl From<Abs> for u32 {
-    fn from(value: Abs) -> u32 {
+impl From<AbsoluteAxis> for u32 {
+    fn from(value: AbsoluteAxis) -> u32 {
         value.0
     }
 }
-impl AsRef<u32> for Abs {
+impl AsRef<u32> for AbsoluteAxis {
     fn as_ref(&self) -> &u32 {
         &self.0
     }
 }
-impl ::core::borrow::Borrow<u32> for Abs {
+impl ::core::borrow::Borrow<u32> for AbsoluteAxis {
     fn borrow(&self) -> &u32 {
         &self.0
     }
 }
-impl PartialEq<u32> for Abs {
+impl PartialEq<u32> for AbsoluteAxis {
     fn eq(&self, other: &u32) -> bool {
         &self.0 == other
     }
 }
-impl Abs {
+impl AbsoluteAxis {
     #[doc(alias = "ABS_X")]
-    pub const X: Abs = Abs(0u32);
+    pub const X: AbsoluteAxis = AbsoluteAxis(0u32);
     #[doc(alias = "ABS_Y")]
-    pub const Y: Abs = Abs(1u32);
+    pub const Y: AbsoluteAxis = AbsoluteAxis(1u32);
     #[doc(alias = "ABS_Z")]
-    pub const Z: Abs = Abs(2u32);
+    pub const Z: AbsoluteAxis = AbsoluteAxis(2u32);
     #[doc(alias = "ABS_RX")]
-    pub const RX: Abs = Abs(3u32);
+    pub const RX: AbsoluteAxis = AbsoluteAxis(3u32);
     #[doc(alias = "ABS_RY")]
-    pub const RY: Abs = Abs(4u32);
+    pub const RY: AbsoluteAxis = AbsoluteAxis(4u32);
     #[doc(alias = "ABS_RZ")]
-    pub const RZ: Abs = Abs(5u32);
+    pub const RZ: AbsoluteAxis = AbsoluteAxis(5u32);
     #[doc(alias = "ABS_THROTTLE")]
-    pub const THROTTLE: Abs = Abs(6u32);
+    pub const THROTTLE: AbsoluteAxis = AbsoluteAxis(6u32);
     #[doc(alias = "ABS_RUDDER")]
-    pub const RUDDER: Abs = Abs(7u32);
+    pub const RUDDER: AbsoluteAxis = AbsoluteAxis(7u32);
     #[doc(alias = "ABS_WHEEL")]
-    pub const WHEEL: Abs = Abs(8u32);
+    pub const WHEEL: AbsoluteAxis = AbsoluteAxis(8u32);
     #[doc(alias = "ABS_GAS")]
-    pub const GAS: Abs = Abs(9u32);
+    pub const GAS: AbsoluteAxis = AbsoluteAxis(9u32);
     #[doc(alias = "ABS_BRAKE")]
-    pub const BRAKE: Abs = Abs(10u32);
+    pub const BRAKE: AbsoluteAxis = AbsoluteAxis(10u32);
     #[doc(alias = "ABS_HAT0X")]
-    pub const HAT0X: Abs = Abs(16u32);
+    pub const HAT0X: AbsoluteAxis = AbsoluteAxis(16u32);
     #[doc(alias = "ABS_HAT0Y")]
-    pub const HAT0Y: Abs = Abs(17u32);
+    pub const HAT0Y: AbsoluteAxis = AbsoluteAxis(17u32);
     #[doc(alias = "ABS_HAT1X")]
-    pub const HAT1X: Abs = Abs(18u32);
+    pub const HAT1X: AbsoluteAxis = AbsoluteAxis(18u32);
     #[doc(alias = "ABS_HAT1Y")]
-    pub const HAT1Y: Abs = Abs(19u32);
+    pub const HAT1Y: AbsoluteAxis = AbsoluteAxis(19u32);
     #[doc(alias = "ABS_HAT2X")]
-    pub const HAT2X: Abs = Abs(20u32);
+    pub const HAT2X: AbsoluteAxis = AbsoluteAxis(20u32);
     #[doc(alias = "ABS_HAT2Y")]
-    pub const HAT2Y: Abs = Abs(21u32);
+    pub const HAT2Y: AbsoluteAxis = AbsoluteAxis(21u32);
     #[doc(alias = "ABS_HAT3X")]
-    pub const HAT3X: Abs = Abs(22u32);
+    pub const HAT3X: AbsoluteAxis = AbsoluteAxis(22u32);
     #[doc(alias = "ABS_HAT3Y")]
-    pub const HAT3Y: Abs = Abs(23u32);
+    pub const HAT3Y: AbsoluteAxis = AbsoluteAxis(23u32);
     #[doc(alias = "ABS_PRESSURE")]
-    pub const PRESSURE: Abs = Abs(24u32);
+    pub const PRESSURE: AbsoluteAxis = AbsoluteAxis(24u32);
     #[doc(alias = "ABS_DISTANCE")]
-    pub const DISTANCE: Abs = Abs(25u32);
+    pub const DISTANCE: AbsoluteAxis = AbsoluteAxis(25u32);
     #[doc(alias = "ABS_TILT_X")]
-    pub const TILT_X: Abs = Abs(26u32);
+    pub const TILT_X: AbsoluteAxis = AbsoluteAxis(26u32);
     #[doc(alias = "ABS_TILT_Y")]
-    pub const TILT_Y: Abs = Abs(27u32);
+    pub const TILT_Y: AbsoluteAxis = AbsoluteAxis(27u32);
     #[doc(alias = "ABS_TOOL_WIDTH")]
-    pub const TOOL_WIDTH: Abs = Abs(28u32);
+    pub const TOOL_WIDTH: AbsoluteAxis = AbsoluteAxis(28u32);
     #[doc(alias = "ABS_VOLUME")]
-    pub const VOLUME: Abs = Abs(32u32);
+    pub const VOLUME: AbsoluteAxis = AbsoluteAxis(32u32);
     #[doc(alias = "ABS_MISC")]
-    pub const MISC: Abs = Abs(40u32);
+    pub const MISC: AbsoluteAxis = AbsoluteAxis(40u32);
     #[doc(alias = "ABS_RESERVED")]
-    pub const RESERVED: Abs = Abs(46u32);
+    pub const RESERVED: AbsoluteAxis = AbsoluteAxis(46u32);
     #[doc = " MT slot being modified "]
     #[doc(alias = "ABS_MT_SLOT")]
-    pub const MT_SLOT: Abs = Abs(47u32);
+    pub const MT_SLOT: AbsoluteAxis = AbsoluteAxis(47u32);
     #[doc = " Major axis of touching ellipse "]
     #[doc(alias = "ABS_MT_TOUCH_MAJOR")]
-    pub const MT_TOUCH_MAJOR: Abs = Abs(48u32);
+    pub const MT_TOUCH_MAJOR: AbsoluteAxis = AbsoluteAxis(48u32);
     #[doc = " Minor axis (omit if circular) "]
     #[doc(alias = "ABS_MT_TOUCH_MINOR")]
-    pub const MT_TOUCH_MINOR: Abs = Abs(49u32);
+    pub const MT_TOUCH_MINOR: AbsoluteAxis = AbsoluteAxis(49u32);
     #[doc = " Major axis of approaching ellipse "]
     #[doc(alias = "ABS_MT_WIDTH_MAJOR")]
-    pub const MT_WIDTH_MAJOR: Abs = Abs(50u32);
+    pub const MT_WIDTH_MAJOR: AbsoluteAxis = AbsoluteAxis(50u32);
     #[doc = " Minor axis (omit if circular) "]
     #[doc(alias = "ABS_MT_WIDTH_MINOR")]
-    pub const MT_WIDTH_MINOR: Abs = Abs(51u32);
+    pub const MT_WIDTH_MINOR: AbsoluteAxis = AbsoluteAxis(51u32);
     #[doc = " Ellipse orientation "]
     #[doc(alias = "ABS_MT_ORIENTATION")]
-    pub const MT_ORIENTATION: Abs = Abs(52u32);
+    pub const MT_ORIENTATION: AbsoluteAxis = AbsoluteAxis(52u32);
     #[doc = " Center X touch position "]
     #[doc(alias = "ABS_MT_POSITION_X")]
-    pub const MT_POSITION_X: Abs = Abs(53u32);
+    pub const MT_POSITION_X: AbsoluteAxis = AbsoluteAxis(53u32);
     #[doc = " Center Y touch position "]
     #[doc(alias = "ABS_MT_POSITION_Y")]
-    pub const MT_POSITION_Y: Abs = Abs(54u32);
+    pub const MT_POSITION_Y: AbsoluteAxis = AbsoluteAxis(54u32);
     #[doc = " Type of touching device "]
     #[doc(alias = "ABS_MT_TOOL_TYPE")]
-    pub const MT_TOOL_TYPE: Abs = Abs(55u32);
+    pub const MT_TOOL_TYPE: AbsoluteAxis = AbsoluteAxis(55u32);
     #[doc = " Group a set of packets as a blob "]
     #[doc(alias = "ABS_MT_BLOB_ID")]
-    pub const MT_BLOB_ID: Abs = Abs(56u32);
+    pub const MT_BLOB_ID: AbsoluteAxis = AbsoluteAxis(56u32);
     #[doc = " Unique ID of initiated contact "]
     #[doc(alias = "ABS_MT_TRACKING_ID")]
-    pub const MT_TRACKING_ID: Abs = Abs(57u32);
+    pub const MT_TRACKING_ID: AbsoluteAxis = AbsoluteAxis(57u32);
     #[doc = " Pressure on contact area "]
     #[doc(alias = "ABS_MT_PRESSURE")]
-    pub const MT_PRESSURE: Abs = Abs(58u32);
+    pub const MT_PRESSURE: AbsoluteAxis = AbsoluteAxis(58u32);
     #[doc = " Contact hover distance "]
     #[doc(alias = "ABS_MT_DISTANCE")]
-    pub const MT_DISTANCE: Abs = Abs(59u32);
+    pub const MT_DISTANCE: AbsoluteAxis = AbsoluteAxis(59u32);
     #[doc = " Center X tool position "]
     #[doc(alias = "ABS_MT_TOOL_X")]
-    pub const MT_TOOL_X: Abs = Abs(60u32);
+    pub const MT_TOOL_X: AbsoluteAxis = AbsoluteAxis(60u32);
     #[doc = " Center Y tool position "]
     #[doc(alias = "ABS_MT_TOOL_Y")]
-    pub const MT_TOOL_Y: Abs = Abs(61u32);
+    pub const MT_TOOL_Y: AbsoluteAxis = AbsoluteAxis(61u32);
     #[doc(alias = "ABS_MAX")]
-    pub const MAX: Abs = Abs(63u32);
+    pub const MAX: AbsoluteAxis = AbsoluteAxis(63u32);
     #[doc(alias = "ABS_CNT")]
-    pub const CNT: Abs = Abs(64u32);
+    pub const CNT: AbsoluteAxis = AbsoluteAxis(64u32);
 }
 #[repr(transparent)]
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
-pub struct Btn(u32);
-impl Btn {
+pub struct Button(u32);
+impl Button {
     pub const fn new(value: u32) -> Self {
         Self(value)
     }
@@ -154,277 +154,277 @@ impl Btn {
         self.0
     }
 }
-impl From<u32> for Btn {
+impl From<u32> for Button {
     fn from(value: u32) -> Self {
         Self(value)
     }
 }
-impl From<Btn> for u32 {
-    fn from(value: Btn) -> u32 {
+impl From<Button> for u32 {
+    fn from(value: Button) -> u32 {
         value.0
     }
 }
-impl AsRef<u32> for Btn {
+impl AsRef<u32> for Button {
     fn as_ref(&self) -> &u32 {
         &self.0
     }
 }
-impl ::core::borrow::Borrow<u32> for Btn {
+impl ::core::borrow::Borrow<u32> for Button {
     fn borrow(&self) -> &u32 {
         &self.0
     }
 }
-impl PartialEq<u32> for Btn {
+impl PartialEq<u32> for Button {
     fn eq(&self, other: &u32) -> bool {
         &self.0 == other
     }
 }
-impl Btn {
+impl Button {
     #[doc(alias = "BTN_MISC")]
-    pub const MISC: Btn = Btn(256u32);
+    pub const MISC: Button = Button(256u32);
     #[doc(alias = "BTN_0")]
-    pub const _0: Btn = Btn(256u32);
+    pub const _0: Button = Button(256u32);
     #[doc(alias = "BTN_1")]
-    pub const _1: Btn = Btn(257u32);
+    pub const _1: Button = Button(257u32);
     #[doc(alias = "BTN_2")]
-    pub const _2: Btn = Btn(258u32);
+    pub const _2: Button = Button(258u32);
     #[doc(alias = "BTN_3")]
-    pub const _3: Btn = Btn(259u32);
+    pub const _3: Button = Button(259u32);
     #[doc(alias = "BTN_4")]
-    pub const _4: Btn = Btn(260u32);
+    pub const _4: Button = Button(260u32);
     #[doc(alias = "BTN_5")]
-    pub const _5: Btn = Btn(261u32);
+    pub const _5: Button = Button(261u32);
     #[doc(alias = "BTN_6")]
-    pub const _6: Btn = Btn(262u32);
+    pub const _6: Button = Button(262u32);
     #[doc(alias = "BTN_7")]
-    pub const _7: Btn = Btn(263u32);
+    pub const _7: Button = Button(263u32);
     #[doc(alias = "BTN_8")]
-    pub const _8: Btn = Btn(264u32);
+    pub const _8: Button = Button(264u32);
     #[doc(alias = "BTN_9")]
-    pub const _9: Btn = Btn(265u32);
+    pub const _9: Button = Button(265u32);
     #[doc(alias = "BTN_MOUSE")]
-    pub const MOUSE: Btn = Btn(272u32);
+    pub const MOUSE: Button = Button(272u32);
     #[doc(alias = "BTN_LEFT")]
-    pub const LEFT: Btn = Btn(272u32);
+    pub const LEFT: Button = Button(272u32);
     #[doc(alias = "BTN_RIGHT")]
-    pub const RIGHT: Btn = Btn(273u32);
+    pub const RIGHT: Button = Button(273u32);
     #[doc(alias = "BTN_MIDDLE")]
-    pub const MIDDLE: Btn = Btn(274u32);
+    pub const MIDDLE: Button = Button(274u32);
     #[doc(alias = "BTN_SIDE")]
-    pub const SIDE: Btn = Btn(275u32);
+    pub const SIDE: Button = Button(275u32);
     #[doc(alias = "BTN_EXTRA")]
-    pub const EXTRA: Btn = Btn(276u32);
+    pub const EXTRA: Button = Button(276u32);
     #[doc(alias = "BTN_FORWARD")]
-    pub const FORWARD: Btn = Btn(277u32);
+    pub const FORWARD: Button = Button(277u32);
     #[doc(alias = "BTN_BACK")]
-    pub const BACK: Btn = Btn(278u32);
+    pub const BACK: Button = Button(278u32);
     #[doc(alias = "BTN_TASK")]
-    pub const TASK: Btn = Btn(279u32);
+    pub const TASK: Button = Button(279u32);
     #[doc(alias = "BTN_JOYSTICK")]
-    pub const JOYSTICK: Btn = Btn(288u32);
+    pub const JOYSTICK: Button = Button(288u32);
     #[doc(alias = "BTN_TRIGGER")]
-    pub const TRIGGER: Btn = Btn(288u32);
+    pub const TRIGGER: Button = Button(288u32);
     #[doc(alias = "BTN_THUMB")]
-    pub const THUMB: Btn = Btn(289u32);
+    pub const THUMB: Button = Button(289u32);
     #[doc(alias = "BTN_THUMB2")]
-    pub const THUMB2: Btn = Btn(290u32);
+    pub const THUMB2: Button = Button(290u32);
     #[doc(alias = "BTN_TOP")]
-    pub const TOP: Btn = Btn(291u32);
+    pub const TOP: Button = Button(291u32);
     #[doc(alias = "BTN_TOP2")]
-    pub const TOP2: Btn = Btn(292u32);
+    pub const TOP2: Button = Button(292u32);
     #[doc(alias = "BTN_PINKIE")]
-    pub const PINKIE: Btn = Btn(293u32);
+    pub const PINKIE: Button = Button(293u32);
     #[doc(alias = "BTN_BASE")]
-    pub const BASE: Btn = Btn(294u32);
+    pub const BASE: Button = Button(294u32);
     #[doc(alias = "BTN_BASE2")]
-    pub const BASE2: Btn = Btn(295u32);
+    pub const BASE2: Button = Button(295u32);
     #[doc(alias = "BTN_BASE3")]
-    pub const BASE3: Btn = Btn(296u32);
+    pub const BASE3: Button = Button(296u32);
     #[doc(alias = "BTN_BASE4")]
-    pub const BASE4: Btn = Btn(297u32);
+    pub const BASE4: Button = Button(297u32);
     #[doc(alias = "BTN_BASE5")]
-    pub const BASE5: Btn = Btn(298u32);
+    pub const BASE5: Button = Button(298u32);
     #[doc(alias = "BTN_BASE6")]
-    pub const BASE6: Btn = Btn(299u32);
+    pub const BASE6: Button = Button(299u32);
     #[doc(alias = "BTN_DEAD")]
-    pub const DEAD: Btn = Btn(303u32);
+    pub const DEAD: Button = Button(303u32);
     #[doc(alias = "BTN_GAMEPAD")]
-    pub const GAMEPAD: Btn = Btn(304u32);
+    pub const GAMEPAD: Button = Button(304u32);
     #[doc(alias = "BTN_SOUTH")]
-    pub const SOUTH: Btn = Btn(304u32);
+    pub const SOUTH: Button = Button(304u32);
     #[doc(alias = "BTN_A")]
-    pub const A: Btn = Btn(304u32);
+    pub const A: Button = Button(304u32);
     #[doc(alias = "BTN_EAST")]
-    pub const EAST: Btn = Btn(305u32);
+    pub const EAST: Button = Button(305u32);
     #[doc(alias = "BTN_B")]
-    pub const B: Btn = Btn(305u32);
+    pub const B: Button = Button(305u32);
     #[doc(alias = "BTN_C")]
-    pub const C: Btn = Btn(306u32);
+    pub const C: Button = Button(306u32);
     #[doc(alias = "BTN_NORTH")]
-    pub const NORTH: Btn = Btn(307u32);
+    pub const NORTH: Button = Button(307u32);
     #[doc(alias = "BTN_X")]
-    pub const X: Btn = Btn(307u32);
+    pub const X: Button = Button(307u32);
     #[doc(alias = "BTN_WEST")]
-    pub const WEST: Btn = Btn(308u32);
+    pub const WEST: Button = Button(308u32);
     #[doc(alias = "BTN_Y")]
-    pub const Y: Btn = Btn(308u32);
+    pub const Y: Button = Button(308u32);
     #[doc(alias = "BTN_Z")]
-    pub const Z: Btn = Btn(309u32);
+    pub const Z: Button = Button(309u32);
     #[doc(alias = "BTN_TL")]
-    pub const TL: Btn = Btn(310u32);
+    pub const TL: Button = Button(310u32);
     #[doc(alias = "BTN_TR")]
-    pub const TR: Btn = Btn(311u32);
+    pub const TR: Button = Button(311u32);
     #[doc(alias = "BTN_TL2")]
-    pub const TL2: Btn = Btn(312u32);
+    pub const TL2: Button = Button(312u32);
     #[doc(alias = "BTN_TR2")]
-    pub const TR2: Btn = Btn(313u32);
+    pub const TR2: Button = Button(313u32);
     #[doc(alias = "BTN_SELECT")]
-    pub const SELECT: Btn = Btn(314u32);
+    pub const SELECT: Button = Button(314u32);
     #[doc(alias = "BTN_START")]
-    pub const START: Btn = Btn(315u32);
+    pub const START: Button = Button(315u32);
     #[doc(alias = "BTN_MODE")]
-    pub const MODE: Btn = Btn(316u32);
+    pub const MODE: Button = Button(316u32);
     #[doc(alias = "BTN_THUMBL")]
-    pub const THUMBL: Btn = Btn(317u32);
+    pub const THUMBL: Button = Button(317u32);
     #[doc(alias = "BTN_THUMBR")]
-    pub const THUMBR: Btn = Btn(318u32);
+    pub const THUMBR: Button = Button(318u32);
     #[doc(alias = "BTN_DIGI")]
-    pub const DIGI: Btn = Btn(320u32);
+    pub const DIGI: Button = Button(320u32);
     #[doc(alias = "BTN_TOOL_PEN")]
-    pub const TOOL_PEN: Btn = Btn(320u32);
+    pub const TOOL_PEN: Button = Button(320u32);
     #[doc(alias = "BTN_TOOL_RUBBER")]
-    pub const TOOL_RUBBER: Btn = Btn(321u32);
+    pub const TOOL_RUBBER: Button = Button(321u32);
     #[doc(alias = "BTN_TOOL_BRUSH")]
-    pub const TOOL_BRUSH: Btn = Btn(322u32);
+    pub const TOOL_BRUSH: Button = Button(322u32);
     #[doc(alias = "BTN_TOOL_PENCIL")]
-    pub const TOOL_PENCIL: Btn = Btn(323u32);
+    pub const TOOL_PENCIL: Button = Button(323u32);
     #[doc(alias = "BTN_TOOL_AIRBRUSH")]
-    pub const TOOL_AIRBRUSH: Btn = Btn(324u32);
+    pub const TOOL_AIRBRUSH: Button = Button(324u32);
     #[doc(alias = "BTN_TOOL_FINGER")]
-    pub const TOOL_FINGER: Btn = Btn(325u32);
+    pub const TOOL_FINGER: Button = Button(325u32);
     #[doc(alias = "BTN_TOOL_MOUSE")]
-    pub const TOOL_MOUSE: Btn = Btn(326u32);
+    pub const TOOL_MOUSE: Button = Button(326u32);
     #[doc(alias = "BTN_TOOL_LENS")]
-    pub const TOOL_LENS: Btn = Btn(327u32);
+    pub const TOOL_LENS: Button = Button(327u32);
     #[doc = " Five fingers on trackpad "]
     #[doc(alias = "BTN_TOOL_QUINTTAP")]
-    pub const TOOL_QUINTTAP: Btn = Btn(328u32);
+    pub const TOOL_QUINTTAP: Button = Button(328u32);
     #[doc(alias = "BTN_STYLUS3")]
-    pub const STYLUS3: Btn = Btn(329u32);
+    pub const STYLUS3: Button = Button(329u32);
     #[doc(alias = "BTN_TOUCH")]
-    pub const TOUCH: Btn = Btn(330u32);
+    pub const TOUCH: Button = Button(330u32);
     #[doc(alias = "BTN_STYLUS")]
-    pub const STYLUS: Btn = Btn(331u32);
+    pub const STYLUS: Button = Button(331u32);
     #[doc(alias = "BTN_STYLUS2")]
-    pub const STYLUS2: Btn = Btn(332u32);
+    pub const STYLUS2: Button = Button(332u32);
     #[doc(alias = "BTN_TOOL_DOUBLETAP")]
-    pub const TOOL_DOUBLETAP: Btn = Btn(333u32);
+    pub const TOOL_DOUBLETAP: Button = Button(333u32);
     #[doc(alias = "BTN_TOOL_TRIPLETAP")]
-    pub const TOOL_TRIPLETAP: Btn = Btn(334u32);
+    pub const TOOL_TRIPLETAP: Button = Button(334u32);
     #[doc = " Four fingers on trackpad "]
     #[doc(alias = "BTN_TOOL_QUADTAP")]
-    pub const TOOL_QUADTAP: Btn = Btn(335u32);
+    pub const TOOL_QUADTAP: Button = Button(335u32);
     #[doc(alias = "BTN_WHEEL")]
-    pub const WHEEL: Btn = Btn(336u32);
+    pub const WHEEL: Button = Button(336u32);
     #[doc(alias = "BTN_GEAR_DOWN")]
-    pub const GEAR_DOWN: Btn = Btn(336u32);
+    pub const GEAR_DOWN: Button = Button(336u32);
     #[doc(alias = "BTN_GEAR_UP")]
-    pub const GEAR_UP: Btn = Btn(337u32);
+    pub const GEAR_UP: Button = Button(337u32);
     #[doc(alias = "BTN_DPAD_UP")]
-    pub const DPAD_UP: Btn = Btn(544u32);
+    pub const DPAD_UP: Button = Button(544u32);
     #[doc(alias = "BTN_DPAD_DOWN")]
-    pub const DPAD_DOWN: Btn = Btn(545u32);
+    pub const DPAD_DOWN: Button = Button(545u32);
     #[doc(alias = "BTN_DPAD_LEFT")]
-    pub const DPAD_LEFT: Btn = Btn(546u32);
+    pub const DPAD_LEFT: Button = Button(546u32);
     #[doc(alias = "BTN_DPAD_RIGHT")]
-    pub const DPAD_RIGHT: Btn = Btn(547u32);
+    pub const DPAD_RIGHT: Button = Button(547u32);
     #[doc(alias = "BTN_TRIGGER_HAPPY")]
-    pub const TRIGGER_HAPPY: Btn = Btn(704u32);
+    pub const TRIGGER_HAPPY: Button = Button(704u32);
     #[doc(alias = "BTN_TRIGGER_HAPPY1")]
-    pub const TRIGGER_HAPPY1: Btn = Btn(704u32);
+    pub const TRIGGER_HAPPY1: Button = Button(704u32);
     #[doc(alias = "BTN_TRIGGER_HAPPY2")]
-    pub const TRIGGER_HAPPY2: Btn = Btn(705u32);
+    pub const TRIGGER_HAPPY2: Button = Button(705u32);
     #[doc(alias = "BTN_TRIGGER_HAPPY3")]
-    pub const TRIGGER_HAPPY3: Btn = Btn(706u32);
+    pub const TRIGGER_HAPPY3: Button = Button(706u32);
     #[doc(alias = "BTN_TRIGGER_HAPPY4")]
-    pub const TRIGGER_HAPPY4: Btn = Btn(707u32);
+    pub const TRIGGER_HAPPY4: Button = Button(707u32);
     #[doc(alias = "BTN_TRIGGER_HAPPY5")]
-    pub const TRIGGER_HAPPY5: Btn = Btn(708u32);
+    pub const TRIGGER_HAPPY5: Button = Button(708u32);
     #[doc(alias = "BTN_TRIGGER_HAPPY6")]
-    pub const TRIGGER_HAPPY6: Btn = Btn(709u32);
+    pub const TRIGGER_HAPPY6: Button = Button(709u32);
     #[doc(alias = "BTN_TRIGGER_HAPPY7")]
-    pub const TRIGGER_HAPPY7: Btn = Btn(710u32);
+    pub const TRIGGER_HAPPY7: Button = Button(710u32);
     #[doc(alias = "BTN_TRIGGER_HAPPY8")]
-    pub const TRIGGER_HAPPY8: Btn = Btn(711u32);
+    pub const TRIGGER_HAPPY8: Button = Button(711u32);
     #[doc(alias = "BTN_TRIGGER_HAPPY9")]
-    pub const TRIGGER_HAPPY9: Btn = Btn(712u32);
+    pub const TRIGGER_HAPPY9: Button = Button(712u32);
     #[doc(alias = "BTN_TRIGGER_HAPPY10")]
-    pub const TRIGGER_HAPPY10: Btn = Btn(713u32);
+    pub const TRIGGER_HAPPY10: Button = Button(713u32);
     #[doc(alias = "BTN_TRIGGER_HAPPY11")]
-    pub const TRIGGER_HAPPY11: Btn = Btn(714u32);
+    pub const TRIGGER_HAPPY11: Button = Button(714u32);
     #[doc(alias = "BTN_TRIGGER_HAPPY12")]
-    pub const TRIGGER_HAPPY12: Btn = Btn(715u32);
+    pub const TRIGGER_HAPPY12: Button = Button(715u32);
     #[doc(alias = "BTN_TRIGGER_HAPPY13")]
-    pub const TRIGGER_HAPPY13: Btn = Btn(716u32);
+    pub const TRIGGER_HAPPY13: Button = Button(716u32);
     #[doc(alias = "BTN_TRIGGER_HAPPY14")]
-    pub const TRIGGER_HAPPY14: Btn = Btn(717u32);
+    pub const TRIGGER_HAPPY14: Button = Button(717u32);
     #[doc(alias = "BTN_TRIGGER_HAPPY15")]
-    pub const TRIGGER_HAPPY15: Btn = Btn(718u32);
+    pub const TRIGGER_HAPPY15: Button = Button(718u32);
     #[doc(alias = "BTN_TRIGGER_HAPPY16")]
-    pub const TRIGGER_HAPPY16: Btn = Btn(719u32);
+    pub const TRIGGER_HAPPY16: Button = Button(719u32);
     #[doc(alias = "BTN_TRIGGER_HAPPY17")]
-    pub const TRIGGER_HAPPY17: Btn = Btn(720u32);
+    pub const TRIGGER_HAPPY17: Button = Button(720u32);
     #[doc(alias = "BTN_TRIGGER_HAPPY18")]
-    pub const TRIGGER_HAPPY18: Btn = Btn(721u32);
+    pub const TRIGGER_HAPPY18: Button = Button(721u32);
     #[doc(alias = "BTN_TRIGGER_HAPPY19")]
-    pub const TRIGGER_HAPPY19: Btn = Btn(722u32);
+    pub const TRIGGER_HAPPY19: Button = Button(722u32);
     #[doc(alias = "BTN_TRIGGER_HAPPY20")]
-    pub const TRIGGER_HAPPY20: Btn = Btn(723u32);
+    pub const TRIGGER_HAPPY20: Button = Button(723u32);
     #[doc(alias = "BTN_TRIGGER_HAPPY21")]
-    pub const TRIGGER_HAPPY21: Btn = Btn(724u32);
+    pub const TRIGGER_HAPPY21: Button = Button(724u32);
     #[doc(alias = "BTN_TRIGGER_HAPPY22")]
-    pub const TRIGGER_HAPPY22: Btn = Btn(725u32);
+    pub const TRIGGER_HAPPY22: Button = Button(725u32);
     #[doc(alias = "BTN_TRIGGER_HAPPY23")]
-    pub const TRIGGER_HAPPY23: Btn = Btn(726u32);
+    pub const TRIGGER_HAPPY23: Button = Button(726u32);
     #[doc(alias = "BTN_TRIGGER_HAPPY24")]
-    pub const TRIGGER_HAPPY24: Btn = Btn(727u32);
+    pub const TRIGGER_HAPPY24: Button = Button(727u32);
     #[doc(alias = "BTN_TRIGGER_HAPPY25")]
-    pub const TRIGGER_HAPPY25: Btn = Btn(728u32);
+    pub const TRIGGER_HAPPY25: Button = Button(728u32);
     #[doc(alias = "BTN_TRIGGER_HAPPY26")]
-    pub const TRIGGER_HAPPY26: Btn = Btn(729u32);
+    pub const TRIGGER_HAPPY26: Button = Button(729u32);
     #[doc(alias = "BTN_TRIGGER_HAPPY27")]
-    pub const TRIGGER_HAPPY27: Btn = Btn(730u32);
+    pub const TRIGGER_HAPPY27: Button = Button(730u32);
     #[doc(alias = "BTN_TRIGGER_HAPPY28")]
-    pub const TRIGGER_HAPPY28: Btn = Btn(731u32);
+    pub const TRIGGER_HAPPY28: Button = Button(731u32);
     #[doc(alias = "BTN_TRIGGER_HAPPY29")]
-    pub const TRIGGER_HAPPY29: Btn = Btn(732u32);
+    pub const TRIGGER_HAPPY29: Button = Button(732u32);
     #[doc(alias = "BTN_TRIGGER_HAPPY30")]
-    pub const TRIGGER_HAPPY30: Btn = Btn(733u32);
+    pub const TRIGGER_HAPPY30: Button = Button(733u32);
     #[doc(alias = "BTN_TRIGGER_HAPPY31")]
-    pub const TRIGGER_HAPPY31: Btn = Btn(734u32);
+    pub const TRIGGER_HAPPY31: Button = Button(734u32);
     #[doc(alias = "BTN_TRIGGER_HAPPY32")]
-    pub const TRIGGER_HAPPY32: Btn = Btn(735u32);
+    pub const TRIGGER_HAPPY32: Button = Button(735u32);
     #[doc(alias = "BTN_TRIGGER_HAPPY33")]
-    pub const TRIGGER_HAPPY33: Btn = Btn(736u32);
+    pub const TRIGGER_HAPPY33: Button = Button(736u32);
     #[doc(alias = "BTN_TRIGGER_HAPPY34")]
-    pub const TRIGGER_HAPPY34: Btn = Btn(737u32);
+    pub const TRIGGER_HAPPY34: Button = Button(737u32);
     #[doc(alias = "BTN_TRIGGER_HAPPY35")]
-    pub const TRIGGER_HAPPY35: Btn = Btn(738u32);
+    pub const TRIGGER_HAPPY35: Button = Button(738u32);
     #[doc(alias = "BTN_TRIGGER_HAPPY36")]
-    pub const TRIGGER_HAPPY36: Btn = Btn(739u32);
+    pub const TRIGGER_HAPPY36: Button = Button(739u32);
     #[doc(alias = "BTN_TRIGGER_HAPPY37")]
-    pub const TRIGGER_HAPPY37: Btn = Btn(740u32);
+    pub const TRIGGER_HAPPY37: Button = Button(740u32);
     #[doc(alias = "BTN_TRIGGER_HAPPY38")]
-    pub const TRIGGER_HAPPY38: Btn = Btn(741u32);
+    pub const TRIGGER_HAPPY38: Button = Button(741u32);
     #[doc(alias = "BTN_TRIGGER_HAPPY39")]
-    pub const TRIGGER_HAPPY39: Btn = Btn(742u32);
+    pub const TRIGGER_HAPPY39: Button = Button(742u32);
     #[doc(alias = "BTN_TRIGGER_HAPPY40")]
-    pub const TRIGGER_HAPPY40: Btn = Btn(743u32);
+    pub const TRIGGER_HAPPY40: Button = Button(743u32);
 }
 #[repr(transparent)]
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
-pub struct Ev(u32);
-impl Ev {
+pub struct EventType(u32);
+impl EventType {
     pub const fn new(value: u32) -> Self {
         Self(value)
     }
@@ -432,65 +432,65 @@ impl Ev {
         self.0
     }
 }
-impl From<u32> for Ev {
+impl From<u32> for EventType {
     fn from(value: u32) -> Self {
         Self(value)
     }
 }
-impl From<Ev> for u32 {
-    fn from(value: Ev) -> u32 {
+impl From<EventType> for u32 {
+    fn from(value: EventType) -> u32 {
         value.0
     }
 }
-impl AsRef<u32> for Ev {
+impl AsRef<u32> for EventType {
     fn as_ref(&self) -> &u32 {
         &self.0
     }
 }
-impl ::core::borrow::Borrow<u32> for Ev {
+impl ::core::borrow::Borrow<u32> for EventType {
     fn borrow(&self) -> &u32 {
         &self.0
     }
 }
-impl PartialEq<u32> for Ev {
+impl PartialEq<u32> for EventType {
     fn eq(&self, other: &u32) -> bool {
         &self.0 == other
     }
 }
-impl Ev {
+impl EventType {
     #[doc(alias = "EV_SYN")]
-    pub const SYN: Ev = Ev(0u32);
+    pub const SYN: EventType = EventType(0u32);
     #[doc(alias = "EV_KEY")]
-    pub const KEY: Ev = Ev(1u32);
+    pub const KEY: EventType = EventType(1u32);
     #[doc(alias = "EV_REL")]
-    pub const REL: Ev = Ev(2u32);
+    pub const REL: EventType = EventType(2u32);
     #[doc(alias = "EV_ABS")]
-    pub const ABS: Ev = Ev(3u32);
+    pub const ABS: EventType = EventType(3u32);
     #[doc(alias = "EV_MSC")]
-    pub const MSC: Ev = Ev(4u32);
+    pub const MSC: EventType = EventType(4u32);
     #[doc(alias = "EV_SW")]
-    pub const SW: Ev = Ev(5u32);
+    pub const SW: EventType = EventType(5u32);
     #[doc(alias = "EV_LED")]
-    pub const LED: Ev = Ev(17u32);
+    pub const LED: EventType = EventType(17u32);
     #[doc(alias = "EV_SND")]
-    pub const SND: Ev = Ev(18u32);
+    pub const SND: EventType = EventType(18u32);
     #[doc(alias = "EV_REP")]
-    pub const REP: Ev = Ev(20u32);
+    pub const REP: EventType = EventType(20u32);
     #[doc(alias = "EV_FF")]
-    pub const FF: Ev = Ev(21u32);
+    pub const FF: EventType = EventType(21u32);
     #[doc(alias = "EV_PWR")]
-    pub const PWR: Ev = Ev(22u32);
+    pub const PWR: EventType = EventType(22u32);
     #[doc(alias = "EV_FF_STATUS")]
-    pub const FF_STATUS: Ev = Ev(23u32);
+    pub const FF_STATUS: EventType = EventType(23u32);
     #[doc(alias = "EV_MAX")]
-    pub const MAX: Ev = Ev(31u32);
+    pub const MAX: EventType = EventType(31u32);
     #[doc(alias = "EV_CNT")]
-    pub const CNT: Ev = Ev(32u32);
+    pub const CNT: EventType = EventType(32u32);
 }
 #[repr(transparent)]
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
-pub struct Input(u32);
-impl Input {
+pub struct InputQuirk(u32);
+impl InputQuirk {
     pub const fn new(value: u32) -> Self {
         Self(value)
     }
@@ -498,57 +498,57 @@ impl Input {
         self.0
     }
 }
-impl From<u32> for Input {
+impl From<u32> for InputQuirk {
     fn from(value: u32) -> Self {
         Self(value)
     }
 }
-impl From<Input> for u32 {
-    fn from(value: Input) -> u32 {
+impl From<InputQuirk> for u32 {
+    fn from(value: InputQuirk) -> u32 {
         value.0
     }
 }
-impl AsRef<u32> for Input {
+impl AsRef<u32> for InputQuirk {
     fn as_ref(&self) -> &u32 {
         &self.0
     }
 }
-impl ::core::borrow::Borrow<u32> for Input {
+impl ::core::borrow::Borrow<u32> for InputQuirk {
     fn borrow(&self) -> &u32 {
         &self.0
     }
 }
-impl PartialEq<u32> for Input {
+impl PartialEq<u32> for InputQuirk {
     fn eq(&self, other: &u32) -> bool {
         &self.0 == other
     }
 }
-impl Input {
+impl InputQuirk {
     #[doc = " needs a pointer "]
     #[doc(alias = "INPUT_PROP_POINTER")]
-    pub const PROP_POINTER: Input = Input(0u32);
+    pub const PROP_POINTER: InputQuirk = InputQuirk(0u32);
     #[doc = " direct input devices "]
     #[doc(alias = "INPUT_PROP_DIRECT")]
-    pub const PROP_DIRECT: Input = Input(1u32);
+    pub const PROP_DIRECT: InputQuirk = InputQuirk(1u32);
     #[doc = " has button(s) under pad "]
     #[doc(alias = "INPUT_PROP_BUTTONPAD")]
-    pub const PROP_BUTTONPAD: Input = Input(2u32);
+    pub const PROP_BUTTONPAD: InputQuirk = InputQuirk(2u32);
     #[doc = " touch rectangle only "]
     #[doc(alias = "INPUT_PROP_SEMI_MT")]
-    pub const PROP_SEMI_MT: Input = Input(3u32);
+    pub const PROP_SEMI_MT: InputQuirk = InputQuirk(3u32);
     #[doc = " softbuttons at top of pad "]
     #[doc(alias = "INPUT_PROP_TOPBUTTONPAD")]
-    pub const PROP_TOPBUTTONPAD: Input = Input(4u32);
+    pub const PROP_TOPBUTTONPAD: InputQuirk = InputQuirk(4u32);
     #[doc = " is a pointing stick "]
     #[doc(alias = "INPUT_PROP_POINTING_STICK")]
-    pub const PROP_POINTING_STICK: Input = Input(5u32);
+    pub const PROP_POINTING_STICK: InputQuirk = InputQuirk(5u32);
     #[doc = " has accelerometer "]
     #[doc(alias = "INPUT_PROP_ACCELEROMETER")]
-    pub const PROP_ACCELEROMETER: Input = Input(6u32);
+    pub const PROP_ACCELEROMETER: InputQuirk = InputQuirk(6u32);
     #[doc(alias = "INPUT_PROP_MAX")]
-    pub const PROP_MAX: Input = Input(31u32);
+    pub const PROP_MAX: InputQuirk = InputQuirk(31u32);
     #[doc(alias = "INPUT_PROP_CNT")]
-    pub const PROP_CNT: Input = Input(32u32);
+    pub const PROP_CNT: InputQuirk = InputQuirk(32u32);
 }
 #[repr(transparent)]
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -1766,8 +1766,8 @@ impl Led {
 }
 #[repr(transparent)]
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
-pub struct Msc(u32);
-impl Msc {
+pub struct MiscEvent(u32);
+impl MiscEvent {
     pub const fn new(value: u32) -> Self {
         Self(value)
     }
@@ -1775,53 +1775,53 @@ impl Msc {
         self.0
     }
 }
-impl From<u32> for Msc {
+impl From<u32> for MiscEvent {
     fn from(value: u32) -> Self {
         Self(value)
     }
 }
-impl From<Msc> for u32 {
-    fn from(value: Msc) -> u32 {
+impl From<MiscEvent> for u32 {
+    fn from(value: MiscEvent) -> u32 {
         value.0
     }
 }
-impl AsRef<u32> for Msc {
+impl AsRef<u32> for MiscEvent {
     fn as_ref(&self) -> &u32 {
         &self.0
     }
 }
-impl ::core::borrow::Borrow<u32> for Msc {
+impl ::core::borrow::Borrow<u32> for MiscEvent {
     fn borrow(&self) -> &u32 {
         &self.0
     }
 }
-impl PartialEq<u32> for Msc {
+impl PartialEq<u32> for MiscEvent {
     fn eq(&self, other: &u32) -> bool {
         &self.0 == other
     }
 }
-impl Msc {
+impl MiscEvent {
     #[doc(alias = "MSC_SERIAL")]
-    pub const SERIAL: Msc = Msc(0u32);
+    pub const SERIAL: MiscEvent = MiscEvent(0u32);
     #[doc(alias = "MSC_PULSELED")]
-    pub const PULSELED: Msc = Msc(1u32);
+    pub const PULSELED: MiscEvent = MiscEvent(1u32);
     #[doc(alias = "MSC_GESTURE")]
-    pub const GESTURE: Msc = Msc(2u32);
+    pub const GESTURE: MiscEvent = MiscEvent(2u32);
     #[doc(alias = "MSC_RAW")]
-    pub const RAW: Msc = Msc(3u32);
+    pub const RAW: MiscEvent = MiscEvent(3u32);
     #[doc(alias = "MSC_SCAN")]
-    pub const SCAN: Msc = Msc(4u32);
+    pub const SCAN: MiscEvent = MiscEvent(4u32);
     #[doc(alias = "MSC_TIMESTAMP")]
-    pub const TIMESTAMP: Msc = Msc(5u32);
+    pub const TIMESTAMP: MiscEvent = MiscEvent(5u32);
     #[doc(alias = "MSC_MAX")]
-    pub const MAX: Msc = Msc(7u32);
+    pub const MAX: MiscEvent = MiscEvent(7u32);
     #[doc(alias = "MSC_CNT")]
-    pub const CNT: Msc = Msc(8u32);
+    pub const CNT: MiscEvent = MiscEvent(8u32);
 }
 #[repr(transparent)]
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
-pub struct Rel(u32);
-impl Rel {
+pub struct RelativeAxis(u32);
+impl RelativeAxis {
     pub const fn new(value: u32) -> Self {
         Self(value)
     }
@@ -1829,67 +1829,67 @@ impl Rel {
         self.0
     }
 }
-impl From<u32> for Rel {
+impl From<u32> for RelativeAxis {
     fn from(value: u32) -> Self {
         Self(value)
     }
 }
-impl From<Rel> for u32 {
-    fn from(value: Rel) -> u32 {
+impl From<RelativeAxis> for u32 {
+    fn from(value: RelativeAxis) -> u32 {
         value.0
     }
 }
-impl AsRef<u32> for Rel {
+impl AsRef<u32> for RelativeAxis {
     fn as_ref(&self) -> &u32 {
         &self.0
     }
 }
-impl ::core::borrow::Borrow<u32> for Rel {
+impl ::core::borrow::Borrow<u32> for RelativeAxis {
     fn borrow(&self) -> &u32 {
         &self.0
     }
 }
-impl PartialEq<u32> for Rel {
+impl PartialEq<u32> for RelativeAxis {
     fn eq(&self, other: &u32) -> bool {
         &self.0 == other
     }
 }
-impl Rel {
+impl RelativeAxis {
     #[doc(alias = "REL_X")]
-    pub const X: Rel = Rel(0u32);
+    pub const X: RelativeAxis = RelativeAxis(0u32);
     #[doc(alias = "REL_Y")]
-    pub const Y: Rel = Rel(1u32);
+    pub const Y: RelativeAxis = RelativeAxis(1u32);
     #[doc(alias = "REL_Z")]
-    pub const Z: Rel = Rel(2u32);
+    pub const Z: RelativeAxis = RelativeAxis(2u32);
     #[doc(alias = "REL_RX")]
-    pub const RX: Rel = Rel(3u32);
+    pub const RX: RelativeAxis = RelativeAxis(3u32);
     #[doc(alias = "REL_RY")]
-    pub const RY: Rel = Rel(4u32);
+    pub const RY: RelativeAxis = RelativeAxis(4u32);
     #[doc(alias = "REL_RZ")]
-    pub const RZ: Rel = Rel(5u32);
+    pub const RZ: RelativeAxis = RelativeAxis(5u32);
     #[doc(alias = "REL_HWHEEL")]
-    pub const HWHEEL: Rel = Rel(6u32);
+    pub const HWHEEL: RelativeAxis = RelativeAxis(6u32);
     #[doc(alias = "REL_DIAL")]
-    pub const DIAL: Rel = Rel(7u32);
+    pub const DIAL: RelativeAxis = RelativeAxis(7u32);
     #[doc(alias = "REL_WHEEL")]
-    pub const WHEEL: Rel = Rel(8u32);
+    pub const WHEEL: RelativeAxis = RelativeAxis(8u32);
     #[doc(alias = "REL_MISC")]
-    pub const MISC: Rel = Rel(9u32);
+    pub const MISC: RelativeAxis = RelativeAxis(9u32);
     #[doc(alias = "REL_RESERVED")]
-    pub const RESERVED: Rel = Rel(10u32);
+    pub const RESERVED: RelativeAxis = RelativeAxis(10u32);
     #[doc(alias = "REL_WHEEL_HI_RES")]
-    pub const WHEEL_HI_RES: Rel = Rel(11u32);
+    pub const WHEEL_HI_RES: RelativeAxis = RelativeAxis(11u32);
     #[doc(alias = "REL_HWHEEL_HI_RES")]
-    pub const HWHEEL_HI_RES: Rel = Rel(12u32);
+    pub const HWHEEL_HI_RES: RelativeAxis = RelativeAxis(12u32);
     #[doc(alias = "REL_MAX")]
-    pub const MAX: Rel = Rel(15u32);
+    pub const MAX: RelativeAxis = RelativeAxis(15u32);
     #[doc(alias = "REL_CNT")]
-    pub const CNT: Rel = Rel(16u32);
+    pub const CNT: RelativeAxis = RelativeAxis(16u32);
 }
 #[repr(transparent)]
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
-pub struct Rep(u32);
-impl Rep {
+pub struct AutoRepeat(u32);
+impl AutoRepeat {
     pub const fn new(value: u32) -> Self {
         Self(value)
     }
@@ -1897,45 +1897,45 @@ impl Rep {
         self.0
     }
 }
-impl From<u32> for Rep {
+impl From<u32> for AutoRepeat {
     fn from(value: u32) -> Self {
         Self(value)
     }
 }
-impl From<Rep> for u32 {
-    fn from(value: Rep) -> u32 {
+impl From<AutoRepeat> for u32 {
+    fn from(value: AutoRepeat) -> u32 {
         value.0
     }
 }
-impl AsRef<u32> for Rep {
+impl AsRef<u32> for AutoRepeat {
     fn as_ref(&self) -> &u32 {
         &self.0
     }
 }
-impl ::core::borrow::Borrow<u32> for Rep {
+impl ::core::borrow::Borrow<u32> for AutoRepeat {
     fn borrow(&self) -> &u32 {
         &self.0
     }
 }
-impl PartialEq<u32> for Rep {
+impl PartialEq<u32> for AutoRepeat {
     fn eq(&self, other: &u32) -> bool {
         &self.0 == other
     }
 }
-impl Rep {
+impl AutoRepeat {
     #[doc(alias = "REP_DELAY")]
-    pub const DELAY: Rep = Rep(0u32);
+    pub const DELAY: AutoRepeat = AutoRepeat(0u32);
     #[doc(alias = "REP_PERIOD")]
-    pub const PERIOD: Rep = Rep(1u32);
+    pub const PERIOD: AutoRepeat = AutoRepeat(1u32);
     #[doc(alias = "REP_MAX")]
-    pub const MAX: Rep = Rep(1u32);
+    pub const MAX: AutoRepeat = AutoRepeat(1u32);
     #[doc(alias = "REP_CNT")]
-    pub const CNT: Rep = Rep(2u32);
+    pub const CNT: AutoRepeat = AutoRepeat(2u32);
 }
 #[repr(transparent)]
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
-pub struct Snd(u32);
-impl Snd {
+pub struct Sound(u32);
+impl Sound {
     pub const fn new(value: u32) -> Self {
         Self(value)
     }
@@ -1943,47 +1943,47 @@ impl Snd {
         self.0
     }
 }
-impl From<u32> for Snd {
+impl From<u32> for Sound {
     fn from(value: u32) -> Self {
         Self(value)
     }
 }
-impl From<Snd> for u32 {
-    fn from(value: Snd) -> u32 {
+impl From<Sound> for u32 {
+    fn from(value: Sound) -> u32 {
         value.0
     }
 }
-impl AsRef<u32> for Snd {
+impl AsRef<u32> for Sound {
     fn as_ref(&self) -> &u32 {
         &self.0
     }
 }
-impl ::core::borrow::Borrow<u32> for Snd {
+impl ::core::borrow::Borrow<u32> for Sound {
     fn borrow(&self) -> &u32 {
         &self.0
     }
 }
-impl PartialEq<u32> for Snd {
+impl PartialEq<u32> for Sound {
     fn eq(&self, other: &u32) -> bool {
         &self.0 == other
     }
 }
-impl Snd {
+impl Sound {
     #[doc(alias = "SND_CLICK")]
-    pub const CLICK: Snd = Snd(0u32);
+    pub const CLICK: Sound = Sound(0u32);
     #[doc(alias = "SND_BELL")]
-    pub const BELL: Snd = Snd(1u32);
+    pub const BELL: Sound = Sound(1u32);
     #[doc(alias = "SND_TONE")]
-    pub const TONE: Snd = Snd(2u32);
+    pub const TONE: Sound = Sound(2u32);
     #[doc(alias = "SND_MAX")]
-    pub const MAX: Snd = Snd(7u32);
+    pub const MAX: Sound = Sound(7u32);
     #[doc(alias = "SND_CNT")]
-    pub const CNT: Snd = Snd(8u32);
+    pub const CNT: Sound = Sound(8u32);
 }
 #[repr(transparent)]
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
-pub struct Sw(u32);
-impl Sw {
+pub struct SwitchEvent(u32);
+impl SwitchEvent {
     pub const fn new(value: u32) -> Self {
         Self(value)
     }
@@ -1991,95 +1991,95 @@ impl Sw {
         self.0
     }
 }
-impl From<u32> for Sw {
+impl From<u32> for SwitchEvent {
     fn from(value: u32) -> Self {
         Self(value)
     }
 }
-impl From<Sw> for u32 {
-    fn from(value: Sw) -> u32 {
+impl From<SwitchEvent> for u32 {
+    fn from(value: SwitchEvent) -> u32 {
         value.0
     }
 }
-impl AsRef<u32> for Sw {
+impl AsRef<u32> for SwitchEvent {
     fn as_ref(&self) -> &u32 {
         &self.0
     }
 }
-impl ::core::borrow::Borrow<u32> for Sw {
+impl ::core::borrow::Borrow<u32> for SwitchEvent {
     fn borrow(&self) -> &u32 {
         &self.0
     }
 }
-impl PartialEq<u32> for Sw {
+impl PartialEq<u32> for SwitchEvent {
     fn eq(&self, other: &u32) -> bool {
         &self.0 == other
     }
 }
-impl Sw {
+impl SwitchEvent {
     #[doc = " set = lid shut "]
     #[doc(alias = "SW_LID")]
-    pub const LID: Sw = Sw(0u32);
+    pub const LID: SwitchEvent = SwitchEvent(0u32);
     #[doc = " set = tablet mode "]
     #[doc(alias = "SW_TABLET_MODE")]
-    pub const TABLET_MODE: Sw = Sw(1u32);
+    pub const TABLET_MODE: SwitchEvent = SwitchEvent(1u32);
     #[doc = " set = inserted "]
     #[doc(alias = "SW_HEADPHONE_INSERT")]
-    pub const HEADPHONE_INSERT: Sw = Sw(2u32);
+    pub const HEADPHONE_INSERT: SwitchEvent = SwitchEvent(2u32);
     #[doc = " rfkill master switch, type \"any\"\n\t\t\t\t\t set = radio enabled "]
     #[doc(alias = "SW_RFKILL_ALL")]
-    pub const RFKILL_ALL: Sw = Sw(3u32);
+    pub const RFKILL_ALL: SwitchEvent = SwitchEvent(3u32);
     #[doc = " deprecated "]
     #[doc(alias = "SW_RADIO")]
-    pub const RADIO: Sw = Sw(3u32);
+    pub const RADIO: SwitchEvent = SwitchEvent(3u32);
     #[doc = " set = inserted "]
     #[doc(alias = "SW_MICROPHONE_INSERT")]
-    pub const MICROPHONE_INSERT: Sw = Sw(4u32);
+    pub const MICROPHONE_INSERT: SwitchEvent = SwitchEvent(4u32);
     #[doc = " set = plugged into dock "]
     #[doc(alias = "SW_DOCK")]
-    pub const DOCK: Sw = Sw(5u32);
+    pub const DOCK: SwitchEvent = SwitchEvent(5u32);
     #[doc = " set = inserted "]
     #[doc(alias = "SW_LINEOUT_INSERT")]
-    pub const LINEOUT_INSERT: Sw = Sw(6u32);
+    pub const LINEOUT_INSERT: SwitchEvent = SwitchEvent(6u32);
     #[doc = " set = mechanical switch set "]
     #[doc(alias = "SW_JACK_PHYSICAL_INSERT")]
-    pub const JACK_PHYSICAL_INSERT: Sw = Sw(7u32);
+    pub const JACK_PHYSICAL_INSERT: SwitchEvent = SwitchEvent(7u32);
     #[doc = " set = inserted "]
     #[doc(alias = "SW_VIDEOOUT_INSERT")]
-    pub const VIDEOOUT_INSERT: Sw = Sw(8u32);
+    pub const VIDEOOUT_INSERT: SwitchEvent = SwitchEvent(8u32);
     #[doc = " set = lens covered "]
     #[doc(alias = "SW_CAMERA_LENS_COVER")]
-    pub const CAMERA_LENS_COVER: Sw = Sw(9u32);
+    pub const CAMERA_LENS_COVER: SwitchEvent = SwitchEvent(9u32);
     #[doc = " set = keypad slide out "]
     #[doc(alias = "SW_KEYPAD_SLIDE")]
-    pub const KEYPAD_SLIDE: Sw = Sw(10u32);
+    pub const KEYPAD_SLIDE: SwitchEvent = SwitchEvent(10u32);
     #[doc = " set = front proximity sensor active "]
     #[doc(alias = "SW_FRONT_PROXIMITY")]
-    pub const FRONT_PROXIMITY: Sw = Sw(11u32);
+    pub const FRONT_PROXIMITY: SwitchEvent = SwitchEvent(11u32);
     #[doc = " set = rotate locked/disabled "]
     #[doc(alias = "SW_ROTATE_LOCK")]
-    pub const ROTATE_LOCK: Sw = Sw(12u32);
+    pub const ROTATE_LOCK: SwitchEvent = SwitchEvent(12u32);
     #[doc = " set = inserted "]
     #[doc(alias = "SW_LINEIN_INSERT")]
-    pub const LINEIN_INSERT: Sw = Sw(13u32);
+    pub const LINEIN_INSERT: SwitchEvent = SwitchEvent(13u32);
     #[doc = " set = device disabled "]
     #[doc(alias = "SW_MUTE_DEVICE")]
-    pub const MUTE_DEVICE: Sw = Sw(14u32);
+    pub const MUTE_DEVICE: SwitchEvent = SwitchEvent(14u32);
     #[doc = " set = pen inserted "]
     #[doc(alias = "SW_PEN_INSERTED")]
-    pub const PEN_INSERTED: Sw = Sw(15u32);
+    pub const PEN_INSERTED: SwitchEvent = SwitchEvent(15u32);
     #[doc = " set = cover closed "]
     #[doc(alias = "SW_MACHINE_COVER")]
-    pub const MACHINE_COVER: Sw = Sw(16u32);
+    pub const MACHINE_COVER: SwitchEvent = SwitchEvent(16u32);
     #[doc(alias = "SW_MAX")]
-    pub const MAX: Sw = Sw(16u32);
+    pub const MAX: SwitchEvent = SwitchEvent(16u32);
     #[doc(alias = "SW_CNT")]
-    pub const CNT: Sw = Sw(17u32);
+    pub const CNT: SwitchEvent = SwitchEvent(17u32);
 }
 #[repr(transparent)]
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
-pub struct Syn(u32);
-impl Syn {
+pub struct SynchronizationEvent(u32);
+impl SynchronizationEvent {
     pub const fn new(value: u32) -> Self {
         Self(value)
     }
@@ -2087,42 +2087,42 @@ impl Syn {
         self.0
     }
 }
-impl From<u32> for Syn {
+impl From<u32> for SynchronizationEvent {
     fn from(value: u32) -> Self {
         Self(value)
     }
 }
-impl From<Syn> for u32 {
-    fn from(value: Syn) -> u32 {
+impl From<SynchronizationEvent> for u32 {
+    fn from(value: SynchronizationEvent) -> u32 {
         value.0
     }
 }
-impl AsRef<u32> for Syn {
+impl AsRef<u32> for SynchronizationEvent {
     fn as_ref(&self) -> &u32 {
         &self.0
     }
 }
-impl ::core::borrow::Borrow<u32> for Syn {
+impl ::core::borrow::Borrow<u32> for SynchronizationEvent {
     fn borrow(&self) -> &u32 {
         &self.0
     }
 }
-impl PartialEq<u32> for Syn {
+impl PartialEq<u32> for SynchronizationEvent {
     fn eq(&self, other: &u32) -> bool {
         &self.0 == other
     }
 }
-impl Syn {
+impl SynchronizationEvent {
     #[doc(alias = "SYN_REPORT")]
-    pub const REPORT: Syn = Syn(0u32);
+    pub const REPORT: SynchronizationEvent = SynchronizationEvent(0u32);
     #[doc(alias = "SYN_CONFIG")]
-    pub const CONFIG: Syn = Syn(1u32);
+    pub const CONFIG: SynchronizationEvent = SynchronizationEvent(1u32);
     #[doc(alias = "SYN_MT_REPORT")]
-    pub const MT_REPORT: Syn = Syn(2u32);
+    pub const MT_REPORT: SynchronizationEvent = SynchronizationEvent(2u32);
     #[doc(alias = "SYN_DROPPED")]
-    pub const DROPPED: Syn = Syn(3u32);
+    pub const DROPPED: SynchronizationEvent = SynchronizationEvent(3u32);
     #[doc(alias = "SYN_MAX")]
-    pub const MAX: Syn = Syn(15u32);
+    pub const MAX: SynchronizationEvent = SynchronizationEvent(15u32);
     #[doc(alias = "SYN_CNT")]
-    pub const CNT: Syn = Syn(16u32);
+    pub const CNT: SynchronizationEvent = SynchronizationEvent(16u32);
 }

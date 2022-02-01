@@ -11,7 +11,8 @@ pub struct Constant {
 }
 
 #[derive(Debug)]
-pub struct Category {
+pub struct Category<'a> {
+    pub category_name: &'a str,
     pub constants: Vec<Constant>,
 }
 
@@ -24,7 +25,13 @@ pub fn create_categories(defines: Vec<Define>) -> Result<BTreeMap<&str, Category
 
         if !categories.contains_key(category_name) {
             assert!(categories
-                .insert(category_name, Category { constants: vec![] })
+                .insert(
+                    category_name,
+                    Category {
+                        category_name,
+                        constants: vec![]
+                    }
+                )
                 .is_none());
         }
 
