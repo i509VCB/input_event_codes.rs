@@ -70,6 +70,7 @@ jobs:
       RUSTDOCFLAGS: "-Dwarnings"
 
     runs-on: ubuntu-latest
+    steps:
       - name: Checkout sources
         uses: actions/checkout@v2
       - name: Rust toolchain
