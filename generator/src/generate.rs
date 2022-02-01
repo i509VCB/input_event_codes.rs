@@ -16,6 +16,12 @@ pub fn category_to_tokens(
         .and_then(|rename| rename.rename_to)
         .unwrap_or(category_enum_name);
 
+    let doc = renames::RENAMES
+        .iter()
+        .find(|rename| rename.name == category_enum_name)
+        .and_then(|rename| rename.documentation)
+        .map(|doc| quote! { #[doc = #doc] });
+
     let enum_name = Ident::new(enum_name, Span::call_site());
 
     let constant_tokens = category
@@ -39,6 +45,7 @@ pub fn category_to_tokens(
         .collect::<Vec<_>>();
 
     let tokens = quote! {
+        #doc
         #[repr(transparent)]
         #[derive(
             Debug,

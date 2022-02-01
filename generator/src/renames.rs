@@ -5,17 +5,17 @@ pub const RENAMES: &[CategoryRename] = &[
     CategoryRename {
         name: "Input",
         rename_to: Some("InputQuirk"),
-        documentation: None,
+        documentation: Some("Device properties and quirks."),
     },
     CategoryRename {
         name: "Ev",
         rename_to: Some("EventType"),
-        documentation: None,
+        documentation: Some("Event types."),
     },
     CategoryRename {
         name: "Syn",
         rename_to: Some("SynchronizationEvent"),
-        documentation: None,
+        documentation: Some("Synchronization events."),
     },
     CategoryRename {
         name: "Key",
@@ -30,27 +30,27 @@ pub const RENAMES: &[CategoryRename] = &[
     CategoryRename {
         name: "Rel",
         rename_to: Some("RelativeAxis"),
-        documentation: None,
+        documentation: Some("Relative axes."),
     },
     CategoryRename {
         name: "Abs",
         rename_to: Some("AbsoluteAxis"),
-        documentation: None,
+        documentation: Some("Absolute axes."),
     },
     CategoryRename {
         name: "Sw",
         rename_to: Some("SwitchEvent"),
-        documentation: None,
+        documentation: Some("Switch events."),
     },
     CategoryRename {
         name: "Msc",
         rename_to: Some("MiscEvent"),
-        documentation: None,
+        documentation: Some("Miscellaneous events."),
     },
     CategoryRename {
         name: "Rep",
         rename_to: Some("AutoRepeat"),
-        documentation: None,
+        documentation: Some("Autorepeat values."),
     },
     CategoryRename {
         name: "Snd",
