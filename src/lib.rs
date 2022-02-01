@@ -9,6 +9,7 @@
 //! such as [libinput](https://crates.io/crates/input).
 
 #![no_std]
+#![warn(future_incompatible)]
 
 mod generated;
 

@@ -1,7 +1,19 @@
 [package]
 name = "input_event_codes"
 version = "0.1.0"
-edition = "2021"
+authors = [ "i509VCB <mail@i509.me>" ]
+license = "MIT OR Apache-2.0"
+description = "Input event codes from Linux and used in some other Unix systems"
+# repository = ""
+# documentation = ""
+categories = [
+    "no-std",
+    "os::unix-apis",
+    "os::freebsd-apis" # FreeBSD shares the input event codes with Linux
+]
+keywords = [ "input", "linux" ]
+readme = "README.md"
+edition = "2018"
 
 [workspace]
 members = [
