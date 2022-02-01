@@ -31,7 +31,7 @@ jobs:
       - name: Rust toolchain
         uses: actions-rs/toolchain@v1
         with:
-          toolchain: latest
+          toolchain: stable
           override: true
           components: clippy
       - name: Clippy
